@@ -13,8 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Cat">
+    <Filter Include="Animals">
       <UniqueIdentifier>{e045b10b-318a-44e4-aaad-d6582b3f6b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animals\Cat">
+      <UniqueIdentifier>{74e2b2bd-c446-4909-8754-69d2511ca84a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animals\Dog">
+      <UniqueIdentifier>{3adadb28-006d-46eb-85a0-89f800f5f397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animals\Bear">
+      <UniqueIdentifier>{899a6ee2-dcd8-4212-9910-d089fcf59e68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,10 +49,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
-      <Filter>Cat</Filter>
+      <Filter>Animals</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
-      <Filter>Cat</Filter>
+      <Filter>Animals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +78,10 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
-      <Filter>Cat</Filter>
+      <Filter>Animals</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
-      <Filter>Cat</Filter>
+      <Filter>Animals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
