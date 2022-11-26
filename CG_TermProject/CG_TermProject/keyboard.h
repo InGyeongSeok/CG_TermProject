@@ -1,7 +1,8 @@
 #pragma once
 #include "Header.h"
-#include "Cube.h"
+#include "Cat.h"
 
-void Keyboard(unsigned char key, int x, int y);
+extern Cat cat;
+
+GLvoid Keyboard(unsigned char key, int x, int y);
 GLvoid SpecialKeyboardUP(int key, int x, int y);
-
