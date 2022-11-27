@@ -9,7 +9,7 @@ float carAddZ;
 
 
 void camera() {
-	glm::vec3 CPos(carAddX +3, carAddY + 7, carAddZ + 20);
+	glm::vec3 CPos(carAddX, carAddY , carAddZ + 3);
 	glm::mat4 RotC = glm::rotate(glm::mat4(1.f), glm::radians(carY), glm::vec3(0, 1, 0));
 	CPos = RotC * glm::vec4(CPos, 1.f);
 	glm::vec3 CDir(0.f + carAddX, 0.0f + carAddY, 0.0f + carAddZ);

@@ -1,14 +1,14 @@
 #pragma once
 #include "Header.h"
-#include "sphere.h"
-#include "Cube.h"
+#include "Cat.h"
+#include "Dog.h"
+#include "Bear.h"
+
+
+extern Cat cat;
+extern Dog dog;
+extern Bear bear;
 
 void timer(int value);
 
-
-extern Sphere lightsphere;
-extern Cube CubeBottom;
-extern Cube CubeMid; 
-extern Cube CubeTopR;
-extern Cube CubeTopL;
 

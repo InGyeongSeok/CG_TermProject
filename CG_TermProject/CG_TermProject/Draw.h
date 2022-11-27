@@ -1,8 +1,8 @@
 #pragma once
 #include "Header.h"
-#include "Cube.h"
-#include "sphere.h"
 #include "Camera.h"
-
+#include "Cat.h"
+#include "Dog.h"
+#include "Bear.h"
 
 GLvoid drawScene();

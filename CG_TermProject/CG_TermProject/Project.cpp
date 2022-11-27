@@ -5,10 +5,12 @@
 #include "Motion.h"
 #include "Mouse.h"
 #include "Camera.h"
+#include "KeyboardUP.h"
 
 
 vector<glm::vec3> vertex1;
 vector<glm::vec3> vertex2;
+vector<glm::vec3> vertex3;
 //랜덤
 
 //random_device rd1;
@@ -32,33 +34,10 @@ GLint width{ 1000 }, height{ 800 };
 //VAO, VBO
 GLuint VAO, VBO;
 GLuint sphereVAO, sphereVBO;
-GLuint XYZVAO, XYZVBO;
-
-GLuint CircleVAO;
-GLuint CircleVBO;
+GLuint pyramidVAO, pyramidVBO;
 
 GLuint vertexShader; //--- 버텍스 세이더 객체
 GLuint fragmentShader; //--- 프래그먼트 세이더 객체
-
-
-float floorData[4][9]{							//점, 법선, 컬러
-   {-3,0,-3,       0,1,0,		1,0,0},         
-   {-3,0,3,        0,1,0,		0,1,0 },
-   {3,0,3,         0,1,0,		0,0,1},
-   {3,0,-3,        0,1,0,		0,1,0 }
-};
-
-
-
-
-float XYZ[6][6]{ //x, y, z 축 그리기
-   {-20.0, 0.0, 0.0,      1.0, 0.0, 0.0},
-   {20.0, 0.0, 0.0,         1.0, 0.0, 0.0},
-   {0.0, -20.0, 0.0,      0.0, 1.0, 0.0},
-   {0.0, 20.0, 0.0,        0.0, 1.0, 0.0},
-   {0.0, 0.0, -20.0,      0.0, 0.0, 1.0},
-   {0.0, 0.0, 20.0,         0.0, 0.0, 1.0}
-};
 
 char* filetobuf(string file);
 void ReadObj(string file, vector<glm::vec3>* vertex, vector<glm::vec3>* vcolor, vector<glm::ivec3>* face);
@@ -72,7 +51,7 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(width, height);
-	glutCreateWindow("숙제");
+	glutCreateWindow("Project");
 
 	glewExperimental = GL_TRUE;
 	glewInit();
@@ -86,6 +65,7 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(Keyboard);
 	//glutMotionFunc(Motion);
+	glutKeyboardUpFunc(KeyboardUP);
 	glutPassiveMotionFunc(passiveMotion);
 	glutMouseFunc(Mouse);
 	glutSpecialFunc(SpecialKeyboardUP);
@@ -99,13 +79,7 @@ GLvoid Reshape(int w, int h)
 	width = w;
 	height = h;
 
-	//glm::mat4 projection = glm::mat4(1.0f);
-	//projection = glm::perspective(glm::radians(45.0f), (float)w / (float)h, 0.1f, 200.f);
-	//projection = glm::translate(projection, glm::vec3(0.0, 0.0, 0.0)); //--- 공간을 약간 뒤로 미뤄줌
-	//unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
-	//glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
-	// 
-	//glViewport(0, 0, w, h);
+
 }
 
 
@@ -245,34 +219,22 @@ void InitBuffer()
 	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
+	///////////////////////////////////////////////////////////
 
+	ReadObj("pyramid.obj", vertex3);
 
-	////////////////////////////////////////바닥///////////////////////////////////////////////
+	glGenVertexArrays(1, &pyramidVAO);
 
-	glGenVertexArrays(1, &XYZVAO);
-	glGenBuffers(1, &XYZVBO);
+	glGenBuffers(1, &pyramidVBO);
 
-	glBindVertexArray(XYZVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, XYZVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(XYZ), XYZ, GL_STATIC_DRAW);
+	glBindVertexArray(pyramidVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, pyramidVBO);
+	glBufferData(GL_ARRAY_BUFFER, vertex3.size() * sizeof(glm::vec3), &vertex3[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
-
-	//////////////////////////////////////원형////////////////////////////////////////////////
-	glGenVertexArrays(1, &CircleVAO);
-	glGenBuffers(1, &CircleVBO);
-	glBindVertexArray(CircleVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, CircleVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(floorData), floorData, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void*)(sizeof(float) * 6));
-	glEnableVertexAttribArray(2);
-
 
 }
 

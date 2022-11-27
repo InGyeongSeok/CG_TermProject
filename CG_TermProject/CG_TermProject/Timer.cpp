@@ -1,22 +1,45 @@
 #include "Timer.h"
+
 void timer(int value) {
 
-	CubeBottom.Update();
-	CubeMid.Update();
-	lightsphere.Update();
-	CubeTopL.Update();
-	CubeTopR.Update();
+	if (isW) {
+		cat.update('w');
+	}
+	if (isA) {
+		cat.update('a');
+	}
+	if (isS) {
+		cat.update('s');
+	}
+	if (isD) {
+		cat.update('d');
+	}
+
+	if (isW) {
+		dog.update('w');
+	}
+	if (isA) {
+		dog.update('a');
+	}
+	if (isS) {
+		dog.update('s');
+	}
+	if (isD) {
+		dog.update('d');
+	}
 	
 
-	if (ybutton) {
-		Rot += 0.5f;
+	if (isW) {
+		bear.update('w');
 	}
-	if (rbutton) {
-		lightRot += 0.5 * rbutton;
+	if (isA) {
+		bear.update('a');
 	}
-
-	if (abutton) {
-		carY += 0.3f;
+	if (isS) {
+		bear.update('s');
+	}
+	if (isD) {
+		bear.update('d');
 	}
 
 	glutPostRedisplay();

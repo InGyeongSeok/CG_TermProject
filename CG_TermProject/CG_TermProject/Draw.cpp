@@ -2,18 +2,19 @@
 
 void draw();
 float circleSize = 2;
-Cube CubeBottom{0.7,0.6,0.6,0.,0.,0.};
-Cube CubeMid{0.4,0.3,0.3,0.0,1.2,0.0};
-Cube CubeTopR{0.1,0.2,0.2,0.15,1.8,0.0};
-Cube CubeTopL{0.1,0.2,0.2,-0.15,1.8,0.0};
-Sphere lightsphere{0.06,8.,1.,0.};
+
 float lightPosX = 7.6;
 float lightPosY = 1.0;
 float lightPosZ = 0.0;
 int lightcolorN = 0;
+float lightRot;
 float lightColorR = 1.0f;
 float lightColorG = 1.0f;
 float lightColorB = 1.0f;
+
+Cat cat;
+Dog dog;
+Bear bear;
 
 random_device rd;
 default_random_engine dre(rd());
@@ -27,7 +28,12 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 
 	glClearColor(0.f, 0.f, 0.f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST); 
+	glEnable(GL_DEPTH_TEST);   //은면제거
+	glEnable(GL_DITHER);        // 표면을 매끄럽게
+	glEnable(GL_CULL_FACE);     // 컬링
+	glEnable(GL_LINE_SMOOTH);   // 안티 앨리어싱
+	glEnable(GL_POLYGON_SMOOTH);// 안티 앨리어싱
+	glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.s
 	//glEnable(GL_CULL_FACE);
 	//glFrontFace(GL_CW);
 
@@ -52,6 +58,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 };
 
 void draw() {
+
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
@@ -77,45 +84,9 @@ void draw() {
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(aColor, 1., 1., 1.);
 
-	//GLuint aColor = glGetUniformLocation(shaderID, "objectColor");
-
-	glBindVertexArray(XYZVAO);
-
-	glm::mat4 Tx = glm::mat4(1.0f); //--- 이동 행렬 선언
-	glm::mat4 Rz = glm::mat4(1.0f); //--- 회전 행렬 선언
-	glm::mat4 scale = glm::mat4(1.0f); //--- 사이즈 변환
-	glm::mat4 TR = glm::mat4(1.0f); //--- 합성 변환 행렬
-
-	TR = Tx * Rz * scale;
-	unsigned int floormodelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(floormodelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-	glDrawArrays(GL_LINES, 0, 6);         //그리기
-
-
-
-
-	///////////////////////////////////////////////////////////////////
-	CubeBottom.Draw();
-	CubeMid.Draw();
-	CubeTopR.Draw();
-	CubeTopL.Draw();
-	lightsphere.Draw();
-
-
-	//////////////////////////////////////////////////////////////////
-	glBindVertexArray(CircleVAO);
-	glUniform3f(aColor, 255 / 255., 255 / 255., 255 / 255.);
-	Rz = glm::rotate(Rz, glm::radians(0.f), glm::vec3(0.0, 0.0, 1.0));
-	scale = glm::scale(scale, glm::vec3(circleSize, circleSize, circleSize));
-
-	TR =  Rz * scale;
-	unsigned int modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(TR));
-	glLineWidth(2.0);
-	glUniform1i(SelectColor, 0);
-
-	glDrawArrays(GL_POLYGON, 0, 4);
-
+	//cat.draw();
+	//dog.draw();
+	bear.draw();
 }
 
 

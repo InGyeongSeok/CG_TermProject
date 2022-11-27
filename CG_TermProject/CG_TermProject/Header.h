@@ -27,20 +27,15 @@ extern GLuint aColor;
 
 extern GLuint shaderID; //--- 세이더 프로그램 이름
 extern GLuint VAO;
-extern GLuint XYZVAO;
 extern GLuint sphereVAO;
+extern GLuint pyramidVAO;
 
-extern bool nbutton;
 extern float Rot;
-extern vector<glm::vec3> vertex1;
-extern vector<glm::vec3> vertex2;
+extern vector<glm::vec3> vertex1; //육면체
+extern vector<glm::vec3> vertex2; //구
+extern vector<glm::vec3> vertex3; //피라미드
 
 extern float lightRot;
-extern bool mbutton;
-extern bool ybutton;
-extern int rbutton;
-extern bool qbutton;
-extern bool abutton;
 
 
 extern float lightPosX;
@@ -48,12 +43,8 @@ extern float lightPosY;
 extern float lightPosZ;
 
 
-extern GLuint CircleVAO;
 extern float Addx;
-extern int lightcolorN;
-extern float lightColorR;
-extern float lightColorG;
-extern float lightColorB;
+
 
 extern float carY;
 
@@ -61,3 +52,10 @@ extern float carY;
 extern float carAddX;
 extern float carAddY;
 extern float carAddZ;
+
+
+
+extern bool isW, isA, isS, isD;
+
+//156. / 255, 91. / 255, 54. / 255 곰 색깔!?
+

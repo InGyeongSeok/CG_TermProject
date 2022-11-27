@@ -1,91 +1,58 @@
 #include "keyboard.h"
-bool nbutton = true;
-bool mbutton = false;
-bool ybutton = false;
-int rbutton = 0;
-bool qbutton = false;
-bool abutton = false;
+bool isW, isA, isS, isD;
+
 
 GLvoid Keyboard(unsigned char key, int x, int y)
 {
 	switch (key) {
-	case'c':
-	case'C':
-		if (4 == lightcolorN) {
-			lightcolorN = 0;
-		}
-		if (2 == lightcolorN) {
-			lightColorR = 1.;
-			lightColorG = 1.;
-			lightColorB = 1.;
-		}
-		if (0 == lightcolorN) {
-			lightColorR = 255. / 255.;
-			lightColorG = 113. / 255.;
-			lightColorB = 113. / 255.;
-		}
-		if (1 == lightcolorN) {
-			lightColorR = 103. / 255.;
-			lightColorG = 153. / 255.;
-			lightColorB = 255. / 255.;
-		}
-		lightcolorN += 1;
+	case 'w':
+	case 'W':
+		isW = true;
 		break;
-	case'r':
-		rbutton != 1 ? rbutton = 1 : rbutton = 0;
+	case 'a':
+	case 'A':
+		isA = true;
 		break;
-	case'R':
-		rbutton != -1 ? rbutton = -1 : rbutton = 0;
+	case 's':
+	case 'S':
+		isS = true;
 		break;
-	case's':
-		rbutton = false;
-		abutton = false;
+	case 'd':
+	case 'D':
+		isD = true;
 		break;
-	case'z':
-		carAddZ += 0.3f;
 
+	case'z':
+		carAddZ -= 1;
 		break;
 	case'Z':
-		carAddZ -= 0.3f;
-
+		carAddZ += 1;
 		break;
-	case'X':
-		carAddX -= 0.3f;
+	case 'q':
+	case 'Q':
+		glutLeaveMainLoop();
 		break;
-	case'x':
-		carAddX += 0.3f;
-		break;
-	case'a':
-		abutton = true;
-		break;
-	case'm':
-		mbutton = not mbutton;
-		if (mbutton == true) {
-			GLuint LightOff =  glGetUniformLocation(shaderID, "LightOff");
-			glUniform1i(LightOff, 1);
-		}
-		else {
-			GLuint LightOff = glGetUniformLocation(shaderID, "LightOff");
-			glUniform1i(LightOff, 0);
-		}
-		break;
-
 	}
-		glutPostRedisplay(); //--- 배경색이 바뀔 때마다 출력 콜백 함수를 호출하여 화면을 refresh 한다
+	glutPostRedisplay(); //--- 배경색이 바뀔 때마다 출력 콜백 함수를 호출하여 화면을 refresh 한다
 }
 
 
-GLvoid SpecialKeyboardUP(int key, int x, int y)
+GLvoid SpecialKeyboard(int key, int x, int y)
 {
 	switch (key) {
 	case GLUT_KEY_LEFT:
+		isA = true;
 		break;
-
 	case GLUT_KEY_RIGHT:
+		isD = true;
 		break;
 	case GLUT_KEY_UP:
+		isW = true;
 		break;
 	case GLUT_KEY_DOWN:
+		isS = true;
 		break;
 	}
+
+	glutPostRedisplay();
 }
