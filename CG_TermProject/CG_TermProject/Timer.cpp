@@ -1,4 +1,5 @@
 #include "Timer.h"
+
 void timer(int value) {
 
 	if (isW) {
@@ -14,6 +15,32 @@ void timer(int value) {
 		cat.update('d');
 	}
 
+	if (isW) {
+		dog.update('w');
+	}
+	if (isA) {
+		dog.update('a');
+	}
+	if (isS) {
+		dog.update('s');
+	}
+	if (isD) {
+		dog.update('d');
+	}
+	
+
+	if (isW) {
+		bear.update('w');
+	}
+	if (isA) {
+		bear.update('a');
+	}
+	if (isS) {
+		bear.update('s');
+	}
+	if (isD) {
+		bear.update('d');
+	}
 
 	glutPostRedisplay();
 	glutTimerFunc(14, timer, 1);

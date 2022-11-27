@@ -15,9 +15,9 @@
 #include <gl/glew.h>                     
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/ext.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
+#include <gl/glm/glm.hpp>
+#include <gl/glm/ext.hpp>
+#include <gl/glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 
@@ -31,9 +31,9 @@ extern GLuint sphereVAO;
 extern GLuint pyramidVAO;
 
 extern float Rot;
-extern vector<glm::vec3> vertex1;
-extern vector<glm::vec3> vertex2;
-extern vector<glm::vec3> vertex3;
+extern vector<glm::vec3> vertex1; //À°¸éÃ¼
+extern vector<glm::vec3> vertex2; //±¸
+extern vector<glm::vec3> vertex3; //ÇÇ¶ó¹Ìµå
 
 extern float lightRot;
 
@@ -56,4 +56,6 @@ extern float carAddZ;
 
 
 extern bool isW, isA, isS, isD;
+
+//156. / 255, 91. / 255, 54. / 255 °õ »ö±ò!?
 

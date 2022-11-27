@@ -21,6 +21,13 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'D':
 		isD = true;
 		break;
+
+	case'z':
+		carAddZ -= 1;
+		break;
+	case'Z':
+		carAddZ += 1;
+		break;
 	case 'q':
 	case 'Q':
 		glutLeaveMainLoop();

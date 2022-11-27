@@ -4,11 +4,12 @@ class Arm : public Animals
 {
 private:
     int i;
+    int monster;
     float rotate;
     bool isrotDirec;
 public:
     Arm();
-    Arm(glm::vec3 Color, int i);    //i는 방향
+    Arm(glm::vec3 Color, int i, int monster);    //i는 방향 monster 1 --> Cat // 2 --> Dog // 3--> Bear 
     ~Arm();
 
     void update() override;

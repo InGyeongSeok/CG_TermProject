@@ -4,11 +4,12 @@ class Sword : public Animals
 {
 private:
     int i;
+    int monster;
     float rotate;
     bool isrotDirec;
 public:
     Sword();
-    Sword(glm::vec3 Color, int i);    //i는 방향
+    Sword(glm::vec3 Color, int i, int monster);    //i는 방향
     ~Sword();
     void update() override;
     void BindVAO() override;

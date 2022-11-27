@@ -4,9 +4,10 @@
 
 class Head : public Animals
 {
+    int monster;
 public:
     Head();
-    Head(glm::vec3 Color);
+    Head(glm::vec3 Color, int monster);
     ~Head();
     
     void update() override;

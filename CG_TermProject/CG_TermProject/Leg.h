@@ -5,11 +5,12 @@ class Leg :public Animals
 {
 private:
 	int i;
+	int monster;
 	float rotate;
 	bool isrotDirec;
 public:
 	Leg();
-	Leg(glm::vec3 Color, int i);    //i는 위치
+	Leg(glm::vec3 Color, int i, int monster);    //i는 위치
 	~Leg();
 
 	void update() override;
