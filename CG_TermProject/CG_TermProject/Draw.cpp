@@ -15,7 +15,7 @@ float lightColorB = 1.0f;
 Cat cat;
 Dog dog;
 Bear bear;
-Hero hero(0.3,0.3,0.3,1.0,-1.,1.0);
+Hero hero(0.3,0.3,0.3,1.0,0.,10.0);
 
 random_device rd;
 default_random_engine dre(rd());
@@ -52,6 +52,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 	//glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 // 	//glm::mat4 projection = glm::mat4(1.0f);
 //	projection = glm::ortho(-50.0f, 50.0f, -50.0f, 50.0f, -50.0f, 50.0f); //--- 투영 공간을 [-3, 3] 공간으로 설정
+	glViewport(0, 0, width, height);
 
 	camera();
 	draw();
