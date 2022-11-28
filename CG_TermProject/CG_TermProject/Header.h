@@ -29,6 +29,7 @@ extern GLuint shaderID; //--- 세이더 프로그램 이름
 extern GLuint VAO;
 extern GLuint sphereVAO;
 extern GLuint pyramidVAO;
+extern GLuint crossVAO;
 
 extern float Rot;
 extern vector<glm::vec3> vertex1; //육면체

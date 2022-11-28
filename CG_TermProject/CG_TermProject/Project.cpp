@@ -44,6 +44,19 @@ void ReadObj(string file, vector<glm::vec3>* vertex, vector<glm::vec3>* vcolor, 
 
 const glm::mat4 Unit = glm::mat4(1.0f);
 
+
+//바닥 
+float XYZ[4][6]{
+
+	{-100.0,   -0.000001, -100.0,	0, 1, 0},
+   {100.0,   -0.000001, -100.0,	0, 1, 0 },
+   {100.0,   -0.000001, 100.0,	0, 1, 0},
+   {-100.0,   -0.000001, 100.0,	0, 1, 0}
+};
+
+
+GLuint crossVAO, crossVBO;
+
 void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 {
 	//--- 윈도우 생성하기
@@ -237,6 +250,19 @@ void InitBuffer()
 	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
+
+	///////////////////////////////////////////////////////////
+
+	glGenVertexArrays(1, &crossVAO);
+	glGenBuffers(1, &crossVBO);
+	glBindVertexArray(crossVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, crossVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(XYZ), XYZ, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(1);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 
 }
 

@@ -31,7 +31,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);   //은면제거
 	glEnable(GL_DITHER);        // 표면을 매끄럽게
-	glEnable(GL_CULL_FACE);     // 컬링
+	//glEnable(GL_CULL_FACE);     // 컬링6
 	glEnable(GL_LINE_SMOOTH);   // 안티 앨리어싱
 	glEnable(GL_POLYGON_SMOOTH);// 안티 앨리어싱
 	glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.s
@@ -40,21 +40,30 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 
 	glm::mat4 projection; // 원근투영
 
-	projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 35.f);
+	projection = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 200.0f);
 	//												화면비율, 시작좌표(카메라 바로 앞 길이), 깊이
 	/*projection = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);*/
 	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
-
-
-	//projection = glm::translate(projection, glm::vec3(0.0, 0.0, 0.0)); //--- 공간을 약간 뒤로 미뤄줌
-	//unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
-	//glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
-// 	//glm::mat4 projection = glm::mat4(1.0f);
-//	projection = glm::ortho(-50.0f, 50.0f, -50.0f, 50.0f, -50.0f, 50.0f); //--- 투영 공간을 [-3, 3] 공간으로 설정
 	glViewport(0, 0, width, height);
-
 	camera();
+
+	/// XYZ 선
+
+	glBindVertexArray(crossVAO);     //바인드
+	GLuint aColor = glGetUniformLocation(shaderID, "objectColor");
+	glUniform3f(aColor, 0.2, 0.2, 0.2);
+
+	glm::mat4 Tx = glm::mat4(1.0f); //--- 이동 행렬 선언
+	glm::mat4 Rz = glm::mat4(1.0f); //--- 회전 행렬 선언
+	glm::mat4 scale = glm::mat4(1.0f); //--- 사이즈 변환
+	glm::mat4 TR = glm::mat4(1.0f); //--- 합성 변환 행렬
+	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
+	TR = scale * Tx * Rz;
+	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
+	glDrawArrays(GL_QUADS, 0, 4);         //그리기
+	
 	draw();
 	glutSwapBuffers();
 };
@@ -76,8 +85,6 @@ void draw() {
 
 	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
 	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
-
-
 
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(aColor, 1., 1., 1.);

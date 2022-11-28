@@ -1,9 +1,6 @@
 #include "Cat.h"
 
 
-
-int num{};
-
 Cat::Cat() : 
 head(Head(glm::vec3(207. / 255, 207. / 255, 207. / 255),1)),
 nose(Nose(glm::vec3(36.  /255, 36.   / 255, 36.  / 255),1)), 
@@ -91,8 +88,7 @@ void Cat::update()
 	}
 	
 	if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {
-		num++;
-		//cout << "test" << num*0.05 << endl;
+		
 		hero.damage();
 		
  	}
