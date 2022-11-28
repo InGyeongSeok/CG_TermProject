@@ -3,27 +3,27 @@
 float closelineX{};
 float closelineZ{};
 
-Cat::Cat() : 
-head(Head(glm::vec3(207. / 255, 207. / 255, 207. / 255),1)),
-nose(Nose(glm::vec3(36.  /255, 36.   / 255, 36.  / 255),1)), 
-body(Body(glm::vec3(207. / 255, 207. / 255, 207. / 255),1)),
-armL(Arm(glm::vec3(207. / 255, 207. / 255, 207. / 255), -1,1)),
-armR(Arm(glm::vec3(207. / 255, 207. / 255, 207. / 255), 1,1)),
-legL(Leg(glm::vec3(207. / 255, 207. / 255, 207. / 255), -1,1)),
-legR(Leg(glm::vec3(207. / 255, 207. / 255, 207. / 255), 1,1)),
-eyesL(Eyes(glm::vec3(255./255, 54. / 255, 54. / 255),-1,1)), 
-eyesR(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), 1,1)), 
-Position(glm::vec3(0.f, -1.f, 0.f)), Direction(0.f),
-earL(Ear(glm::vec3(135. / 255, 135. / 255, 135. / 255), -1,1)),
-earR(Ear(glm::vec3(135. / 255, 135. / 255, 135. / 255), 1,1)),
-beardL1(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), -1, 1,1)),
-beardR1(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 1,1)),
-beardL2(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), -1, 2,1)),
-beardR2(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 2,1)),
-beardL3(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), -1, 3,1)),
-beardR3(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 3,1)),
-swordL(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), -1,1)),
-swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,1))
+Cat::Cat() :
+	head(Head(glm::vec3(207. / 255, 207. / 255, 207. / 255), 1)),
+	nose(Nose(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1)),
+	body(Body(glm::vec3(207. / 255, 207. / 255, 207. / 255), 1)),
+	armL(Arm(glm::vec3(207. / 255, 207. / 255, 207. / 255), -1, 1)),
+	armR(Arm(glm::vec3(207. / 255, 207. / 255, 207. / 255), 1, 1)),
+	legL(Leg(glm::vec3(207. / 255, 207. / 255, 207. / 255), -1, 1)),
+	legR(Leg(glm::vec3(207. / 255, 207. / 255, 207. / 255), 1, 1)),
+	eyesL(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), -1, 1)),
+	eyesR(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), 1, 1)),
+	Position(glm::vec3(0.f, -1.f, 0.f)), Direction(0.f),
+	earL(Ear(glm::vec3(135. / 255, 135. / 255, 135. / 255), -1, 1)),
+	earR(Ear(glm::vec3(135. / 255, 135. / 255, 135. / 255), 1, 1)),
+	beardL1(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), -1, 1, 1)),
+	beardR1(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 1, 1)),
+	beardL2(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), -1, 2, 1)),
+	beardR2(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 2, 1)),
+	beardL3(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), -1, 3, 1)),
+	beardR3(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 3, 1)),
+	swordL(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), -1, 1)),
+	swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1, 1))
 {
 
 }
@@ -35,7 +35,7 @@ void Cat::draw()
 	head.draw();
 	armL.draw();
 	armR.draw();
-	body.draw();	
+	body.draw();
 	legL.draw();
 	legR.draw();
 	eyesL.draw();
@@ -57,32 +57,44 @@ extern float HeroLocationZ;
 
 void Cat::update()
 {
-	//직선의 방정식 구하기
 	
+	//직선의 방정식 구하기
 	hero.location();
+	/*closelineX = (HeroLocationX - Position.x) / sqrt((HeroLocationX - Position.x) * 2 + (HeroLocationZ - Position.z) * 2);
+	closelineZ = (HeroLocationZ - Position.z) / sqrt((HeroLocationX - Position.x) * 2 + (HeroLocationZ - Position.z) * 2);
+
+	Position.x += closelineX * 0.01;
+	Position.z += closelineZ * 0.01;*/
+
 
 	closelineX = HeroLocationX - Position.x;
-	if (closelineX >= 0) {
-		closelineX -= 0.01;
-		Position.x += 0.01;
-		Direction = 90.f;
-	}
-	if (closelineX < 0) {
-		closelineX += 0.01;
-		Position.x -= 0.01;
-		Direction = 270.f;
+	if (!(closelineX <= 0.000001 && closelineX >= -0.000001)) {
+
+		if (closelineX >= 0) {
+			closelineX -= 0.01;
+			Position.x += 0.01;
+			Direction = 90.f;
+		}
+		if (closelineX < 0) {
+			closelineX += 0.01;
+			Position.x -= 0.01;
+			Direction = 270.f;
+		}
 	}
 
 	closelineZ = HeroLocationZ - Position.z;
-	if (closelineZ > 0) {
-		closelineZ -= 0.01;
-		Position.z += 0.01;
-		Direction = 0.f;
-	}
-	if (closelineZ < 0) {
-		closelineZ += 0.01;
-		Position.z -= 0.01;
-		Direction = 180.f;
+	if (!(closelineZ <= 0.000001 && closelineZ >= -0.000001)) {
+		if (closelineZ > 0) {
+			closelineZ -= 0.01;
+			Position.z += 0.01;
+			Direction = 0.f;
+		}
+		if (closelineZ < 0) {
+			closelineZ += 0.01;
+			Position.z -= 0.01;
+			Direction = 180.f;
+		}
+
 	}
 
 	//switch (key) {
