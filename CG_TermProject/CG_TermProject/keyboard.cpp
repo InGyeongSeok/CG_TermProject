@@ -14,10 +14,12 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		HeroMovX += 0.1 * glm::sin(glm::radians(VAngleY));
 		isW = true;
 		break;
+
 	case 'a':
 	case 'A':
 		carAddX -= 0.1;
 		HeroMovX -= 0.1;
+
 
 		isA = true;
 		break;

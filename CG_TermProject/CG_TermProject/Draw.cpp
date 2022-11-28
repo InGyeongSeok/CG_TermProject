@@ -3,7 +3,7 @@
 void draw();
 float circleSize = 2;
 
-float lightPosX = 7.6;
+float lightPosX = 7.0;
 float lightPosY = 1.0;
 float lightPosZ = 0.0;
 int lightcolorN = 0;
@@ -15,7 +15,7 @@ float lightColorB = 1.0f;
 Cat cat;
 Dog dog;
 Bear bear;
-Hero hero(0.3,0.3,0.3,1.0,0.,10.0);
+Hero hero(0.3,0.3,0.3,1,0,10.0);
 
 random_device rd;
 default_random_engine dre(rd());
@@ -27,7 +27,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
-	glClearColor(1.f, 1.f, 1.f, 1.0f);
+	glClearColor(0.f, 0.f, 0.f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);   //은면제거
 	glEnable(GL_DITHER);        // 표면을 매끄럽게
