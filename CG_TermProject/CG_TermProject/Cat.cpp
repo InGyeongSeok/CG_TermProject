@@ -52,37 +52,41 @@ void Cat::draw()
 	swordR.draw();
 }
 
-extern float HeroLocationX;
-extern float HeroLocationZ;
 
 void Cat::update()
 {
 	//직선의 방정식 구하기
 	
 	hero.location();
+	float dz = HeroLocationZ - Position.z;
+	float dx = HeroLocationX - Position.x;
+
+	Direction = atan2(dx, dz);
 
 	closelineX = HeroLocationX - Position.x;
-	if (closelineX >= 0) {
-		closelineX -= 0.01;
-		Position.x += 0.01;
-		Direction = 90.f;
-	}
-	if (closelineX < 0) {
-		closelineX += 0.01;
-		Position.x -= 0.01;
-		Direction = 270.f;
+	if (!(closelineX <= 0.000001 && closelineX >= -0.000001)) {
+
+		if (closelineX >= 0) {
+			closelineX -= 0.01;
+			Position.x += 0.01;
+		}
+		if (closelineX < 0) {
+			closelineX += 0.01;
+			Position.x -= 0.01;
+		}
 	}
 
 	closelineZ = HeroLocationZ - Position.z;
-	if (closelineZ > 0) {
-		closelineZ -= 0.01;
-		Position.z += 0.01;
-		Direction = 0.f;
-	}
-	if (closelineZ < 0) {
-		closelineZ += 0.01;
-		Position.z -= 0.01;
-		Direction = 180.f;
+	if (!(closelineZ <= 0.000001 && closelineZ >= -0.000001)) {
+		if (closelineZ > 0) {
+			closelineZ -= 0.01;
+			Position.z += 0.01;
+		}
+		if (closelineZ < 0) {
+			closelineZ += 0.01;
+			Position.z -= 0.01;
+		}
+
 	}
 
 	//switch (key) {

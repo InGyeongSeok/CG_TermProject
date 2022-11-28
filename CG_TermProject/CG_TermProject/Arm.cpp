@@ -52,7 +52,7 @@ void Arm::update()
 		Trans = glm::translate(Unit, glm::vec3(i * 0.13, 0, 0));
 		Change = Trans * Change;	// 내가 원하는 위치(왼쪽 오른쪽)
 
-		Rotate = glm::rotate(Unit, glm::radians(Direction), glm::vec3(0, 1, 0));
+		Rotate = glm::rotate(Unit,Direction, glm::vec3(0, 1, 0));
 		Change = Rotate * Change;	//캐릭터 돌려주기
 
 		Trans = glm::translate(Unit, Position);		// 내 이동위치로 무브
@@ -93,7 +93,8 @@ void Arm::update()
 		Trans = glm::translate(Unit, glm::vec3(i * 0.13, 0, 0));
 		Change = Trans * Change;	// 내가 원하는 위치(왼쪽 오른쪽)
 
-		Rotate = glm::rotate(Unit, glm::radians(Direction), glm::vec3(0, 1, 0));
+		Rotate = glm::rotate(Unit, Direction, glm::vec3(0, 1, 0));
+
 		Change = Rotate * Change;	//캐릭터 돌려주기
 
 		Trans = glm::translate(Unit, Position);		// 내 이동위치로 무브

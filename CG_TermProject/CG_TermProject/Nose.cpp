@@ -25,7 +25,8 @@ void Nose::update()
 		Trans = Trans * glm::translate(Unit, glm::vec3(0, 0, 0.12));
 		Change = Trans * Change;	//원하는 위치로 이동
 
-		Rotate = glm::rotate(Unit, glm::radians(Direction), glm::vec3(0, 1, 0));
+		Rotate = glm::rotate(Unit, Direction, glm::vec3(0, 1, 0));
+
 		Change = Rotate * Change;	//캐릭터 돌려주기
 
 		Trans = glm::translate(Unit, Position);
@@ -40,7 +41,8 @@ void Nose::update()
 		Trans = Trans * glm::translate(Unit, glm::vec3(0, 0, 0.075));
 		Change = Trans * Change;	//원하는 위치로 이동
 
-		Rotate = glm::rotate(Unit, glm::radians(Direction), glm::vec3(0, 1, 0));
+		Rotate = glm::rotate(Unit, Direction, glm::vec3(0, 1, 0));
+
 		Change = Rotate * Change;	//캐릭터 돌려주기
 
 		Trans = glm::translate(Unit, Position);
