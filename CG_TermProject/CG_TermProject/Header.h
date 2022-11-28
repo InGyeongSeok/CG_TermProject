@@ -38,16 +38,14 @@ extern vector<glm::vec3> vertex3; //피라미드
 extern float lightRot;
 
 
+
 extern float lightPosX;
 extern float lightPosY;
 extern float lightPosZ;
 
 
 extern float Addx;
-
-
 extern float carY;
-
 
 extern float carAddX;
 extern float carAddY;

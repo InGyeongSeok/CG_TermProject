@@ -9,7 +9,9 @@
 #include "Ear.h"
 #include "Beard.h"
 #include "sword.h"
+#include "Hero.h"
 
+extern Hero hero;
 
 class Bear
 {
@@ -29,6 +31,8 @@ class Bear
 	Sword swordL;
 	Beard eyebrowL;
 	Beard eyebrowR;
+	float closelineX;
+	float closelineZ;
 
 	glm::vec3 Position;
 	float Direction;
@@ -38,7 +42,7 @@ public:
 	~Bear();
 
 	void draw();
-	void update(unsigned char key);
+	void update();
 
 	float getLeft();
 	float getRight();

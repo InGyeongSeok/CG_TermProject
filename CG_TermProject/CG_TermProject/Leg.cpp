@@ -24,6 +24,7 @@ void Leg::update()
 			if (rotate > 30.f)
 				isrotDirec = false;
 		}
+
 		else {
 			rotate -= 2.5f;
 			if (rotate < -30.f)
@@ -68,9 +69,8 @@ void Leg::update()
 
 		Trans = glm::translate(Unit, glm::vec3(0, 1.f, 0));
 		Scale = glm::scale(Unit, glm::vec3(0.04, 0.075, 0.04));	//다리길이 0.15
-
 		Change = Scale * Trans;		// 위로 올리고 축소
-
+		
 		Trans = glm::translate(Unit, glm::vec3(0, -0.15, 0));
 		Change = Trans * Change;	//다리 흔들기 위해 원점에 맞춰주고
 

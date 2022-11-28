@@ -1,7 +1,6 @@
 #include "Cat.h"
 
-float closelineX{};
-float closelineZ{};
+
 
 Cat::Cat() : 
 head(Head(glm::vec3(207. / 255, 207. / 255, 207. / 255),1)),
@@ -89,57 +88,7 @@ void Cat::update()
 
 	}
 
-	//switch (key) {
-	//case 'w':
-	//case 'W':
-	//	Position.z -= 0.01;
-	//	//if (Position.y < -0.8f) {		//부딪치면 원복
-	//	//	Position.z += 0.01;
-	//	//}
-	//	//if (Position.z < -1.f)
-	//	//	Position.z = 1.f;
-	//	Direction = 180.f;
-	//	break;
-	//case 'a':
-	//case 'A':
-	//	Position.x -= 0.01;
-	//	//if (Position.y < -0.8f ) {		//부딪치면 원복
-	//	//	Position.x += 0.01;
-	//	//}
-	//	//if (Position.x < -1.f)
-	//	//	Position.x = 1.f;
-	//	Direction = 270.f;
-	//	break;
-	//case 's':
-	//case 'S':
-	//	Position.z += 0.01;
-	//	//if (Position.y < -0.8f) {		//부딪치면 원복
-	//	//	Position.z -= 0.01;
-	//	//}
-	//	//if (Position.z > 1.f)
-	//	//	Position.z = -1.f;
-	//	Direction = 0.f;
-	//	break;
-	//case 'd':
-	//case 'D':
-	//	Position.x += 0.01;
-	//	//if (Position.y < -0.8f ) {		//부딪치면 원복
-	//	//	Position.x -= 0.01;
-	//	//}
-	//	//if (Position.x > 1.f)
-	//	//	Position.x = -1.f;
-	//	Direction = 90.f;
-	//	break;
-	//
-	//case 'i':
-	//case 'I':
-	//	Position = glm::vec3(0.f, -1.f, 0.f);
-	//	Direction = 0.f;
-	//	carAddX = 0.f;
-	//	carAddZ = 0.f;
-	//	carY = 0.f;
-	//	break;
-	//}
+	
 
 
 	nose.keyIn(Position, Direction);

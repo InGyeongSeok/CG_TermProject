@@ -38,7 +38,8 @@ class Cat
 	Beard beardR3;
 	Sword swordR;
 	Sword swordL;
-	
+	float closelineX;
+	float closelineZ;
 
 	glm::vec3 Position;
 	float Direction;

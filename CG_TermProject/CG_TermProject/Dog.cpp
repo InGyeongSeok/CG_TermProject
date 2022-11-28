@@ -19,7 +19,7 @@ beardhorizon(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 2,2)),
 nose(Nose(glm::vec3(36. / 255, 36. / 255, 36. / 255),2)),
 eyesL(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), -1,2)),
 eyesR(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), 1,2)),
-Position(glm::vec3(0.f, -1.f, 0.f)), Direction(0.f),
+Position(glm::vec3(1.f, -1.f, 1.f)), Direction(0.f),
 swordL(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), -1,2)),
 swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,2))
 {
@@ -47,60 +47,42 @@ void Dog::draw()
 	swordR.draw();
 }
 
-void Dog::update(unsigned char key)
+void Dog::update()
 {
 
-	switch (key) {
-	case 'w':
-	case 'W':
-		Position.z -= 0.01;
-		//if (Position.y < -0.8f) {		//부딪치면 원복
-		//	Position.z += 0.01;
-		//}
-		//if (Position.z < -1.f)
-		//	Position.z = 1.f;
-		Direction = 180.f;
-		break;
-	case 'a':
-	case 'A':
-		Position.x -= 0.01;
-		//if (Position.y < -0.8f) {		//부딪치면 원복
-		//	Position.x += 0.01;
-		//}
-		//if (Position.x < -1.f)
-		//	Position.x = 1.f;
-		Direction = 270.f;
-		break;
-	case 's':
-	case 'S':
-		Position.z += 0.01;
-		//if (Position.y < -0.8f) {		//부딪치면 원복
-		//	Position.z -= 0.01;
-		//}
-		//if (Position.z > 1.f)
-		//	Position.z = -1.f;
-		Direction = 0.f;
-		break;
-	case 'd':
-	case 'D':
-		Position.x += 0.01;
-		//if (Position.y < -0.8f) {		//부딪치면 원복
-		//	Position.x -= 0.01;
-		//}
-		//if (Position.x > 1.f)
-		//	Position.x = -1.f;
-		Direction = 90.f;
-		break;
+	hero.location();
+	float dz = HeroLocationZ - Position.z;
+	float dx = HeroLocationX - Position.x;
 
-	case 'i':
-	case 'I':
-		Position = glm::vec3(0.f, -1.f, 0.f);
-		Direction = 0.f;
-		carAddX = 0.f;
-		carAddZ = 0.f;
-		carY = 0.f;
-		break;
+	Direction = atan2(dx, dz);
+
+	closelineX = HeroLocationX - Position.x;
+	if (!(closelineX <= 0.000001 && closelineX >= -0.000001)) {
+
+		if (closelineX >= 0) {
+			closelineX -= 0.01;
+			Position.x += 0.01;
+		}
+		if (closelineX < 0) {
+			closelineX += 0.01;
+			Position.x -= 0.01;
+		}
 	}
+
+	closelineZ = HeroLocationZ - Position.z;
+	if (!(closelineZ <= 0.000001 && closelineZ >= -0.000001)) {
+		if (closelineZ > 0) {
+			closelineZ -= 0.01;
+			Position.z += 0.01;
+		}
+		if (closelineZ < 0) {
+			closelineZ += 0.01;
+			Position.z -= 0.01;
+		}
+
+	}
+
+	
 
 
 	nose.keyIn(Position, Direction);

@@ -87,8 +87,8 @@ void draw() {
 	glUniform3f(aColor, 1., 1., 1.);
 
 	cat.draw();
-	//dog.draw();
-	//bear.draw();
+	dog.draw();
+	bear.draw();
 	hero.Update();
 	hero.Draw();
 

@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "Head.h"
@@ -10,7 +9,9 @@
 #include "Ear.h"
 #include "Beard.h"
 #include "sword.h"
+#include "Hero.h"
 
+extern Hero hero;
 
 class Dog
 {
@@ -34,12 +35,15 @@ class Dog
 	glm::vec3 Position;
 	float Direction;
 
+	float closelineX;
+	float closelineZ;
+
 public:
 	Dog();
 	~Dog();
 
 	void draw();
-	void update(unsigned char key);
+	void update();
 
 	float getLeft();
 	float getRight();
