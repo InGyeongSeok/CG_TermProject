@@ -15,7 +15,7 @@ float lightColorB = 1.0f;
 Cat cat;
 Dog dog;
 Bear bear;
-Hero hero(0.3,0.3,0.3,1.0,0.,1.0);
+Hero hero(0.3,0.3,0.3,1.0,-1.,1.0);
 
 random_device rd;
 default_random_engine dre(rd());

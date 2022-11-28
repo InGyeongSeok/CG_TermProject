@@ -15,9 +15,9 @@
 #include <gl/glew.h>                     
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/ext.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
+#include <gl/glm/glm.hpp>
+#include <gl/glm/ext.hpp>
+#include <gl/glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 
@@ -63,3 +63,7 @@ extern float HeroMovY;
 extern float HeroMovZ;
 //156. / 255, 91. / 255, 54. / 255 °õ »ö±ò!?
 
+
+
+extern float HeroLocationX;
+extern float HeroLocationZ;

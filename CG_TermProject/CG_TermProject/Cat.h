@@ -10,6 +10,10 @@
 #include "Beard.h"
 #include "sword.h"
 
+#include "Hero.h"
+
+extern Hero hero;
+
 
 class Cat
 {
@@ -44,7 +48,7 @@ public:
 	~Cat();
 
 	void draw();
-	void update(unsigned char key);
+	void update();
 
 	float getLeft();
 	float getRight();

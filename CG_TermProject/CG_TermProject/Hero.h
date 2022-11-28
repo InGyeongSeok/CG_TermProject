@@ -16,10 +16,10 @@ class Hero
 	float PosY;
 	float PosZ;
 
-
 public:
 	Hero(float SX, float SY, float SZ, float X, float Y, float Z);
 	~Hero();
 	void Update();
 	void Draw();
+	void location();
 };
