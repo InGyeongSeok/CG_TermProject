@@ -16,7 +16,6 @@ void camera() {
 	glm::vec3 CDir(0.f + carAddX, 0.0f + carAddY, 0.0f + carAddZ);
 	CDir = RotC * glm::vec4(CDir, 1.f);
 
-
 	glm::mat4 VAngleY_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(VAngleY), glm::vec3(0.0, 1.0, 0.0)); //y?
 	glm::mat4 VAngleX_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(VAngleX), glm::vec3(1.0, 0.0, 0.0)); // x
 

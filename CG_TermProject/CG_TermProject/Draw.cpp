@@ -55,11 +55,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 	glUniform3f(aColor, 0.2, 0.2, 0.2);
 
 	glm::mat4 Tx = glm::mat4(1.0f); //--- 이동 행렬 선언
-	glm::mat4 Rz = glm::mat4(1.0f); //--- 회전 행렬 선언
-	glm::mat4 scale = glm::mat4(1.0f); //--- 사이즈 변환
-	glm::mat4 TR = glm::mat4(1.0f); //--- 합성 변환 행렬
 	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
-	TR = scale * Tx * Rz;
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
 	glDrawArrays(GL_QUADS, 0, 4);         //그리기

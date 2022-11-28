@@ -29,6 +29,7 @@
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Ear.h" />
     <ClInclude Include="Eyes.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="Head.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="KeyboardUP.h" />
@@ -53,6 +54,7 @@
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Ear.cpp" />
     <ClCompile Include="Eyes.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="KeyboardUP.cpp" />
