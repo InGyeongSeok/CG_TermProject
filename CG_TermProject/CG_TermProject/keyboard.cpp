@@ -9,6 +9,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'W':
 		isW = true;
 		break;
+
 	case 'a':
 	case 'A':
 		isA = true;
@@ -32,7 +33,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		glutLeaveMainLoop();
 		break;
 	}
-	glutPostRedisplay(); //--- ¹è°æ»öÀÌ ¹Ù²ð ¶§¸¶´Ù Ãâ·Â ÄÝ¹é ÇÔ¼ö¸¦ È£ÃâÇÏ¿© È­¸éÀ» refresh ÇÑ´Ù
+	glutPostRedisplay(); //--- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ý¹ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï¿ï¿½ È­ï¿½ï¿½ï¿½ï¿½ refresh ï¿½Ñ´ï¿½
 }
 
 

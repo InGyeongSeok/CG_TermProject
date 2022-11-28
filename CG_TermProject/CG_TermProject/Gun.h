@@ -1,7 +1,7 @@
 #pragma once
 #include "Header.h"
 
-class Hero
+class Gun
 {
 	const glm::mat4 Unit;
 
@@ -11,16 +11,14 @@ class Hero
 	float scaleX;
 	float scaleY;
 	float scaleZ;
-	float HP{ 100 };
 	float PosX;
 	float PosY;
 	float PosZ;
 
 public:
-	Hero(float SX, float SY, float SZ, float X, float Y, float Z);
-	~Hero();
-	void damage();
+	Gun(float SX, float SY, float SZ, float X, float Y, float Z);
+	~Gun();
 	void Update();
 	void Draw();
-	void location();
+
 };

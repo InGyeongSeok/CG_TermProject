@@ -17,16 +17,16 @@ void camera() {
 	glm::mat4 VAngleY_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(VAngleY), glm::vec3(0.0, 1.0, 0.0)); //y?
 	glm::mat4 VAngleX_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(VAngleX), glm::vec3(1.0, 0.0, 0.0)); // x
 	
-	glm::vec3 cameraPos = glm::vec3(CPos.x, CPos.y, CPos.z);      //--- Ä«¸Þ¶ó À§Ä¡ (¾îµð¼­ º¼°ÇÁö)
-	glm::vec3 cameraDirection = glm::vec3(CDir.x, CDir.y, CDir.z);               //--- Ä«¸Þ¶ó ¹Ù¶óº¸´Â ¹æÇâ (¾îµðº¼°ÇÁö ÇÏ¸éµÉµí)
-	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);                     //--- Ä«¸Þ¶ó À§ÂÊ ¹æÇâ->º¤ÅÍÀÓ(¹æÇâ¸¸) (À½¼öÇÏ¸é È­¸é »óÇÏ°Å²Ù·Îº¸ÀÓ)
+	glm::vec3 cameraPos = glm::vec3(CPos.x, CPos.y, CPos.z);      //--- Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡ (ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+	glm::vec3 cameraDirection = glm::vec3(CDir.x, CDir.y, CDir.z);               //--- Ä«ï¿½Þ¶ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ðº¼°ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½Éµï¿½)
+	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);                     //--- Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½â¸¸) (ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°Å²Ù·Îºï¿½ï¿½ï¿½)
 
 	glm::mat4 view = VAngleX_Rot * VAngleY_Rot * glm::lookAt(cameraPos, cameraDirection, cameraUp);
 
-	unsigned int viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤
+	unsigned int viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 
-	unsigned int viewPosLocation = glGetUniformLocation(shaderID, "viewPos");      //--- viewPos °ª Àü´Þ: Ä«¸Þ¶ó À§Ä¡
+	unsigned int viewPosLocation = glGetUniformLocation(shaderID, "viewPos");      //--- viewPos ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡
 	glUniform3f(viewPosLocation, cameraPos.x, cameraPos.y, cameraPos.z);
 
 
@@ -39,31 +39,31 @@ void camera() {
 //	glm::mat4 orbitRot1 = glm::mat4(1.0f);
 //	glm::mat4 view = glm::mat4(1.0f);
 //	
-//	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); // °íÁ¤ 
+//	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); // ï¿½ï¿½ï¿½ï¿½ 
 //
-//	glm::vec3 cameraDirection = glm::vec3(0.f+ AddX, 3.0f+ AddY, 0.0f+ AddZ); // Ä«¸Þ¶ó ºÁ¶óº¸±â
+//	glm::vec3 cameraDirection = glm::vec3(0.f+ AddX, 3.0f+ AddY, 0.0f+ AddZ); // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½óº¸±ï¿½
 //	orbitRot = glm::rotate(orbitRot, glm::radians(orbit), glm::vec3(0.0, 1.0, 0.0));
 //	orbitRot1 = glm::rotate(orbitRot1, glm::radians(orbit1), glm::vec3(1.0, 0.0, 0.0));
 //
-//	cameraPos = glm::vec3(0.f+ AddX, 3.f+AddY, 29.f+AddZ); //Ä«¸Þ¶ó À§Ä¡
+//	cameraPos = glm::vec3(0.f+ AddX, 3.f+AddY, 29.f+AddZ); //Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡
 //	view = orbitRot1 * orbitRot * glm::lookAt(cameraPos, cameraDirection, cameraUp);
-//	unsigned int viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤
+//	unsigned int viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½
 //	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 //
 //}
 //
 //
-////¹Ì´Ï¸Ê
+////ï¿½Ì´Ï¸ï¿½
 //void camera2() {
 //	glm::vec3 cameraPos;
 //
-//	cameraPos = glm::vec3(0.f, 30.f, 0.f); //Ä«¸Þ¶ó À§Ä¡
-//	glm::vec3 cameraDirection = glm::vec3(0.f, 0.0f, 0.0f); // Ä«¸Þ¶ó ºÁ¶óº¸±â
-//	glm::vec3 cameraUp = glm::vec3(0.0f, 0.0f, -1.0f); // °íÁ¤ 
+//	cameraPos = glm::vec3(0.f, 30.f, 0.f); //Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡
+//	glm::vec3 cameraDirection = glm::vec3(0.f, 0.0f, 0.0f); // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½óº¸±ï¿½
+//	glm::vec3 cameraUp = glm::vec3(0.0f, 0.0f, -1.0f); // ï¿½ï¿½ï¿½ï¿½ 
 //	glm::mat4 view = glm::mat4(1.0f);
 //	glm::mat4 orbitRot = glm::mat4(1.0f);
 //
-//	if (Ybutton || ybutton) { // °øÀü
+//	if (Ybutton || ybutton) { // ï¿½ï¿½ï¿½ï¿½
 //
 //		view = glm::lookAt(cameraPos, cameraDirection, cameraUp);
 //		view = glm::rotate(view, glm::radians(carY), glm::vec3(0.0, 1.0, 0.0));
@@ -71,6 +71,6 @@ void camera() {
 //	else {
 //		view = glm::lookAt(cameraPos, cameraDirection, cameraUp);
 //	}
-//	unsigned int viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤
+//	unsigned int viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½
 //	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &view[0][0]);
 //}

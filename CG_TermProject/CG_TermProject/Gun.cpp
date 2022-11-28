@@ -1,14 +1,8 @@
-#include "Hero.h"
+#include "Gun.h"
 
-float HeroMovX;
-float HeroMovY;
-float HeroMovZ;
 
-float HeroLocationX{};
-float HeroLocationZ{};
 
-	//color.r, color.g, color.b;
-Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
+Gun::Gun(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 {
 	random_device rd;
 	default_random_engine dre(rd());
@@ -20,33 +14,26 @@ Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 	PosX = X;
 	PosY = Y;
 	PosZ = Z;
-	
+
 }
 
-Hero::~Hero()
+Gun::~Gun()
 {
 
 }
 
-void Hero::damage()
-{
-	HP -= 0.07;
-	cout << "HP - " << HP << endl;
-	if (HP < 0 ) {
-		cout << "DEAD" << endl;
-	}
-}
 
-void Hero::Update()
+
+void Gun::Update()
 {
 	glm::mat4 Scale = glm::scale(Unit, glm::vec3(scaleX, scaleY, scaleZ));
-	glm::mat4 Trans = glm::translate(Unit, glm::vec3(PosX+HeroMovX, PosY+ HeroMovY, PosZ+ HeroMovZ));
+	glm::mat4 Trans = glm::translate(Unit, glm::vec3(PosX, PosY, PosZ));
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
 	Change = Trans * Scale * AddTrans;
 }
 
 
-void Hero::Draw()
+void Gun::Draw()
 {
 
 	glBindVertexArray(VAO);
@@ -58,10 +45,4 @@ void Hero::Draw()
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
 	glDrawArrays(GL_TRIANGLES, 0, vertex1.size() * 3);
-}
-
-void Hero::location()
-{
-	HeroLocationX = PosX + HeroMovX;
-	HeroLocationZ = PosZ + HeroMovZ;
 }
