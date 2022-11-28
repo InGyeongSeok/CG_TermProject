@@ -42,6 +42,7 @@ void timer(int value) {
 		bear.update('d');
 	}
 
+
 	glutPostRedisplay();
 	glutTimerFunc(14, timer, 1);
 }

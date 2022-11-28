@@ -7,18 +7,23 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	switch (key) {
 	case 'w':
 	case 'W':
+		HeroMovZ -= 0.1;
 		isW = true;
 		break;
 	case 'a':
 	case 'A':
+		HeroMovX -= 0.1;
+
 		isA = true;
 		break;
 	case 's':
 	case 'S':
+		HeroMovZ += 0.1f;
 		isS = true;
 		break;
 	case 'd':
 	case 'D':
+		HeroMovX += 0.1;
 		isD = true;
 		break;
 

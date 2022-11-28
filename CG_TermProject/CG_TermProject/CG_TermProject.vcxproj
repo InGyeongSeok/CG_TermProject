@@ -30,6 +30,7 @@
     <ClInclude Include="Ear.h" />
     <ClInclude Include="Eyes.h" />
     <ClInclude Include="Head.h" />
+    <ClInclude Include="Hero.h" />
     <ClInclude Include="KeyboardUP.h" />
     <ClInclude Include="Leg.h" />
     <ClInclude Include="Draw.h" />
@@ -53,6 +54,7 @@
     <ClCompile Include="Ear.cpp" />
     <ClCompile Include="Eyes.cpp" />
     <ClCompile Include="Head.cpp" />
+    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="KeyboardUP.cpp" />
     <ClCompile Include="Leg.cpp" />
     <ClCompile Include="Draw.cpp" />

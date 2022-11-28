@@ -57,5 +57,9 @@ extern float carAddZ;
 
 extern bool isW, isA, isS, isD;
 
+
+extern float HeroMovX;
+extern float HeroMovY;
+extern float HeroMovZ;
 //156. / 255, 91. / 255, 54. / 255 °õ »ö±ò!?
 

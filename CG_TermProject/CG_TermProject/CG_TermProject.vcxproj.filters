@@ -43,6 +43,9 @@
     <Filter Include="Animal\Sword">
       <UniqueIdentifier>{f1268a03-620a-44ef-a251-b72c3fb75499}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Animal\Hero">
+      <UniqueIdentifier>{570d1643-aae0-44be-9419-af575d498441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -108,6 +111,9 @@
     <ClInclude Include="Bear.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Hero.h">
+      <Filter>Animal\Hero</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Motion.cpp">
@@ -172,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="Bear.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Animal\Hero</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
