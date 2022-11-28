@@ -2,7 +2,7 @@
 
 void timer(int value) {
 
-	if (isW) {
+	/*if (isW) {
 		cat.update('w');
 	}
 	if (isA) {
@@ -13,7 +13,7 @@ void timer(int value) {
 	}
 	if (isD) {
 		cat.update('d');
-	}
+	}*/
 
 	if (isW) {
 		dog.update('w');
@@ -42,6 +42,7 @@ void timer(int value) {
 		bear.update('d');
 	}
 
+	cat.update();
 
 	glutPostRedisplay();
 	glutTimerFunc(14, timer, 1);

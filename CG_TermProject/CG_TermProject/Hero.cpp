@@ -3,6 +3,10 @@
 float HeroMovX;
 float HeroMovY;
 float HeroMovZ;
+
+float HeroLocationX{};
+float HeroLocationZ{};
+
 	//color.r, color.g, color.b;
 Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 {
@@ -16,6 +20,7 @@ Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 	PosX = X;
 	PosY = Y;
 	PosZ = Z;
+	
 }
 
 Hero::~Hero()
@@ -48,3 +53,8 @@ void Hero::Draw()
 	glDrawArrays(GL_TRIANGLES, 0, vertex1.size() * 3);
 }
 
+void Hero::location()
+{
+	HeroLocationX = PosX + HeroMovX;
+	HeroLocationZ = PosZ + HeroMovZ;
+}
