@@ -102,6 +102,9 @@ void Bear::update()
 	swordR.keyIn(Position, Direction);
 }
 
+
+
+
 Bear::~Bear()
 {
 }

@@ -3,7 +3,7 @@
 void draw();
 float circleSize = 2;
 
-float lightPosX = 7.6;
+float lightPosX = 7.0;
 float lightPosY = 1.0;
 float lightPosZ = 0.0;
 int lightcolorN = 0;
@@ -15,7 +15,7 @@ float lightColorB = 1.0f;
 Cat cat;
 Dog dog;
 Bear bear;
-Hero hero(0.3,0.3,0.3,1.0,0.,10.0);
+Hero hero(0.3,0.3,0.3,1,0,10.0);
 
 random_device rd;
 default_random_engine dre(rd());
@@ -64,8 +64,6 @@ void draw() {
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
-
-
 	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos 값 전달: (0.0, 0.0, 5.0);
 	//glUniform3f(lightPosLocation, 1, 0.0, 0.0);
 
@@ -75,8 +73,6 @@ void draw() {
 	tempv = Lightrotate * tempv;
 
 	glUniform3f(lightPosLocation, tempv.x, tempv.y, tempv.z);
-
-	
 
 	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
 	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
