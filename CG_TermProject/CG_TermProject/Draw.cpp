@@ -96,6 +96,13 @@ void draw() {
 	hero.Update();
 	hero.Draw();*/
 
+	if (commandGun) {
+		Gun gun(1, 0.0,7);
+		gun.Update();
+		gun.Draw();
+
+	}
+	
 	
 }
 

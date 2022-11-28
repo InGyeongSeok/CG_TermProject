@@ -15,9 +15,9 @@
 #include <gl/glew.h>                     
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/ext.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
+#include <gl/glm/glm.hpp>
+#include <gl/glm/ext.hpp>
+#include <gl/glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 
@@ -25,16 +25,16 @@ extern GLint width, height;
 
 extern GLuint aColor;
 
-extern GLuint shaderID; //--- ¼¼ÀÌ´õ ÇÁ·Î±×·¥ ÀÌ¸§
+extern GLuint shaderID; //--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½Ì¸ï¿½
 extern GLuint VAO;
 extern GLuint sphereVAO;
 extern GLuint pyramidVAO;
 extern GLuint crossVAO;
 
 extern float Rot;
-extern vector<glm::vec3> vertex1; //À°¸éÃ¼
-extern vector<glm::vec3> vertex2; //±¸
-extern vector<glm::vec3> vertex3; //ÇÇ¶ó¹Ìµå
+extern vector<glm::vec3> vertex1; //ï¿½ï¿½ï¿½ï¿½Ã¼
+extern vector<glm::vec3> vertex2; //ï¿½ï¿½
+extern vector<glm::vec3> vertex3; //ï¿½Ç¶ï¿½Ìµï¿½
 
 extern float lightRot;
 
@@ -61,7 +61,7 @@ extern float VAngleY;
 extern float HeroMovX;
 extern float HeroMovY;
 extern float HeroMovZ;
-//156. / 255, 91. / 255, 54. / 255 °õ »ö±ò!?
+//156. / 255, 91. / 255, 54. / 255 ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!?
 
 
 
@@ -69,3 +69,5 @@ extern float HeroLocationX;
 extern float HeroLocationZ;
 
 extern void AnimalCollide();
+
+extern bool commandGun;
