@@ -67,3 +67,7 @@ extern float HeroMovZ;
 
 extern float HeroLocationX;
 extern float HeroLocationZ;
+
+
+extern float MouseX;
+extern float MouseY;
