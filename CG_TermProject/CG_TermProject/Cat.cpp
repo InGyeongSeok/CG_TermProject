@@ -3,6 +3,8 @@
 float closelineX{};
 float closelineZ{};
 
+int num{};
+
 Cat::Cat() : 
 head(Head(glm::vec3(207. / 255, 207. / 255, 207. / 255),1)),
 nose(Nose(glm::vec3(36.  /255, 36.   / 255, 36.  / 255),1)), 
@@ -64,30 +66,38 @@ void Cat::update()
 	Direction = atan2(dx, dz);
 
 	closelineX = HeroLocationX - Position.x;
-	if (!(closelineX <= 0.000001 && closelineX >= -0.000001)) {
+	if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
 
-		if (closelineX >= 0) {
+		if (closelineX >= 0.5) {
 			closelineX -= 0.01;
 			Position.x += 0.01;
 		}
-		if (closelineX < 0) {
+		if (closelineX < -0.5) {
 			closelineX += 0.01;
 			Position.x -= 0.01;
 		}
 	}
 
 	closelineZ = HeroLocationZ - Position.z;
-	if (!(closelineZ <= 0.000001 && closelineZ >= -0.000001)) {
-		if (closelineZ > 0) {
+	if (!(closelineZ <= 0.5 && closelineZ >= -0.5)) {
+		if (closelineZ > 0.5) {
 			closelineZ -= 0.01;
 			Position.z += 0.01;
 		}
-		if (closelineZ < 0) {
+		if (closelineZ < -0.5) {
 			closelineZ += 0.01;
 			Position.z -= 0.01;
 		}
 
 	}
+	
+	if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {
+		num++;
+		//cout << "test" << num*0.05 << endl;
+		hero.damage();
+		
+ 	}
+
 
 	//switch (key) {
 	//case 'w':

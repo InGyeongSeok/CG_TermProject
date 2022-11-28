@@ -121,6 +121,9 @@ void Bear::update(unsigned char key)
 	swordR.keyIn(Position, Direction);
 }
 
+
+
+
 Bear::~Bear()
 {
 }

@@ -29,7 +29,8 @@ class Bear
 	Sword swordL;
 	Beard eyebrowL;
 	Beard eyebrowR;
-
+	
+	
 	glm::vec3 Position;
 	float Direction;
 
@@ -39,7 +40,7 @@ public:
 
 	void draw();
 	void update(unsigned char key);
-
+	void damage();
 	float getLeft();
 	float getRight();
 	float getBehind();

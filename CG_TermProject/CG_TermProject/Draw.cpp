@@ -27,7 +27,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
-	glClearColor(0.f, 0.f, 0.f, 1.0f);
+	glClearColor(1.f, 1.f, 1.f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);   //은면제거
 	glEnable(GL_DITHER);        // 표면을 매끄럽게
@@ -64,8 +64,6 @@ void draw() {
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
-
-
 	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos 값 전달: (0.0, 0.0, 5.0);
 	//glUniform3f(lightPosLocation, 1, 0.0, 0.0);
 
@@ -75,8 +73,6 @@ void draw() {
 	tempv = Lightrotate * tempv;
 
 	glUniform3f(lightPosLocation, tempv.x, tempv.y, tempv.z);
-
-	
 
 	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
 	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
