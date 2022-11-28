@@ -57,7 +57,8 @@ extern float carAddZ;
 
 extern bool isW, isA, isS, isD;
 
-
+extern float VAngleX;
+extern float VAngleY;
 extern float HeroMovX;
 extern float HeroMovY;
 extern float HeroMovZ;

@@ -65,6 +65,8 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(Keyboard);
 	//glutMotionFunc(Motion);
+	glutSetCursor(GLUT_CURSOR_CROSSHAIR);
+
 	glutKeyboardUpFunc(KeyboardUP);
 	glutPassiveMotionFunc(passiveMotion);
 	glutMouseFunc(Mouse);
