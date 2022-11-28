@@ -67,3 +67,5 @@ extern float HeroMovZ;
 
 extern float HeroLocationX;
 extern float HeroLocationZ;
+
+extern void AnimalCollide();
