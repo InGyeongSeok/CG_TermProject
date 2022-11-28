@@ -5,5 +5,5 @@
 #include "Dog.h"
 #include "Bear.h"
 #include "Hero.h"
-
+#include "Gun.h"
 GLvoid drawScene();

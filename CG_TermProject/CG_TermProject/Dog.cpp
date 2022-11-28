@@ -102,7 +102,6 @@ void Dog::update()
 	earR.keyIn(Position, Direction);
 	beardvertical.keyIn(Position, Direction);
 	beardhorizon.keyIn(Position, Direction);
-	
 	swordL.keyIn(Position, Direction);
 	swordR.keyIn(Position, Direction);
 }
