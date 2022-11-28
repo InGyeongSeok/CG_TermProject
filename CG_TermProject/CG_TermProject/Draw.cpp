@@ -2,7 +2,7 @@
 
 void draw();
 float circleSize = 2;
-
+void AnimalCollide();
 float lightPosX = 7.0;
 float lightPosY = 1.0;
 float lightPosZ = 0.0;
@@ -89,6 +89,8 @@ void draw() {
 	for (int i = 0; i < 6; ++i) {
 		cats[i].draw();
 	}
+
+
 	/*dog.draw();
 	bear.draw();
 	hero.Update();
@@ -97,6 +99,22 @@ void draw() {
 	
 }
 
+
+
+void AnimalCollide() {
+	for (int i = 0; i < 5; ++i) {
+		for (int j = 0; j < 5 - i; ++j) {
+			float distanceX = abs(cats[j].Position.x - cats[j + 1].Position.x);
+			float distanceZ = abs(cats[j].Position.z - cats[j + 1].Position.z);
+			if (distanceX <= 0.2f) {
+				cats[j].Position.x += 0.15f;
+			}
+			if (distanceZ<=0.2f) {
+				cats[j].Position.z += 0.15f;
+			}
+		}
+	}
+}
 
 
 

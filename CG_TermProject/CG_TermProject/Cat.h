@@ -58,5 +58,7 @@ public:
 	float getFront();
 	float getBottom();
 	float getTop();
+
+	friend void AnimalCollide();
 };
 

@@ -123,6 +123,8 @@ void Cat::update()
 	beardR3.keyIn(Position, Direction);
 	swordL.keyIn(Position, Direction);
 	swordR.keyIn(Position, Direction);
+
+	AnimalCollide();
 }
 
 Cat::~Cat()
@@ -159,5 +161,4 @@ float Cat::getTop()
 {
 	return 0.0f;				//계산하기 귀찮으니 대충 0으로 잡겠음(의미없는값)
 }
-
 
