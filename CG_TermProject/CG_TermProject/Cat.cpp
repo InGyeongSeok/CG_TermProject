@@ -12,7 +12,7 @@ legL(Leg(glm::vec3(207. / 255, 207. / 255, 207. / 255), -1,1)),
 legR(Leg(glm::vec3(207. / 255, 207. / 255, 207. / 255), 1,1)),
 eyesL(Eyes(glm::vec3(255./255, 54. / 255, 54. / 255),-1,1)), 
 eyesR(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), 1,1)), 
-Position(glm::vec3(0.f, -1.f, 0.f)), Direction(0.f),
+ Direction(0.f),
 earL(Ear(glm::vec3(135. / 255, 135. / 255, 135. / 255), -1,1)),
 earR(Ear(glm::vec3(135. / 255, 135. / 255, 135. / 255), 1,1)),
 beardL1(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), -1, 1,1)),
@@ -24,6 +24,13 @@ beardR3(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 3,1)),
 swordL(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), -1,1)),
 swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,1))
 {
+
+	random_device rd;
+	default_random_engine dre(rd());
+	uniform_real_distribution<float> urd{ -10, 10 };
+	Position.x = urd(dre);
+	Position.y = -1.0f;
+	Position.z = urd(dre);
 
 }
 
@@ -114,6 +121,7 @@ void Cat::update()
 
 Cat::~Cat()
 {
+
 }
 
 float Cat::getLeft()

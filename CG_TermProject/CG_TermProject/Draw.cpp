@@ -12,7 +12,7 @@ float lightColorR = 1.0f;
 float lightColorG = 1.0f;
 float lightColorB = 1.0f;
 
-Cat cat;
+Cat* cats = new Cat[6];
 Dog dog;
 Bear bear;
 Hero hero(0.3,0.3,0.3,1.0,0.,10.0);
@@ -86,11 +86,14 @@ void draw() {
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(aColor, 1., 1., 1.);
 
-	cat.draw();
-	dog.draw();
+
+	for (int i = 0; i < 6; ++i) {
+		cats[i].draw();
+	}
+	/*dog.draw();
 	bear.draw();
 	hero.Update();
-	hero.Draw();
+	hero.Draw();*/
 
 	
 }

@@ -44,6 +44,7 @@ class Cat
 	glm::vec3 Position;
 	float Direction;
 
+
 public:
 	Cat();
 	~Cat();

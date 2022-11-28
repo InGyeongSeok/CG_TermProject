@@ -2,47 +2,40 @@
 
 void timer(int value) {
 
-	/*if (isW) {
-		cat.update('w');
-	}
-	if (isA) {
-		cat.update('a');
-	}
-	if (isS) {
-		cat.update('s');
-	}
-	if (isD) {
-		cat.update('d');
-	}*/
+	if (isW) {
+		carAddZ -= 0.075 * glm::cos(glm::radians(VAngleY));
+		carAddX += 0.075 * glm::sin(glm::radians(VAngleY));
 
-	//if (isW) {
-	//	dog.update('w');
-	//}
-	//if (isA) {
-	//	dog.update('a');
-	//}
-	//if (isS) {
-	//	dog.update('s');
-	//}
-	//if (isD) {
-	//	dog.update('d');
-	//}
-	//
+		HeroMovZ -= 0.075 * glm::cos(glm::radians(VAngleY));
+		HeroMovX += 0.075 * glm::sin(glm::radians(VAngleY));
+	}
+	else if (isA) {
+		carAddZ -= 0.075 * glm::sin(glm::radians(VAngleY));
+		carAddX -= 0.075 * glm::cos(glm::radians(VAngleY));
 
-	//if (isW) {
-	//	bear.update('w');
-	//}
-	//if (isA) {
-	//	bear.update('a');
-	//}
-	//if (isS) {
-	//	bear.update('s');
-	//}
-	//if (isD) {
-	//	bear.update('d');
-	//}
+		HeroMovZ -= 0.075 * glm::sin(glm::radians(VAngleY));
+		HeroMovX -= 0.075 * glm::cos(glm::radians(VAngleY));
+	}
+	else if (isS) {
+		carAddZ += 0.075 * glm::cos(glm::radians(VAngleY));
+		carAddX -= 0.075 * glm::sin(glm::radians(VAngleY));
 
-	cat.update();
+		HeroMovZ += 0.075 * glm::cos(glm::radians(VAngleY));
+		HeroMovX -= 0.075 * glm::sin(glm::radians(VAngleY));
+	}
+	else if (isD) {
+		carAddZ += 0.075 * glm::sin(glm::radians(VAngleY));
+		carAddX += 0.075 * glm::cos(glm::radians(VAngleY));
+
+		HeroMovZ += 0.075 * glm::sin(glm::radians(VAngleY));
+		HeroMovX += 0.075 * glm::cos(glm::radians(VAngleY));
+	}
+
+
+	for (int i = 0; i < 6; ++i) {
+
+		cats[i].update();
+	}
 	dog.update();
 	bear.update();
 
