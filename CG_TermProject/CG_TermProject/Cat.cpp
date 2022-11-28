@@ -62,7 +62,7 @@ void Cat::update()
 	hero.location();
 
 	closelineX = HeroLocationX - Position.x;
-	if (closelineX > 0) {
+	if (closelineX >= 0) {
 		closelineX -= 0.01;
 		Position.x += 0.01;
 		Direction = 90.f;
@@ -84,7 +84,6 @@ void Cat::update()
 		Position.z -= 0.01;
 		Direction = 180.f;
 	}
-
 
 	//switch (key) {
 	//case 'w':
