@@ -8,6 +8,7 @@ void timer(int value) {
 
 		HeroMovZ -= 0.075 * glm::cos(glm::radians(VAngleY));
 		HeroMovX += 0.075 * glm::sin(glm::radians(VAngleY));
+
 	}
 	else if (isA) {
 		carAddZ -= 0.075 * glm::sin(glm::radians(VAngleY));

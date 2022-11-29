@@ -106,18 +106,16 @@ void draw() {
 	
 }
 
-
-
 void AnimalCollide() {
 	for (int i = 0; i < 5; ++i) {
 		for (int j = 0; j < 5 - i; ++j) {
 			float distanceX = abs(cats[j].Position.x - cats[j + 1].Position.x);
 			float distanceZ = abs(cats[j].Position.z - cats[j + 1].Position.z);
 			if (distanceX <= 0.2f) {
-				cats[j].Position.x += 0.15f;
+				cats[j].Position.x += 0.2f;
 			}
 			if (distanceZ<=0.2f) {
-				cats[j].Position.z += 0.15f;
+				cats[j].Position.z += 0.2f;
 			}
 		}
 	}

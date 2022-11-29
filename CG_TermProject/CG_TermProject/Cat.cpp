@@ -47,6 +47,7 @@ void Cat::draw()
 	eyesR.draw();
 	earL.draw();
 	earR.draw();
+
 	beardL1.draw();
 	beardR1.draw();
 	beardL2.draw();
@@ -99,9 +100,6 @@ void Cat::update()
 		hero.damage();
 		
  	}
-
-
-	
 
 
 	nose.keyIn(Position, Direction);
@@ -159,6 +157,6 @@ float Cat::getBottom()
 
 float Cat::getTop()
 {
-	return 0.0f;				//계산하기 귀찮으니 대충 0으로 잡겠음(의미없는값)
+	return 0.0f;				
 }
 
