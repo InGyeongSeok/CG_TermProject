@@ -115,7 +115,7 @@ void draw() {
 	glm::mat4 Scale = glm::mat4(1.0f); //--- 이동 행렬 선언
 	glm::mat4 Tx = glm::mat4(1.0f); //--- 이동 행렬 선언
 	glm::mat4 Change;
-	Scale = glm::scale(Scale, glm::vec3(2, 2, 2));
+	Scale = glm::scale(Scale, glm::vec3(3, 3,3));
 	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
 	Change =Tx*Scale;
 	glBindVertexArray(testVAO);
