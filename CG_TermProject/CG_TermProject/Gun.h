@@ -12,9 +12,10 @@ class Gun
 	float PosX;
 	float PosY;
 	float PosZ;
+	float Angle;
 
 public:
-	Gun(float X, float Y, float Z);
+	Gun(float X, float Y, float Z, float Angle);
 	~Gun();
 	void Update();
 	void Draw();
