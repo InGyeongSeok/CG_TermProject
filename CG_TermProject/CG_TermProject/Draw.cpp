@@ -65,7 +65,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 
 	if (isBullet&&BulletLimit==0) {
 		BulletLimit += 1;
-		gun.push_back(new Gun{ GunDir.x,GunDir.y,GunDir.z ,VAngleY });
+		gun.push_back(new Gun{ cameraPos.x,cameraPos.y,cameraPos.z, TermGunDir.x,TermGunDir.y,TermGunDir.z });
 	}
 	
 	draw();

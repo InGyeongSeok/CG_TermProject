@@ -12,12 +12,18 @@ class Gun
 	float PosX;
 	float PosY;
 	float PosZ;
-	float Angle;
+	float dirX;
+	float dirY;
+	float dirZ;
+	float startP;
+	glm::vec3 GunDir;
+
 
 public:
-	Gun(float X, float Y, float Z, float Angle);
+	Gun(float posX, float posY, float posZ, float dirX, float dirY, float dirZ);
 	~Gun();
 	void Update();
 	void Draw();
 	void Loction();
+
 };

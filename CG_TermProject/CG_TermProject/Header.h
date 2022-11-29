@@ -51,7 +51,8 @@ extern float carY;
 extern float carAddX;
 extern float carAddY;
 extern float carAddZ;
-
+extern glm::vec3 TermGunDir;
+extern glm::vec3 cameraPos;
 
 extern int BulletLimit;
 
