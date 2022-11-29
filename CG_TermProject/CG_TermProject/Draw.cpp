@@ -12,6 +12,8 @@ float lightColorR = 1.0f;
 float lightColorG = 1.0f;
 float lightColorB = 1.0f;
 
+bool isBullet = false;
+vector<Gun*> gun;
 Cat* cats = new Cat[6];
 Dog dog;
 Bear bear;
@@ -59,6 +61,12 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
 	glDrawArrays(GL_QUADS, 0, 4);         //그리기
+
+
+	if (isBullet&&BulletLimit==0) {
+		BulletLimit += 1;
+		gun.push_back(new Gun{ GunDir.x,GunDir.y,GunDir.z ,VAngleY });
+	}
 	
 	draw();
 	glutSwapBuffers();
@@ -96,13 +104,13 @@ void draw() {
 	hero.Update();
 	hero.Draw();*/
 
-	if (commandGun) {
-		Gun gun(1, 0.0,7);
-		gun.Update();
-		gun.Draw();
 
+	for (Gun*& gunbullet : gun) {
+		gunbullet->Update();
+		gunbullet->Draw();
 	}
-	
+
+
 	
 }
 
