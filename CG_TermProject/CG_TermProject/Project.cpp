@@ -11,6 +11,8 @@
 vector<glm::vec3> vertex1;
 vector<glm::vec3> vertex2;
 vector<glm::vec3> vertex3;
+
+vector<glm::vec3> test;
 //랜덤
 
 //random_device rd1;
@@ -35,6 +37,7 @@ GLint width{ 1000 }, height{ 800 };
 GLuint VAO, VBO;
 GLuint sphereVAO, sphereVBO;
 GLuint pyramidVAO, pyramidVBO;
+GLuint testVAO, testVBO;
 
 GLuint vertexShader; //--- 버텍스 세이더 객체
 GLuint fragmentShader; //--- 프래그먼트 세이더 객체
@@ -264,6 +267,23 @@ void InitBuffer()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 
+
+	///////////////////////////////////////////////////////////
+
+	ReadObj("test.obj", test);
+
+	glGenVertexArrays(1, &testVAO);
+
+	glGenBuffers(1, &testVBO);
+
+	glBindVertexArray(testVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, testVBO);
+	glBufferData(GL_ARRAY_BUFFER, test.size() * sizeof(glm::vec3), &test[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(1);
 }
 
 bool make_vertexShaders()

@@ -5,8 +5,8 @@
 #include "Bear.h"
 
 
-extern Cat*cats;
-extern Dog dog;
+extern Cat* cats;
+extern Dog* dogs;
 extern Bear bear;
 
 

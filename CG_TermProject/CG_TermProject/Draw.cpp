@@ -2,7 +2,7 @@
 
 void draw();
 float circleSize = 2;
-void AnimalCollide();
+void AnimalCollideCat();
 float lightPosX = 7.0;
 float lightPosY = 1.0;
 float lightPosZ = 0.0;
@@ -15,7 +15,7 @@ float lightColorB = 1.0f;
 bool isBullet = false;
 vector<Gun*> gun;
 Cat* cats = new Cat[6];
-Dog dog;
+Dog* dogs = new Dog[6];
 Bear bear;
 Hero hero(0.3,0.3,0.3,1,0.5,10.0);
 
@@ -36,7 +36,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 	//glEnable(GL_CULL_FACE);     // 컬링6
 	glEnable(GL_LINE_SMOOTH);   // 안티 앨리어싱
 	glEnable(GL_POLYGON_SMOOTH);// 안티 앨리어싱
-	glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.s
+	glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.
 	//glEnable(GL_CULL_FACE);
 	//glFrontFace(GL_CW);
 
@@ -94,27 +94,43 @@ void draw() {
 	glUniform3f(aColor, 1., 1., 1.);
 
 
+	//for (int i = 0; i < 6; ++i) {
+	//	cats[i].draw();
+	//}
+
 	for (int i = 0; i < 6; ++i) {
-		cats[i].draw();
+		dogs[i].draw();
 	}
 
-
-	//dog.draw();
 	//bear.draw();
 	hero.Update();
 	hero.Draw();
-
 
 	for (Gun*& gunbullet : gun) {
 		gunbullet->Update();
 		gunbullet->Draw();
 	}
+	
 
+	glm::mat4 Scale = glm::mat4(1.0f); //--- 이동 행렬 선언
+	glm::mat4 Tx = glm::mat4(1.0f); //--- 이동 행렬 선언
+	glm::mat4 Change;
+	Scale = glm::scale(Scale, glm::vec3(2, 2, 2));
+	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
+	Change =Tx*Scale;
+	glBindVertexArray(testVAO);
+	SelectColor = glGetUniformLocation(shaderID, "SelectColor");
+	glUniform1i(SelectColor, 1);
 
+	aColor = glGetUniformLocation(shaderID, "objectColor");
+	//glUniform3f(aColor, color.r, color.g, color.b);
+	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
+	glDrawArrays(GL_TRIANGLES, 0, test.size() * 3);
 	
 }
 
-void AnimalCollide() {
+void AnimalCollideCat() {  
 	for (int i = 0; i < 5; ++i) {
 		for (int j = 0; j < 5 - i; ++j) {
 			float distanceX = abs(cats[j].Position.x - cats[j + 1].Position.x);
@@ -124,6 +140,21 @@ void AnimalCollide() {
 			}
 			if (distanceZ<=0.2f) {
 				cats[j].Position.z += 0.2f;
+			}
+		}
+	}
+}
+
+void AnimalCollideDog() {
+	for (int i = 0; i < 5; ++i) {
+		for (int j = 0; j < 5 - i; ++j) {
+			float distanceX = abs(dogs[j].Position.x - dogs[j + 1].Position.x);
+			float distanceZ = abs(dogs[j].Position.z - dogs[j + 1].Position.z);
+			if (distanceX <= 0.2f) {
+				dogs[j].Position.x += 0.2f;
+			}
+			if (distanceZ <= 0.2f) {
+				dogs[j].Position.z += 0.2f;
 			}
 		}
 	}

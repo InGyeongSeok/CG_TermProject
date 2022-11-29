@@ -23,7 +23,12 @@ Position(glm::vec3(1.f, -1.f, 1.f)), Direction(0.f),
 swordL(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), -1,2)),
 swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,2))
 {
-
+	random_device rd;
+	default_random_engine dre(rd());
+	uniform_real_distribution<float> urd{ -10, 10 };
+	Position.x = urd(dre);
+	Position.y = -1.0f;
+	Position.z = urd(dre);
 }
 
 
@@ -104,6 +109,8 @@ void Dog::update()
 	beardhorizon.keyIn(Position, Direction);
 	swordL.keyIn(Position, Direction);
 	swordR.keyIn(Position, Direction);
+
+	AnimalCollideDog();
 }
 
 Dog::~Dog()

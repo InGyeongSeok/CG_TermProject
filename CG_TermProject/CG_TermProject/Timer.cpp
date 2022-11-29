@@ -40,7 +40,11 @@ void timer(int value) {
 
 		cats[i].update();
 	}
-	dog.update();
+	for (int i = 0; i < 6; ++i) {
+
+		dogs[i].update();
+	}
+	
 	bear.update();
 
 	glutPostRedisplay();
