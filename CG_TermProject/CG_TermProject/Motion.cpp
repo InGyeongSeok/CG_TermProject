@@ -5,7 +5,6 @@ GLvoid passiveMotion(int x, int y) {
 
 
 	VAngleY += (x - width / 2) / 12.5;
-
 	//if (glm::radians(VAngleX) < -0.3) {
 	//	VAngleX += 0.05;
 	//}

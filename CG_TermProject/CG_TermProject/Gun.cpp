@@ -1,8 +1,12 @@
 #include "Gun.h"
 
-Gun::Gun(float X, float Y, float Z,float Angle) : Unit(1.f),PosX(X),PosY(Y),PosZ(Z),Angle(Angle)
+Gun::Gun(float posX, float posY, float posZ,float dirX,float dirY,float dirZ) : Unit(1.f),PosX(posX),PosY(posY),PosZ(posZ),
+dirX(dirX), dirY(dirY), dirZ(dirZ)
 {
+	startP = 1.2;
 	color = glm::vec3(1,1,0);
+	
+
 }
 
 Gun::~Gun()
@@ -12,12 +16,14 @@ Gun::~Gun()
 
 void Gun::Update()
 {
-	PosZ -= 0.075 * glm::cos(glm::radians(Angle));
-	PosX += 0.075 * glm::sin(glm::radians(Angle));
-	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.005, 0.005, 0.005));
-	glm::mat4 Trans = glm::translate(Unit, glm::vec3(PosX, PosY, PosZ));
+
+	startP += 0.1;
+	GunDir = glm::vec3(dirX * startP, dirY * startP, dirZ * startP) + glm::vec3(PosX, PosY, PosZ);
+	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.01, 0.01, 0.01));
+	glm::mat4 Trans = glm::translate(Unit, glm::vec3(GunDir.x, GunDir.y, GunDir.z));
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 0., 0.));
 	Change = Trans * Scale * AddTrans;
+
 }
 
 
