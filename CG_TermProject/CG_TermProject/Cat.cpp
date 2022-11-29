@@ -130,6 +130,16 @@ Cat::~Cat()
 
 }
 
+
+void Cat::damage()
+{
+	HP -= 10;
+	if (HP < 0) {
+		cout << "cat dead" << endl;
+	}
+}
+
+
 float Cat::getLeft()
 {
 	return Position.x - 0.15f;
