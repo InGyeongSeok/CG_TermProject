@@ -7,6 +7,8 @@ float HeroMovZ;
 float HeroLocationX{};
 float HeroLocationZ{};
 
+bool jumpUp = true;
+
 	//color.r, color.g, color.b;
 Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 {
@@ -25,7 +27,7 @@ Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 
 Hero::~Hero()
 {
-
+	
 }
 
 void Hero::damage()
@@ -34,7 +36,9 @@ void Hero::damage()
 	cout << "HP - " << HP << endl;
 	if (HP < 0 ) {
 		cout << "DEAD" << endl;
+		
 	}
+	
 }
 
 void Hero::Update()
@@ -43,8 +47,32 @@ void Hero::Update()
 	glm::mat4 Trans = glm::translate(Unit, glm::vec3(PosX+HeroMovX, PosY+ HeroMovY, PosZ+ HeroMovZ));
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
 	Change = Trans * Scale * AddTrans;
+
+	
 }
 
+void Hero::Jump()
+{
+	if (isJump) {
+		if (jumpUp) {
+			HeroMovY += 0.1f;
+			cameraJump +=0.1f;
+			if (HeroMovY >= 1) {
+				jumpUp = false;
+			}
+		}
+		else {
+			HeroMovY -= 0.1f;
+			cameraJump -= 0.1f;
+
+			if (HeroMovY <= 0.f) {
+				isJump = false;
+			}
+		}
+	}
+	
+	
+}
 
 void Hero::Draw()
 {
@@ -58,6 +86,8 @@ void Hero::Draw()
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
 	glDrawArrays(GL_TRIANGLES, 0, vertex1.size() * 3);
+
+	
 }
 
 void Hero::location()

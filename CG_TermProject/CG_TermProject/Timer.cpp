@@ -31,7 +31,10 @@ void timer(int value) {
 		HeroMovZ += 0.075 * glm::sin(glm::radians(VAngleY));
 		HeroMovX += 0.075 * glm::cos(glm::radians(VAngleY));
 	}
+	if (isJump) {
+		hero.Jump();
 
+	}
 
 	for (int i = 0; i < 6; ++i) {
 

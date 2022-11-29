@@ -55,6 +55,10 @@ extern float carAddZ;
 
 
 extern bool isW, isA, isS, isD;
+extern bool isJump;
+extern bool jumpUp;
+
+extern float cameraJump;
 
 extern float VAngleX;
 extern float VAngleY;

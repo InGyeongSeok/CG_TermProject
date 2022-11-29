@@ -1,6 +1,6 @@
 #include "keyboard.h"
 bool isW, isA, isS, isD;
-
+bool isJump;
 
 GLvoid Keyboard(unsigned char key, int x, int y)
 {
@@ -21,6 +21,10 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'd':
 	case 'D':
 		isD = true;
+		break;
+	case' ':
+		isJump = true;
+		jumpUp = true;
 		break;
 	case'z':
 		carAddZ -= 1;

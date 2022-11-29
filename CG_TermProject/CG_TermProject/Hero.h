@@ -19,6 +19,7 @@ class Hero
 public:
 	Hero(float SX, float SY, float SZ, float X, float Y, float Z);
 	~Hero();
+	void Jump();
 	void damage();
 	void Update();
 	void Draw();

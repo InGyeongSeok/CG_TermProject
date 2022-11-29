@@ -9,18 +9,17 @@ float carAddY;
 float carAddZ;
 float VAngleX;
 float VAngleY;
+float cameraJump{};
 
 void camera() {
 
-	glm::vec3 cameraPos(carAddX + 1, carAddY, carAddZ + 10);      //--- 카메라 위치 (어디서 볼건지)
-
-
+	//glm::vec3 cameraPos(carAddX + 1, carAddY, carAddZ + 10);      //--- 카메라 위치 (어디서 볼건지)
+	glm::vec3 cameraPos(carAddX + 1, carAddY+cameraJump, carAddZ + 10);      //--- 카메라 위치 (어디서 볼건지)
 
 	glm::mat4 VAngleY_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(-VAngleY), glm::vec3(0.0, 1.0, 0.0)); //y?
 	glm::mat4 VAngleX_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(-VAngleX), glm::vec3(1.0, 0.0, 0.0)); // x
 
 	glm::vec3 CDir(0.f, 0.f, -10.f);
-
 	CDir = VAngleY_Rot * VAngleX_Rot * glm::vec4(CDir, 1.f);
 	CDir.x += 1.f;
 

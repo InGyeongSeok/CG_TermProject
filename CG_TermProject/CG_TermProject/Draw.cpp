@@ -15,7 +15,7 @@ float lightColorB = 1.0f;
 Cat* cats = new Cat[6];
 Dog dog;
 Bear bear;
-Hero hero(0.3,0.3,0.3,1,0,10.0);
+Hero hero(0.3,0.3,0.3,1,0.5,10.0);
 
 random_device rd;
 default_random_engine dre(rd());
@@ -40,7 +40,7 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 
 	glm::mat4 projection; // 원근투영
 
-	projection = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 200.0f);
+	projection = glm::perspective(glm::radians(90.0f), (float)width / height, 0.1f, 200.0f);
 	//												화면비율, 시작좌표(카메라 바로 앞 길이), 깊이
 	/*projection = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);*/
 	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
@@ -91,10 +91,10 @@ void draw() {
 	}
 
 
-	/*dog.draw();
-	bear.draw();
+	//dog.draw();
+	//bear.draw();
 	hero.Update();
-	hero.Draw();*/
+	hero.Draw();
 
 	if (commandGun) {
 		Gun gun(1, 0.0,7);
