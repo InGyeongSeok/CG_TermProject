@@ -30,6 +30,7 @@ swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,1))
 	Position.x = urd(dre);
 	Position.y = -1.0f;
 	Position.z = urd(dre);
+	HP = 20;
 
 }
 
@@ -123,6 +124,7 @@ void Cat::update()
 	swordR.keyIn(Position, Direction);
 
 	AnimalCollideCat();
+
 }
 
 Cat::~Cat()

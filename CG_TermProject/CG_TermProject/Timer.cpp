@@ -36,13 +36,11 @@ void timer(int value) {
 
 	}
 
-	for (int i = 0; i < 6; ++i) {
-
-		cats[i].update();
+	for (int i = 0; i < cats.size(); ++i) {
+		cats[i]->update();
 	}
-	for (int i = 0; i < 6; ++i) {
-
-		dogs[i].update();
+	for (int i = 0; i < dogs.size(); ++i) {
+		dogs[i]->update();
 	}
 	
 	bear.update();

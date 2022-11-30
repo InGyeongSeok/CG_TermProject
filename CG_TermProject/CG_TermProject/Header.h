@@ -78,7 +78,7 @@ extern float HeroLocationZ;
 
 extern void AnimalCollideCat();
 extern void AnimalCollideDog();
-
+extern void BulletCollideCat();
 extern bool commandGun;
 
 

@@ -44,7 +44,7 @@ class Cat
 	glm::vec3 Position;
 	float Direction;
 
-	float HP;
+	int HP;
 
 public:
 	Cat();
@@ -61,5 +61,6 @@ public:
 	float getBottom();
 	float getTop();
 	friend void AnimalCollideCat();
+	friend void BulletCollideCat();
 };
 

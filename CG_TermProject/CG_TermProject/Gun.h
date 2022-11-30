@@ -16,6 +16,7 @@ class Gun
 	float dirY;
 	float dirZ;
 	float startP;
+	int  Damage;
 	glm::vec3 GunDir;
 
 
@@ -24,6 +25,7 @@ public:
 	~Gun();
 	void Update();
 	void Draw();
+	friend void BulletCollideCat();
 	void Loction();
 
 };
