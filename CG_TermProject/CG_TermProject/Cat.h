@@ -64,6 +64,5 @@ public:
 	float getTop();
 	friend void AnimalCollideCat();
 	friend void BulletCollideCat();
-	friend void DrawParticle(int j);
 };
 
