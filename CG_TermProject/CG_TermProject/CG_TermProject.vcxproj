@@ -40,6 +40,7 @@
     <ClInclude Include="Motion.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Nose.h" />
+    <ClInclude Include="particle.h" />
     <ClInclude Include="sword.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
@@ -64,6 +65,7 @@
     <ClCompile Include="Motion.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Nose.cpp" />
+    <ClCompile Include="particle.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Timer.cpp" />

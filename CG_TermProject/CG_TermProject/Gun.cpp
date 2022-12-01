@@ -16,7 +16,6 @@ Gun::~Gun()
 
 void Gun::Update()
 {
-
 	BulletCollideCat();
 	startP += 0.1;
 	GunDir = glm::vec3(dirX * startP, dirY * startP, dirZ * startP) + glm::vec3(PosX, PosY, PosZ);

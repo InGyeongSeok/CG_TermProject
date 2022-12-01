@@ -24,6 +24,7 @@ vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 Bear bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
+Particle particle ={0,0.5,9};
 
 random_device rd;
 default_random_engine dre(rd());
@@ -71,6 +72,9 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 	//camera3D();
 
 	draw();
+
+	particle.draw();
+	particle.update();
 
 	if (isBullet && BulletLimit == 0) {
 		BulletLimit += 1;

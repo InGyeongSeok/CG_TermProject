@@ -6,6 +6,7 @@
 #include "Bear.h"
 #include "Hero.h"
 #include "Gun.h"
+#include "particle.h"
 GLvoid drawScene();
 
 
