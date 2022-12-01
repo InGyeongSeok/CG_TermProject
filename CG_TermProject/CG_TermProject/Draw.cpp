@@ -35,7 +35,11 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
-	glClearColor(1.f, 1.f, 1.f, 1.0f);
+	if(lightColorR <0.3)
+		glClearColor(0.f, 0.f, 0.f, 1.0f);
+	else
+		glClearColor(1.f, 1.f, 1.f, 1.0f);
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);   //��������
 	glEnable(GL_DITHER);        // ǥ���� �Ų�����

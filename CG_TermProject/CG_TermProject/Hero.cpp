@@ -41,6 +41,11 @@ void Hero::damage()
 		cout << "DEAD" << endl;
 		
 	}
+	if (lightColorG < 0.3) { 
+		lightColorB = 0;
+		lightColorG = 0;
+		lightColorR = 0;
+	}
 }
 
 void Hero::Update()

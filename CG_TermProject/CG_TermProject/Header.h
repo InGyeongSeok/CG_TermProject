@@ -45,7 +45,7 @@ extern float lightRot;
 extern float lightPosX;
 extern float lightPosY;
 extern float lightPosZ;
-
+extern float lightColorR;
 extern float lightColorG;
 extern float lightColorB;
 
