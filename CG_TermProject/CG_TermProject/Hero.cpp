@@ -34,15 +34,15 @@ Hero::~Hero()
 void Hero::damage()
 {
 	HP -= 0.07;
-	lightColorG-= 0.001f;
-	lightColorB-= 0.001f;
+	lightColorG-= 0.0005f;
+	lightColorB-= 0.0005f;
 	cout << "lightColorG" << lightColorG << endl;
 	cout << "HP" << HP << endl;
 	if (HP < 0 ) {
 		cout << "DEAD" << endl;
 		
 	}
-	if (lightColorG < 0.3) { 
+	if (lightColorG < 0.35) { 
 		lightColorB = 0;
 		lightColorG = 0;
 		lightColorR = 0;

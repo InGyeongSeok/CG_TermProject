@@ -36,7 +36,7 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
-	if(lightColorR <0.3)
+	if(lightColorR <0.35)
 		glClearColor(0.f, 0.f, 0.f, 1.0f);
 	else
 		glClearColor(1.f, 1.f, 1.f, 1.0f);
