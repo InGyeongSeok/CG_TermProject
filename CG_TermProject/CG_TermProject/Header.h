@@ -15,9 +15,9 @@
 #include <gl/glew.h>                     
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include <gl/glm/glm.hpp>
-#include <gl/glm/ext.hpp>
-#include <gl/glm/gtc/matrix_transform.hpp>
+#include <glm/glm/glm.hpp>
+#include <glm/glm/ext.hpp>
+#include <glm/glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 
@@ -81,12 +81,15 @@ extern float HeroLocationZ;
 extern void AnimalCollideCat();
 extern void AnimalCollideDog();
 extern void BulletCollideCat();
+extern void DrawParticle(int j);
 extern bool commandGun;
-extern float drop;
+
 extern glm::vec3 GunDir;
 extern bool isParticle;
 extern bool isBullet ;
-
-extern float ParticleZ;
-extern float ParticleX;
 extern const glm::mat4 Unit;
+
+
+extern float CatEndPosX;
+extern float CatEndPosZ;
+

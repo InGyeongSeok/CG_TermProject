@@ -18,16 +18,26 @@ float lightColorG = 1.0f;
 float lightColorB = 1.0f;
 bool isParticle = false;
 bool isBullet = false;
-
-
-float ParticleZ{};
-float ParticleX{};
 vector<Gun*> gun;
-vector<Particle*> particle;
+
+
+vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle, new Particle
+						,new Particle, new Particle,new Particle,new Particle,new Particle,
+						 new Particle,new Particle, new Particle, new Particle, new Particle
+						,new Particle, new Particle,new Particle,new Particle,new Particle,new Particle,new Particle, new Particle, new Particle, new Particle
+						,new Particle, new Particle,new Particle,new Particle,new Particle,
+						 new Particle,new Particle, new Particle, new Particle, new Particle
+						,new Particle, new Particle,new Particle,new Particle,new Particle };
+
+
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 Bear bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
+
+
+float CatEndPosX;
+float CatEndPosZ;
 
 random_device rd;
 default_random_engine dre(rd());
@@ -68,7 +78,7 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 
 	glViewport(width / 1.26, height / 1.35, 200,200);
 	projection = glm::mat4(1.0f);
-	projection = glm::ortho(-25.0f, 25.0f, -25.0f, 25.0f, -25.0f, 25.0f);
+	projection = glm::ortho(-13.0f, 13.0f, -13.0f, 13.0f, -13.0f, 13.0f);
 	projectionLocation = glGetUniformLocation(shaderID, "projectionTransform");
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 	TopView();
@@ -76,7 +86,6 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 	//camera3D();
 
 	draw();
-
 	
 
 	if (isBullet && BulletLimit == 0) {
@@ -134,24 +143,24 @@ void draw() {
 	hero.Update();
 	hero.Draw();
 
-	for (int i = 0; i < 100; ++i) {
-		particle.push_back(new Particle{ 0 ,0,0 });
-	}
-	if (isParticle) {
-		for (int i = 0; i < 100; ++i) {
-	
-			particle[i]->update();
-			particle[i]->draw();
-		}
-	}
-
-
-
-
+	/*for (Particle*& test : particle) {
+		test->draw();
+		test->update();
+	}*/
 	for (Gun*& gunbullet : gun) {
 		gunbullet->Update();
 		gunbullet->Draw();
 	}
+	
+	if (CatEndPosX != 0 && CatEndPosZ != 0) {
+		if (isParticle) {
+			for (int i = 0; i < 40; ++i) {
+				particle[i]->update();
+				particle[i]->draw();
+			}
+		}
+	}
+
 
 	///////////////////////////////////////////////////// test ��
 	//glm::mat4 Scale = glm::mat4(1.0f); //--- �̵� ��� ����
@@ -234,14 +243,15 @@ void BulletCollideCat() {
 				cats[j]->HP -= gun[i]->Damage;
 				delete gun[i];
 				if (0 == cats[j]->HP) {
-					ParticleX = cats[j]->Position.x;
-					ParticleZ = cats[j]->Position.z;
+					for (int i = 0; i < 40; ++i) {
+						particle[i]->dirY = -0.2;
+					}
+					CatEndPosX = cats[j]->Position.x;
+					CatEndPosZ = cats[j]->Position.z;
 					isParticle = true;
-					drop = -0.5;
 					delete cats[j];
 					cats.erase(cats.begin() + j);
 					--j;
-					
 				}
 				gun.erase(gun.begin() + i);
 				--i;
@@ -253,8 +263,20 @@ void BulletCollideCat() {
 	}
 }
 
-
-
+//
+//void DrawParticle(int j)
+//{
+//	float catX = cats[j]->Position.x;
+//	float catZ = cats[j]->Position.z;
+//
+//	for (int i = 0; i < 10; ++i) {
+//		particle.push_back(new Particle{ catX,0,catZ });
+//	}
+//	for (int i = 0; i < 10; ++i) {
+//		particle[i]->draw();
+//		particle[i]->update();
+//	}
+//}
 
 //float distanceX = abs(gun[i]->GunDir.x - cats[j]->Position.x);
 //float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);
