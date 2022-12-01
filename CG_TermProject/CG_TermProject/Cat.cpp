@@ -62,7 +62,6 @@ void Cat::draw()
 
 void Cat::update()
 {
-	//직선의 방정식 구하기
 	
 	hero.location();
 	float dz = HeroLocationZ - Position.z;
@@ -144,22 +143,22 @@ void Cat::damage()
 
 float Cat::getLeft()
 {
-	return Position.x - 0.15f;
+	return Position.x - 0.12f;
 }
 
 float Cat::getRight()
 {
-	return Position.x + 0.15f;
+	return Position.x + 0.12f;
 }
 
 float Cat::getBehind()
 {
-	return Position.z - 0.15f;
+	return Position.z - 0.12f;
 }
 
 float Cat::getFront()
 {
-	return Position.z + 0.15f;
+	return Position.z + 0.12f;
 }
 
 float Cat::getBottom()
@@ -171,4 +170,5 @@ float Cat::getTop()
 {
 	return 0.0f;				
 }
+
 

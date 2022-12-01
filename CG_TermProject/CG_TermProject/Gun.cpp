@@ -40,7 +40,33 @@ void Gun::Draw()
 	glDrawArrays(GL_TRIANGLES, 0, vertex2.size() * 3);
 }
 
-void Gun::Loction()
-{
 
+float Gun::getLeft()
+{
+	return GunDir.x - 0.03f;
+}
+
+float Gun::getRight()
+{
+	return GunDir.x + 0.03f;
+}
+
+float Gun::getBehind()
+{
+	return GunDir.z - 0.03f;
+}
+
+float Gun::getFront()
+{
+	return GunDir.z + 0.03f;
+}
+
+float Gun::getBottom()
+{
+	return GunDir.y;
+}
+
+float Gun::getTop()
+{
+	return 0.0f;
 }

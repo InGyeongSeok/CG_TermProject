@@ -5,6 +5,9 @@ float circleSize = 2;
 void AnimalCollideCat();
 void AnimalCollideDog();
 void BulletCollideCat();
+bool isCollide2D(Cat r1, Gun r2);
+
+
 float lightPosX = 7.0;
 float lightPosY = 1.0;
 float lightPosZ = 0.0;
@@ -27,27 +30,27 @@ default_random_engine dre(rd());
 uniform_real_distribution<float> urd{ 0, 255 };
 
 
-GLvoid drawScene() //--- ÄÝ¹é ÇÔ¼ö: ±×¸®±â ÄÝ¹é ÇÔ¼ö
+GLvoid drawScene() //--- ï¿½Ý¹ï¿½ ï¿½Ô¼ï¿½: ï¿½×¸ï¿½ï¿½ï¿½ ï¿½Ý¹ï¿½ ï¿½Ô¼ï¿½
 {
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
 	glClearColor(1.f, 1.f, 1.f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);   //Àº¸éÁ¦°Å
-	glEnable(GL_DITHER);        // Ç¥¸éÀ» ¸Å²ô·´°Ô
-	//glEnable(GL_CULL_FACE);     // ÄÃ¸µ6
-	glEnable(GL_LINE_SMOOTH);   // ¾ÈÆ¼ ¾Ù¸®¾î½Ì
-	glEnable(GL_POLYGON_SMOOTH);// ¾ÈÆ¼ ¾Ù¸®¾î½Ì
-	glShadeModel(GL_SMOOTH);    // ºÎµå·¯¿î À½¿µÀ» ¼öÇàÇÕ´Ï´Ù.
+	glEnable(GL_DEPTH_TEST);   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	glEnable(GL_DITHER);        // Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Å²ï¿½ï¿½ï¿½ï¿½ï¿½
+	//glEnable(GL_CULL_FACE);     // ï¿½Ã¸ï¿½6
+	glEnable(GL_LINE_SMOOTH);   // ï¿½ï¿½Æ¼ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½
+	glEnable(GL_POLYGON_SMOOTH);// ï¿½ï¿½Æ¼ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½
+	glShadeModel(GL_SMOOTH);    // ï¿½Îµå·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 	//glEnable(GL_CULL_FACE);
 	//glFrontFace(GL_CW);
 
-	glm::mat4 projection; // ¿ø±ÙÅõ¿µ
+	glm::mat4 projection; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	projection = glm::perspective(glm::radians(90.0f), (float)width / height, 0.1f, 200.0f);
-	//												È­¸éºñÀ², ½ÃÀÛÁÂÇ¥(Ä«¸Þ¶ó ¹Ù·Î ¾Õ ±æÀÌ), ±íÀÌ
-	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- Åõ¿µ º¯È¯ °ª ¼³Á¤
+	//												È­ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¥(Ä«ï¿½Þ¶ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½), ï¿½ï¿½ï¿½ï¿½
+	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 	glViewport(0, 0, width, height);
 	camera();
@@ -78,33 +81,33 @@ void draw() {
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
-	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos °ª Àü´Þ: (0.0, 0.0, 5.0);
+	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: (0.0, 0.0, 5.0);
 	//glUniform3f(lightPosLocation, 1, 0.0, 0.0);
 
-	glm::vec4 tempv(lightPosX, lightPosY, lightPosZ, 1); //À§Ä¡ 
+	glm::vec4 tempv(lightPosX, lightPosY, lightPosZ, 1); //ï¿½ï¿½Ä¡ 
 	glm::mat4 Lightrotate = glm::rotate(glm::mat4(1.f), glm::radians(lightRot), glm::vec3(0, 1, 0));
 
 	tempv = Lightrotate * tempv;
 
 	glUniform3f(lightPosLocation, tempv.x, tempv.y, tempv.z);
 
-	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor °ª Àü´Þ: (1.0, 1.0, 1.0) ¹é»ö
+	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: (1.0, 1.0, 1.0) ï¿½ï¿½ï¿½
 	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
 
-	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color°ª Àü´Þ: (1.0, 0.5, 0.3)ÀÇ »ö
+	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Colorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: (1.0, 0.5, 0.3)ï¿½ï¿½ ï¿½ï¿½
 	glUniform3f(aColor, 1, 1., 1.);
 
-	//////////////////////////////////////////////////////// ¹Ù´Ú 
+	//////////////////////////////////////////////////////// ï¿½Ù´ï¿½ 
 
-	glBindVertexArray(crossVAO);     //¹ÙÀÎµå
+	glBindVertexArray(crossVAO);     //ï¿½ï¿½ï¿½Îµï¿½
 	aColor = glGetUniformLocation(shaderID, "objectColor");
 	glUniform3f(aColor, 0.2, 0.2, 0.2);
 
-	glm::mat4 Tx = glm::mat4(1.0f); //--- ÀÌµ¿ Çà·Ä ¼±¾ð
+	glm::mat4 Tx = glm::mat4(1.0f); //--- ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
-	glDrawArrays(GL_QUADS, 0, 4);         //±×¸®±â
+	glDrawArrays(GL_QUADS, 0, 4);         //ï¿½×¸ï¿½ï¿½ï¿½
 
 
 
@@ -125,8 +128,8 @@ void draw() {
 		gunbullet->Draw();
 	}
 
-	///////////////////////////////////////////////////// test ¼º
-	glm::mat4 Scale = glm::mat4(1.0f); //--- ÀÌµ¿ Çà·Ä ¼±¾ð
+	///////////////////////////////////////////////////// test ï¿½ï¿½
+	glm::mat4 Scale = glm::mat4(1.0f); //--- ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	glm::mat4 Change;
 	Scale = glm::scale(Scale, glm::vec3(3, 3, 3));
 	Tx = glm::translate(Unit, glm::vec3(0, -1.f, 0));
@@ -178,9 +181,7 @@ void BulletCollideCat() {
 
 	for (int i = 0; i < gun.size(); ++i) {
 		for (int j = 0; j < cats.size(); ++j) {
-			float distanceX = abs(gun[i]->GunDir.x - cats[j]->Position.x);
-			float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);
-			if (distanceX < 0.05 || distanceZ < 0.05) {
+			if (isCollide2D(*cats[j], *gun[i])) {
 				cats[j]->HP -= gun[i]->Damage;
 				delete gun[i];
 				if (0 == cats[j]->HP) {
@@ -192,9 +193,32 @@ void BulletCollideCat() {
 				--i;
 				break;
 			}
+
 		}
 
 	}
+}
+
+//float distanceX = abs(gun[i]->GunDir.x - cats[j]->Position.x);
+//float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);
+//if (distanceX < 0.05 || distanceZ < 0.05) {
+//	cats[j]->HP -= gun[i]->Damage;
+//	delete gun[i];
+//	if (0 == cats[j]->HP) {
+//		delete cats[j];
+//		cats.erase(cats.begin() + j);
+//		--j;
+//	}
+//	gun.erase(gun.begin() + i);
+//	--i;
+//	break;
+//}
+
+bool isCollide2D(Cat r1, Gun r2)
+{
+	if (r1.getRight() < r2.getLeft() || r1.getLeft() > r2.getRight()) return false;
+	if (r1.getFront() < r2.getBehind() || r1.getBehind() > r2.getFront()) return false;
+	return true;
 }
 
 
