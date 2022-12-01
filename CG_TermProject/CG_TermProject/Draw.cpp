@@ -92,7 +92,7 @@ void draw() {
 	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
 
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
-	glUniform3f(aColor, 1., 1., 1.);
+	glUniform3f(aColor, 1, 1., 1.);
 
 	//////////////////////////////////////////////////////// 바닥 
 
