@@ -239,7 +239,7 @@ void BulletCollideCat() {
 void DrawParticle(int j)
 {
 	float catX = cats[j]->Position.x;
-	float catZ = cats[j]->Position.x;
+	float catZ = cats[j]->Position.z;
 
 	for (int i = 0; i < 10; ++i) {
 		particle.push_back(new Particle{ catX,0,catZ });

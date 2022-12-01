@@ -45,11 +45,5 @@ void Particle::update()
 	//glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1, 0.));
 	Change = Trans * Scale;
 	++i;
-	//cout << i << endl;
-	if (i > 10) {
-		i = 0;
-		//cout << i << endl;
-	}
-
 }
 
