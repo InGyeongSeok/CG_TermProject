@@ -45,7 +45,7 @@ void camera() {
 
 void TopView()
 {
-	glm::vec3 cameraPos = glm::vec3(0.f, 15.f, 0);
+	glm::vec3 cameraPos = glm::vec3(0.f, 10.f, 0);
 	glm::vec3 cameraDirection = glm::vec3(0.f, 0.0f, 0.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::mat4 view = glm::mat4(1.0f);
@@ -58,7 +58,7 @@ void TopView()
 }
 
 void camera3D() {
-	glm::vec3 cameraPos = glm::vec3(0.f, 10.f,20.f);
+	glm::vec3 cameraPos = glm::vec3(0.f, 5.f,5.f);
 	glm::vec3 cameraDirection = glm::vec3(0.f, 0.0f, 0.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 view = glm::mat4(1.0f);

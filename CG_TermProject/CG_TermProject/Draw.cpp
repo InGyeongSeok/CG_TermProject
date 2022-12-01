@@ -54,14 +54,14 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 	draw();
 
 
-	glViewport(width / 1.4, height / 1.44, 300, 300);
-	/*projection = glm::mat4(1.0f);
-	projection = glm::ortho(-50.0f, 50.0f, -50.0f, 50.0f, -50.0f, 50.0f);
+	glViewport(width / 1.26, height / 1.35, 200,200);
+	projection = glm::mat4(1.0f);
+	projection = glm::ortho(-25.0f, 25.0f, -25.0f, 25.0f, -25.0f, 25.0f);
 	projectionLocation = glGetUniformLocation(shaderID, "projectionTransform");
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
-	TopView();*/
+	TopView();
 
-	camera3D();
+	//camera3D();
 
 	draw();
 
