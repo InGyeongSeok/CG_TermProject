@@ -24,8 +24,7 @@ vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 Bear bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
-Particle particle ={0,0.5,9};
-
+vector<Particle*> particle;
 random_device rd;
 default_random_engine dre(rd());
 uniform_real_distribution<float> urd{ 0, 255 };
@@ -60,7 +59,8 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 	glViewport(0, 0, width, height);
 	camera();
 	draw();
-
+	
+	
 
 	glViewport(width / 1.26, height / 1.35, 200,200);
 	projection = glm::mat4(1.0f);
@@ -73,8 +73,7 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 
 	draw();
 
-	particle.draw();
-	particle.update();
+	
 
 	if (isBullet && BulletLimit == 0) {
 		BulletLimit += 1;
@@ -107,15 +106,15 @@ void draw() {
 
 	//////////////////////////////////////////////////////// 
 
-	glBindVertexArray(crossVAO);     
+	glBindVertexArray(crossVAO);
 	aColor = glGetUniformLocation(shaderID, "objectColor");
 	glUniform3f(aColor, 0.2, 0.2, 0.2);
 
-	glm::mat4 Tx = glm::mat4(1.0f); 
+	glm::mat4 Tx = glm::mat4(1.0f);
 	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
-	glDrawArrays(GL_QUADS, 0, 4);         
+	glDrawArrays(GL_QUADS, 0, 4);
 
 
 
@@ -130,28 +129,39 @@ void draw() {
 	//bear.draw();
 	hero.Update();
 	hero.Draw();
-
+	for (int i = 0; i < 10; ++i) {
+		particle.push_back(new Particle{ 0,0,0 });
+	}
+	for (int i = 0; i < 10; ++i) {
+		particle[i]->draw();
+		particle[i]->update();
+	}
+	
+	/*for (Particle*& test : particle) {
+		test->draw();
+		test->update();
+	}*/
 	for (Gun*& gunbullet : gun) {
 		gunbullet->Update();
 		gunbullet->Draw();
 	}
 
 	///////////////////////////////////////////////////// test ��
-	glm::mat4 Scale = glm::mat4(1.0f); //--- �̵� ��� ����
-	glm::mat4 Change;
-	Scale = glm::scale(Scale, glm::vec3(3, 3, 3));
-	Tx = glm::translate(Unit, glm::vec3(0, -1.f, 0));
-	Change = Tx * Scale;
+	//glm::mat4 Scale = glm::mat4(1.0f); //--- �̵� ��� ����
+	//glm::mat4 Change;
+	//Scale = glm::scale(Scale, glm::vec3(3, 3, 3));
+	//Tx = glm::translate(Unit, glm::vec3(0, -1.f, 0));
+	//Change = Tx * Scale;
 
-	glBindVertexArray(testVAO);
-	SelectColor = glGetUniformLocation(shaderID, "SelectColor");
-	glUniform1i(SelectColor, 1);
+	//glBindVertexArray(testVAO);
+	//SelectColor = glGetUniformLocation(shaderID, "SelectColor");
+	//glUniform1i(SelectColor, 1);
 
-	aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(aColor, 128 / 255., 245 / 255., 255 / 255.);
-	modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
-	glDrawArrays(GL_TRIANGLES, 0, test.size() * 3);
+	//aColor = glGetUniformLocation(shaderID, "objectColor");
+	//glUniform3f(aColor, 128 / 255., 245 / 255., 255 / 255.);
+	//modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
+	//glDrawArrays(GL_TRIANGLES, 0, test.size() * 3);
 	///////////////////////////////////////////////////////////////////////////
 	
 	glBindVertexArray(HeroHPVAO);     //���ε�
@@ -159,7 +169,7 @@ void draw() {
 	glUniform3f(aColor, 1.0, 0.0, 0.0);
 
 	for (int i = 0; i < hero.InfoHP(); ++i) {
-
+		glm::mat4 Change;
 		Change = Unit;
 		GLuint projectionTransform = glGetUniformLocation(shaderID, "projectionTransform");
 		glUniformMatrix4fv(projectionTransform, 1, GL_FALSE, glm::value_ptr(Change));

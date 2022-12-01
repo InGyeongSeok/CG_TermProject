@@ -4,7 +4,6 @@
 #include "Dog.h"
 #include "Bear.h"
 
-
 extern vector<Cat*> cats;
 extern vector<Dog*> dogs;
 extern Bear bear;

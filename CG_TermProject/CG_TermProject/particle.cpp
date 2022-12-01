@@ -1,11 +1,21 @@
 #include "particle.h"
+int i = 0;
 
-Particle::Particle(float Xpos, float Ypos, float Zpos) : Xpos{ Xpos }, Ypos{ Ypos }, Zpos{ Zpos }
+Particle::Particle(float XPos, float YPos, float ZPos) : Xpos{ XPos }, Ypos{YPos}, Zpos{ZPos}
 { 
+
 	random_device rd;
 	default_random_engine dre(rd());
 	uniform_real_distribution<float> urd{ 0, 255 };
+	uniform_real_distribution<float> urdX(-1.0f, 1.0f);
+	uniform_real_distribution<float> urdY(-1.0f, 1.0f);
+	uniform_real_distribution<float> urdZ(-1.0f, 1.0f);
 	color = glm::vec3(urd(dre) / 255., urd(dre) / 255., urd(dre) / 255.);
+	for (int i = 0; i < 10; i++) {
+		dirX[i] = urdX(dre);
+		dirY[i] = urdY(dre);
+		dirZ[i] = urdZ(dre);
+	}
 }
 
 Particle::~Particle() {
@@ -27,10 +37,17 @@ void Particle::draw()
 }
 
 void Particle::update() 
-{
-	glm::mat4 Scale = glm::scale(Unit, glm::vec3(1, 1, 1));
-	glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos, Ypos, Zpos));
-	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
-	Change = Trans * Scale * AddTrans;
+{	
+	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.1-i*0.01, 0.1-i * 0.01, 0.1-i * 0.01));
+	glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos+dirX[i], Ypos+dirY[i], Zpos+dirZ[i]));
+	//glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1, 0.));
+	Change = Trans * Scale ;
+	++i;
+	//cout << i << endl;
+	if (i > 10) {
+		i = 0;
+		//cout << i << endl;
+	}
+
 }
 
