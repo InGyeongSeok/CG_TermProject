@@ -89,7 +89,7 @@ void Dog::update()
 
 	if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {
 
-		hero.damage();
+		//hero.damage();
 
 	}
 
