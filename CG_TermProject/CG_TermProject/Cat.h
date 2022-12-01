@@ -12,6 +12,7 @@
 
 #include "Hero.h"
 #include "Gun.h"
+#include "particle.h"
 
 extern Hero hero;
 
@@ -63,6 +64,6 @@ public:
 	float getTop();
 	friend void AnimalCollideCat();
 	friend void BulletCollideCat();
-
+	friend void DrawParticle(int j);
 };
 

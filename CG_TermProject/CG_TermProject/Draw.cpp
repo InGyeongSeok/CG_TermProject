@@ -16,15 +16,15 @@ float lightRot;
 float lightColorR = 1.0f;
 float lightColorG = 1.0f;
 float lightColorB = 1.0f;
-
+bool isParticle = false;
 bool isBullet = false;
 vector<Gun*> gun;
-
+vector<Particle*> particle;
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 Bear bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
-vector<Particle*> particle;
+
 random_device rd;
 default_random_engine dre(rd());
 uniform_real_distribution<float> urd{ 0, 255 };
@@ -129,14 +129,7 @@ void draw() {
 	//bear.draw();
 	hero.Update();
 	hero.Draw();
-	for (int i = 0; i < 10; ++i) {
-		particle.push_back(new Particle{ 0,0,0 });
-	}
-	for (int i = 0; i < 10; ++i) {
-		particle[i]->draw();
-		particle[i]->update();
-	}
-	
+
 	/*for (Particle*& test : particle) {
 		test->draw();
 		test->update();
@@ -230,6 +223,7 @@ void BulletCollideCat() {
 					delete cats[j];
 					cats.erase(cats.begin() + j);
 					--j;
+					DrawParticle(j);
 				}
 				gun.erase(gun.begin() + i);
 				--i;
@@ -238,6 +232,21 @@ void BulletCollideCat() {
 
 		}
 
+	}
+}
+
+
+void DrawParticle(int j)
+{
+	float catX = cats[j]->Position.x;
+	float catZ = cats[j]->Position.x;
+
+	for (int i = 0; i < 10; ++i) {
+		particle.push_back(new Particle{ catX,0,catZ });
+	}
+	for (int i = 0; i < 10; ++i) {
+		particle[i]->draw();
+		particle[i]->update();
 	}
 }
 

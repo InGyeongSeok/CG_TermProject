@@ -128,7 +128,16 @@ void Cat::update()
 
 Cat::~Cat()
 {
-
+	/*for (int i = 0; i < 10; ++i) {
+		particle.push_back(new Particle{ Position.x,0,Position.z });
+	}
+	for (int i = 0; i < 10; ++i) {
+		particle[i]->draw();
+		particle[i]->update();
+	}*/
+	/*Particle particle{ Position.x,0,Position.z };
+	particle.draw();
+	particle.update();*/
 }
 
 

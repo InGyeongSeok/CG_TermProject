@@ -24,6 +24,8 @@ Particle::~Particle() {
 
 void Particle::draw()
 {
+
+
 	glBindVertexArray(VAO);
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
@@ -38,10 +40,10 @@ void Particle::draw()
 
 void Particle::update() 
 {	
-	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.1-i*0.01, 0.1-i * 0.01, 0.1-i * 0.01));
-	glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos+dirX[i], Ypos+dirY[i], Zpos+dirZ[i]));
+	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.1 - i * 0.01, 0.1 - i * 0.01, 0.1 - i * 0.01));
+	glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos + dirX[i], Ypos + dirY[i], Zpos + dirZ[i]));
 	//glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1, 0.));
-	Change = Trans * Scale ;
+	Change = Trans * Scale;
 	++i;
 	//cout << i << endl;
 	if (i > 10) {
