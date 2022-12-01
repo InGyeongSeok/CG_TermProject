@@ -41,7 +41,6 @@ void Hero::damage()
 		cout << "DEAD" << endl;
 		
 	}
-	
 }
 
 void Hero::Update()
@@ -50,8 +49,6 @@ void Hero::Update()
 	glm::mat4 Trans = glm::translate(Unit, glm::vec3(PosX+HeroMovX, PosY+ HeroMovY, PosZ+ HeroMovZ));
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
 	Change = Trans * Scale * AddTrans;
-
-	
 }
 
 void Hero::Jump()
