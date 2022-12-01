@@ -19,11 +19,25 @@ float lightColorB = 1.0f;
 bool isParticle = false;
 bool isBullet = false;
 vector<Gun*> gun;
-vector<Particle*> particle;
+
+
+vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle, new Particle
+						,new Particle, new Particle,new Particle,new Particle,new Particle,
+						 new Particle,new Particle, new Particle, new Particle, new Particle
+						,new Particle, new Particle,new Particle,new Particle,new Particle,new Particle,new Particle, new Particle, new Particle, new Particle
+						,new Particle, new Particle,new Particle,new Particle,new Particle,
+						 new Particle,new Particle, new Particle, new Particle, new Particle
+						,new Particle, new Particle,new Particle,new Particle,new Particle };
+
+
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 Bear bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
+
+
+float CatEndPosX;
+float CatEndPosZ;
 
 random_device rd;
 default_random_engine dre(rd());
@@ -72,7 +86,6 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 	//camera3D();
 
 	draw();
-
 	
 
 	if (isBullet && BulletLimit == 0) {
@@ -138,6 +151,16 @@ void draw() {
 		gunbullet->Update();
 		gunbullet->Draw();
 	}
+	
+	if (CatEndPosX != 0 && CatEndPosZ != 0) {
+		if (isParticle) {
+			for (int i = 0; i < 40; ++i) {
+				particle[i]->update();
+				particle[i]->draw();
+			}
+		}
+	}
+
 
 	///////////////////////////////////////////////////// test ��
 	//glm::mat4 Scale = glm::mat4(1.0f); //--- �̵� ��� ����
@@ -220,10 +243,15 @@ void BulletCollideCat() {
 				cats[j]->HP -= gun[i]->Damage;
 				delete gun[i];
 				if (0 == cats[j]->HP) {
+					for (int i = 0; i < 40; ++i) {
+						particle[i]->dirY = -0.2;
+					}
+					CatEndPosX = cats[j]->Position.x;
+					CatEndPosZ = cats[j]->Position.z;
+					isParticle = true;
 					delete cats[j];
 					cats.erase(cats.begin() + j);
 					--j;
-					DrawParticle(j);
 				}
 				gun.erase(gun.begin() + i);
 				--i;
@@ -235,20 +263,20 @@ void BulletCollideCat() {
 	}
 }
 
-
-void DrawParticle(int j)
-{
-	float catX = cats[j]->Position.x;
-	float catZ = cats[j]->Position.z;
-
-	for (int i = 0; i < 10; ++i) {
-		particle.push_back(new Particle{ catX,0,catZ });
-	}
-	for (int i = 0; i < 10; ++i) {
-		particle[i]->draw();
-		particle[i]->update();
-	}
-}
+//
+//void DrawParticle(int j)
+//{
+//	float catX = cats[j]->Position.x;
+//	float catZ = cats[j]->Position.z;
+//
+//	for (int i = 0; i < 10; ++i) {
+//		particle.push_back(new Particle{ catX,0,catZ });
+//	}
+//	for (int i = 0; i < 10; ++i) {
+//		particle[i]->draw();
+//		particle[i]->update();
+//	}
+//}
 
 //float distanceX = abs(gun[i]->GunDir.x - cats[j]->Position.x);
 //float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);

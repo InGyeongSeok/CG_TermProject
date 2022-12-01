@@ -88,3 +88,8 @@ extern glm::vec3 GunDir;
 extern bool isParticle;
 extern bool isBullet ;
 extern const glm::mat4 Unit;
+
+
+extern float CatEndPosX;
+extern float CatEndPosZ;
+
