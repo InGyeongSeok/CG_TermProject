@@ -1,4 +1,5 @@
 #include "particle.h"
+float drop{};
 
 
 Particle::Particle(float XPos, float YPos, float ZPos) : Xpos{ XPos }, Ypos{0}, Zpos{ZPos}
@@ -7,16 +8,18 @@ Particle::Particle(float XPos, float YPos, float ZPos) : Xpos{ XPos }, Ypos{0}, 
 	random_device rd;
 	default_random_engine dre(rd());
 	uniform_real_distribution<float> urd{ 0, 255 };
-	uniform_real_distribution<float> urdX(-1.0f, 1.0f);
-	uniform_real_distribution<float> urdY(-1.0f, 1.0f);
-	uniform_real_distribution<float> urdZ(-1.0f, 1.0f);
-	uniform_real_distribution<float> urdsize(0.001f,0.05f);
+	uniform_real_distribution<float> urdX(-0.5f, 0.5f);
+	uniform_real_distribution<float> urdY(-0.5f, 0.5f);
+	uniform_real_distribution<float> urdZ(-0.5f, 0.5f);
+	uniform_real_distribution<float> urdsize(0.005f,0.01f);
+	uniform_int_distribution<int> updown(0, 1);
 	color = glm::vec3(urd(dre) / 255., urd(dre) / 255., urd(dre) / 255.);
 	
 	dirX = urdX(dre);
 	dirY = urdY(dre);
 	dirZ = urdZ(dre);
 	size = urdsize(dre);
+
 	
 }
 
@@ -46,9 +49,10 @@ void Particle::update()
 {	
 	
 		glm::mat4 Scale = glm::scale(Unit, glm::vec3(size, size, size));
-		glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos + dirX + ParticleX, Ypos + dirY, Zpos + dirZ + ParticleZ));
+		glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos + dirX + ParticleX, Ypos + dirY+drop, Zpos + dirZ + ParticleZ));
 		Change = Trans * Scale;
-	
-
+		
+		drop -= 0.0001;
+		
 }
 

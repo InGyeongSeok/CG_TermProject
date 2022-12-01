@@ -81,9 +81,8 @@ extern float HeroLocationZ;
 extern void AnimalCollideCat();
 extern void AnimalCollideDog();
 extern void BulletCollideCat();
-extern void DrawParticle(int j);
 extern bool commandGun;
-
+extern float drop;
 extern glm::vec3 GunDir;
 extern bool isParticle;
 extern bool isBullet ;

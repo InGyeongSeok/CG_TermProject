@@ -133,22 +133,19 @@ void draw() {
 	//bear.draw();
 	hero.Update();
 	hero.Draw();
-	/*for (int i = 0; i < 100; ++i) {
-		particle.push_back(new Particle{ 0 ,0,0 });
 
-	}*/
 	for (int i = 0; i < 100; ++i) {
 		particle.push_back(new Particle{ 0 ,0,0 });
-
 	}
 	if (isParticle) {
 		for (int i = 0; i < 100; ++i) {
+	
 			particle[i]->update();
 			particle[i]->draw();
 		}
 	}
 
-	//isParticle = false;
+
 
 
 	for (Gun*& gunbullet : gun) {
@@ -239,9 +236,10 @@ void BulletCollideCat() {
 				if (0 == cats[j]->HP) {
 					ParticleX = cats[j]->Position.x;
 					ParticleZ = cats[j]->Position.z;
+					isParticle = true;
+					drop = 0;
 					delete cats[j];
 					cats.erase(cats.begin() + j);
-					isParticle = true;
 					--j;
 					
 				}
