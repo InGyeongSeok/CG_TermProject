@@ -17,10 +17,10 @@ float lightColorB = 1.0f;
 bool isBullet = false;
 vector<Gun*> gun;
 
-vector<Cat*> cats{new Cat, new Cat, new Cat, new Cat, new Cat, new Cat};
-vector<Dog*> dogs{new Dog, new Dog, new Dog, new Dog, new Dog, new Dog};
+vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
+vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 Bear bear;
-Hero hero(0.3,0.3,0.3,1,0.5,10.0);
+Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
 
 random_device rd;
 default_random_engine dre(rd());
@@ -47,31 +47,29 @@ GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 
 	projection = glm::perspective(glm::radians(90.0f), (float)width / height, 0.1f, 200.0f);
 	//												화면비율, 시작좌표(카메라 바로 앞 길이), 깊이
-	/*projection = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);*/
 	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 	glViewport(0, 0, width, height);
 	camera();
-
-	/// XYZ 선
-
-	glBindVertexArray(crossVAO);     //바인드
-	GLuint aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(aColor, 0.2, 0.2, 0.2);
-
-	glm::mat4 Tx = glm::mat4(1.0f); //--- 이동 행렬 선언
-	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
-	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
-	glDrawArrays(GL_QUADS, 0, 4);         //그리기
+	draw();
 
 
-	if (isBullet&&BulletLimit==0) {
+	glViewport(width / 1.4, height / 1.44, 300, 300);
+	/*projection = glm::mat4(1.0f);
+	projection = glm::ortho(-50.0f, 50.0f, -50.0f, 50.0f, -50.0f, 50.0f);
+	projectionLocation = glGetUniformLocation(shaderID, "projectionTransform");
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
+	TopView();*/
+
+	camera3D();
+
+	draw();
+
+	if (isBullet && BulletLimit == 0) {
 		BulletLimit += 1;
 		gun.push_back(new Gun{ cameraPos.x,cameraPos.y,cameraPos.z, TermGunDir.x,TermGunDir.y,TermGunDir.z });
 	}
-	
-	draw();
+
 	glutSwapBuffers();
 };
 
@@ -96,6 +94,19 @@ void draw() {
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color값 전달: (1.0, 0.5, 0.3)의 색
 	glUniform3f(aColor, 1., 1., 1.);
 
+	//////////////////////////////////////////////////////// 바닥 
+
+	glBindVertexArray(crossVAO);     //바인드
+	aColor = glGetUniformLocation(shaderID, "objectColor");
+	glUniform3f(aColor, 0.2, 0.2, 0.2);
+
+	glm::mat4 Tx = glm::mat4(1.0f); //--- 이동 행렬 선언
+	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
+	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
+	glDrawArrays(GL_QUADS, 0, 4);         //그리기
+
+
 
 	for (int i = 0; i < cats.size(); ++i) {
 		cats[i]->draw();
@@ -113,36 +124,35 @@ void draw() {
 		gunbullet->Update();
 		gunbullet->Draw();
 	}
-	
 
+	///////////////////////////////////////////////////// test 성
 	glm::mat4 Scale = glm::mat4(1.0f); //--- 이동 행렬 선언
-	glm::mat4 Tx = glm::mat4(1.0f); //--- 이동 행렬 선언
 	glm::mat4 Change;
-	Scale = glm::scale(Scale, glm::vec3(3, 3,3));
-	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
-	Change =Tx*Scale;
+	Scale = glm::scale(Scale, glm::vec3(3, 3, 3));
+	Tx = glm::translate(Unit, glm::vec3(0, -1.f, 0));
+	Change = Tx * Scale;
 
 	glBindVertexArray(testVAO);
 	SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
 	aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(aColor, 128/255., 245/255., 255/255.);
-	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+	glUniform3f(aColor, 128 / 255., 245 / 255., 255 / 255.);
+	modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
 	glDrawArrays(GL_TRIANGLES, 0, test.size() * 3);
-	
+
 }
 
-void AnimalCollideCat() {  
+void AnimalCollideCat() {
 	for (int i = 0; i < cats.size(); ++i) {
-		for (int j = i+1; j < cats.size(); ++j) {
+		for (int j = i + 1; j < cats.size(); ++j) {
 			float distanceX = abs(cats[i]->Position.x - cats[j]->Position.x);
 			float distanceZ = abs(cats[i]->Position.z - cats[j]->Position.z);
 			if (distanceX <= 0.1f) {
 				cats[i]->Position.x += 0.1f;
 			}
-			if (distanceZ<=0.1f) {
+			if (distanceZ <= 0.1f) {
 				cats[i]->Position.z += 0.1f;
 			}
 		}
@@ -168,9 +178,9 @@ void BulletCollideCat() {
 
 	for (int i = 0; i < gun.size(); ++i) {
 		for (int j = 0; j < cats.size(); ++j) {
-			float distanceX = abs(gun[i]->GunDir.x- cats[j]->Position.x);
+			float distanceX = abs(gun[i]->GunDir.x - cats[j]->Position.x);
 			float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);
-			if (distanceX < 0.05|| distanceZ <0.05) {
+			if (distanceX < 0.05 || distanceZ < 0.05) {
 				cats[j]->HP -= gun[i]->Damage;
 				delete gun[i];
 				if (0 == cats[j]->HP) {
