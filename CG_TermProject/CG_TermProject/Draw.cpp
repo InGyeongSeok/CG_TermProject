@@ -5,6 +5,9 @@ float circleSize = 2;
 void AnimalCollideCat();
 void AnimalCollideDog();
 void BulletCollideCat();
+bool isCollide2D(Cat r1, Gun r2);
+
+
 float lightPosX = 7.0;
 float lightPosY = 1.0;
 float lightPosZ = 0.0;
@@ -168,9 +171,7 @@ void BulletCollideCat() {
 
 	for (int i = 0; i < gun.size(); ++i) {
 		for (int j = 0; j < cats.size(); ++j) {
-			float distanceX = abs(gun[i]->GunDir.x- cats[j]->Position.x);
-			float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);
-			if (distanceX < 0.05|| distanceZ <0.05) {
+			if (isCollide2D(*cats[j], *gun[i])) {
 				cats[j]->HP -= gun[i]->Damage;
 				delete gun[i];
 				if (0 == cats[j]->HP) {
@@ -182,9 +183,32 @@ void BulletCollideCat() {
 				--i;
 				break;
 			}
+
 		}
 
 	}
+}
+
+//float distanceX = abs(gun[i]->GunDir.x - cats[j]->Position.x);
+//float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);
+//if (distanceX < 0.05 || distanceZ < 0.05) {
+//	cats[j]->HP -= gun[i]->Damage;
+//	delete gun[i];
+//	if (0 == cats[j]->HP) {
+//		delete cats[j];
+//		cats.erase(cats.begin() + j);
+//		--j;
+//	}
+//	gun.erase(gun.begin() + i);
+//	--i;
+//	break;
+//}
+
+bool isCollide2D(Cat r1, Gun r2)
+{
+	if (r1.getRight() < r2.getLeft() || r1.getLeft() > r2.getRight()) return false;
+	if (r1.getFront() < r2.getBehind() || r1.getBehind() > r2.getFront()) return false;
+	return true;
 }
 
 

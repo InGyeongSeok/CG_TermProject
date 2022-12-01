@@ -81,7 +81,6 @@ extern void AnimalCollideDog();
 extern void BulletCollideCat();
 extern bool commandGun;
 
-
 extern glm::vec3 GunDir;
 
 extern bool isBullet ;

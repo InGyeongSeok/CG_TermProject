@@ -23,9 +23,14 @@ class Gun
 public:
 	Gun(float posX, float posY, float posZ, float dirX, float dirY, float dirZ);
 	~Gun();
+	float getLeft();
+	float getRight();
+	float getBehind();
+	float getFront();
+	float getBottom();
+	float getTop();
 	void Update();
 	void Draw();
 	friend void BulletCollideCat();
 	void Loction();
-
 };
