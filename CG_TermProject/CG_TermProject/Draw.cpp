@@ -163,21 +163,21 @@ void draw() {
 
 
 	///////////////////////////////////////////////////// test ��
-	//glm::mat4 Scale = glm::mat4(1.0f); //--- �̵� ��� ����
-	//glm::mat4 Change;
-	//Scale = glm::scale(Scale, glm::vec3(3, 3, 3));
-	//Tx = glm::translate(Unit, glm::vec3(0, -1.f, 0));
-	//Change = Tx * Scale;
+	glm::mat4 Scale = glm::mat4(1.0f); //--- �̵� ��� ����
+	glm::mat4 Change;
+	Scale = glm::scale(Scale, glm::vec3(3, 3, 3));
+	Tx = glm::translate(Unit, glm::vec3(0, -1.f, 0));
+	Change = Tx * Scale;
 
-	//glBindVertexArray(testVAO);
-	//SelectColor = glGetUniformLocation(shaderID, "SelectColor");
-	//glUniform1i(SelectColor, 1);
+	glBindVertexArray(testVAO);
+	SelectColor = glGetUniformLocation(shaderID, "SelectColor");
+	glUniform1i(SelectColor, 1);
 
-	//aColor = glGetUniformLocation(shaderID, "objectColor");
-	//glUniform3f(aColor, 128 / 255., 245 / 255., 255 / 255.);
-	//modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
-	//glDrawArrays(GL_TRIANGLES, 0, test.size() * 3);
+	aColor = glGetUniformLocation(shaderID, "objectColor");
+	glUniform3f(aColor, 191 / 255., 160 / 255., 237 / 255.);
+	modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
+	glDrawArrays(GL_TRIANGLES, 0, test.size() * 3);
 	///////////////////////////////////////////////////////////////////////////
 	
 	glBindVertexArray(HeroHPVAO);     //���ε�
