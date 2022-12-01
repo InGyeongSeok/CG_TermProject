@@ -47,12 +47,9 @@ void Particle::draw()
 
 void Particle::update() 
 {	
-	
 		glm::mat4 Scale = glm::scale(Unit, glm::vec3(size, size, size));
 		glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos + dirX + ParticleX, Ypos + dirY+drop, Zpos + dirZ + ParticleZ));
 		Change = Trans * Scale;
-		
 		drop -= 0.0001;
-		
 }
 

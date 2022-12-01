@@ -237,7 +237,7 @@ void BulletCollideCat() {
 					ParticleX = cats[j]->Position.x;
 					ParticleZ = cats[j]->Position.z;
 					isParticle = true;
-					drop = 0;
+					drop = -0.5;
 					delete cats[j];
 					cats.erase(cats.begin() + j);
 					--j;
