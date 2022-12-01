@@ -7,7 +7,7 @@ void AnimalCollideDog();
 void BulletCollideCat();
 bool isCollide2D(Cat r1, Gun r2);
 
-
+int HerogetHP = 10;
 float lightPosX = 7.0;
 float lightPosY = 1.0;
 float lightPosZ = 0.0;
@@ -105,17 +105,17 @@ void draw() {
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color�� ����: (1.0, 0.5, 0.3)�� ��
 	glUniform3f(aColor, 1, 1., 1.);
 
-	//////////////////////////////////////////////////////// �ٴ� 
+	//////////////////////////////////////////////////////// 
 
-	glBindVertexArray(crossVAO);     //���ε�
+	glBindVertexArray(crossVAO);     
 	aColor = glGetUniformLocation(shaderID, "objectColor");
 	glUniform3f(aColor, 0.2, 0.2, 0.2);
 
-	glm::mat4 Tx = glm::mat4(1.0f); //--- �̵� ��� ����
+	glm::mat4 Tx = glm::mat4(1.0f); 
 	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
-	glDrawArrays(GL_QUADS, 0, 4);         //�׸���
+	glDrawArrays(GL_QUADS, 0, 4);         
 
 
 
@@ -152,6 +152,30 @@ void draw() {
 	modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
 	glDrawArrays(GL_TRIANGLES, 0, test.size() * 3);
+	///////////////////////////////////////////////////////////////////////////
+	
+	glBindVertexArray(HeroHPVAO);     //���ε�
+	aColor = glGetUniformLocation(shaderID, "objectColor");
+	glUniform3f(aColor, 1.0, 0.0, 0.0);
+
+	for (int i = 0; i < hero.InfoHP(); ++i) {
+
+		Change = Unit;
+		GLuint projectionTransform = glGetUniformLocation(shaderID, "projectionTransform");
+		glUniformMatrix4fv(projectionTransform, 1, GL_FALSE, glm::value_ptr(Change));
+		Change = Unit;
+		GLuint viewTransform = glGetUniformLocation(shaderID, "viewTransform");
+		glUniformMatrix4fv(viewTransform, 1, GL_FALSE, glm::value_ptr(Change));
+
+		glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.3));
+		glm::mat4 Trans = glm::translate(Unit, glm::vec3(-0.95, 0.95, 0));
+		Change = Trans * Scale;
+		Change = glm::translate(Unit, glm::vec3(i * 0.08f, 0, 0)) * Change;
+		GLuint modelTransform = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(modelTransform, 1, GL_FALSE, glm::value_ptr(Change));
+
+		glDrawArrays(GL_POLYGON, 0, 4);
+	}      
 
 }
 

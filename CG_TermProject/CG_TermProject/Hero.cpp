@@ -22,6 +22,7 @@ Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 	PosX = X;
 	PosY = Y;
 	PosZ = Z;
+	HP = 100;
 	
 }
 
@@ -46,6 +47,9 @@ void Hero::damage()
 		lightColorG = 0;
 		lightColorR = 0;
 	}
+}
+int Hero::InfoHP() {
+	return abs((int)HP)/10;
 }
 
 void Hero::Update()

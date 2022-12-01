@@ -15,9 +15,9 @@
 #include <gl/glew.h>                     
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include <gl/glm/glm.hpp>
-#include <gl/glm/ext.hpp>
-#include <gl/glm/gtc/matrix_transform.hpp>
+#include <glm/glm/glm.hpp>
+#include <glm/glm/ext.hpp>
+#include <glm/glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 
@@ -32,7 +32,7 @@ extern GLuint pyramidVAO;
 extern GLuint crossVAO;
 extern GLuint testVAO;
 
-
+extern GLuint HeroHPVAO;
 extern float Rot;
 extern vector<glm::vec3> vertex1; //����ü
 extern vector<glm::vec3> vertex2; //��
