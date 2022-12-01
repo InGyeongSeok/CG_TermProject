@@ -38,6 +38,7 @@ GLuint VAO, VBO;
 GLuint sphereVAO, sphereVBO;
 GLuint pyramidVAO, pyramidVBO;
 GLuint testVAO, testVBO;
+GLuint HeroHPVAO, HeroHPVBO;
 
 GLuint vertexShader; //--- 버텍스 세이더 객체
 GLuint fragmentShader; //--- 프래그먼트 세이더 객체
@@ -47,7 +48,12 @@ void ReadObj(string file, vector<glm::vec3>* vertex, vector<glm::vec3>* vcolor, 
 
 const glm::mat4 Unit = glm::mat4(1.0f);
 
-
+float HeroHP[4][3]{
+	{-0.1, 0.1, 0},
+	{-0.1, -0.1, 0},
+	{0.1, -0.1, 0},
+	{0.1, 0.1, 0}
+};
 //바닥 
 float XYZ[4][6]{
 
@@ -284,6 +290,16 @@ void InitBuffer()
 	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
+	/////////////////////////////////////////////////////////
+	glGenVertexArrays(1, &HeroHPVAO);
+	glGenBuffers(1, &HeroHPVBO);
+
+	//// 정점, 색상 접근 규칙 만들기
+	glBindVertexArray(HeroHPVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, HeroHPVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(HeroHP), HeroHP, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
 }
 
 bool make_vertexShaders()

@@ -11,7 +11,7 @@ class Hero
 	float scaleX;
 	float scaleY;
 	float scaleZ;
-	float HP{ 100 };
+	float HP;
 	float PosX;
 	float PosY;
 	float PosZ;
@@ -23,5 +23,6 @@ public:
 	void damage();
 	void Update();
 	void Draw();
+	int InfoHP();
 	void location();
 };
