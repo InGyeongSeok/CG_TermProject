@@ -18,6 +18,10 @@ float lightColorG = 1.0f;
 float lightColorB = 1.0f;
 bool isParticle = false;
 bool isBullet = false;
+
+
+float ParticleZ{};
+float ParticleX{};
 vector<Gun*> gun;
 vector<Particle*> particle;
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
@@ -129,11 +133,24 @@ void draw() {
 	//bear.draw();
 	hero.Update();
 	hero.Draw();
+	/*for (int i = 0; i < 100; ++i) {
+		particle.push_back(new Particle{ 0 ,0,0 });
 
-	/*for (Particle*& test : particle) {
-		test->draw();
-		test->update();
 	}*/
+	for (int i = 0; i < 100; ++i) {
+		particle.push_back(new Particle{ 0 ,0,0 });
+
+	}
+	if (isParticle) {
+		for (int i = 0; i < 100; ++i) {
+			particle[i]->update();
+			particle[i]->draw();
+		}
+	}
+
+	//isParticle = false;
+
+
 	for (Gun*& gunbullet : gun) {
 		gunbullet->Update();
 		gunbullet->Draw();
@@ -220,10 +237,13 @@ void BulletCollideCat() {
 				cats[j]->HP -= gun[i]->Damage;
 				delete gun[i];
 				if (0 == cats[j]->HP) {
+					ParticleX = cats[j]->Position.x;
+					ParticleZ = cats[j]->Position.z;
 					delete cats[j];
 					cats.erase(cats.begin() + j);
+					isParticle = true;
 					--j;
-					DrawParticle(j);
+					
 				}
 				gun.erase(gun.begin() + i);
 				--i;
@@ -236,19 +256,7 @@ void BulletCollideCat() {
 }
 
 
-void DrawParticle(int j)
-{
-	float catX = cats[j]->Position.x;
-	float catZ = cats[j]->Position.z;
 
-	for (int i = 0; i < 10; ++i) {
-		particle.push_back(new Particle{ catX,0,catZ });
-	}
-	for (int i = 0; i < 10; ++i) {
-		particle[i]->draw();
-		particle[i]->update();
-	}
-}
 
 //float distanceX = abs(gun[i]->GunDir.x - cats[j]->Position.x);
 //float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);

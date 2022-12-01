@@ -87,4 +87,7 @@ extern bool commandGun;
 extern glm::vec3 GunDir;
 extern bool isParticle;
 extern bool isBullet ;
+
+extern float ParticleZ;
+extern float ParticleX;
 extern const glm::mat4 Unit;

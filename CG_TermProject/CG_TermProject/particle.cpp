@@ -1,7 +1,7 @@
 #include "particle.h"
-int i = 0;
 
-Particle::Particle(float XPos, float YPos, float ZPos) : Xpos{ XPos }, Ypos{YPos}, Zpos{ZPos}
+
+Particle::Particle(float XPos, float YPos, float ZPos) : Xpos{ XPos }, Ypos{0}, Zpos{ZPos}
 { 
 
 	random_device rd;
@@ -10,12 +10,14 @@ Particle::Particle(float XPos, float YPos, float ZPos) : Xpos{ XPos }, Ypos{YPos
 	uniform_real_distribution<float> urdX(-1.0f, 1.0f);
 	uniform_real_distribution<float> urdY(-1.0f, 1.0f);
 	uniform_real_distribution<float> urdZ(-1.0f, 1.0f);
+	uniform_real_distribution<float> urdsize(0.001f,0.05f);
 	color = glm::vec3(urd(dre) / 255., urd(dre) / 255., urd(dre) / 255.);
-	for (int i = 0; i < 10; i++) {
-		dirX[i] = urdX(dre);
-		dirY[i] = urdY(dre);
-		dirZ[i] = urdZ(dre);
-	}
+	
+	dirX = urdX(dre);
+	dirY = urdY(dre);
+	dirZ = urdZ(dre);
+	size = urdsize(dre);
+	
 }
 
 Particle::~Particle() {
@@ -24,7 +26,6 @@ Particle::~Particle() {
 
 void Particle::draw()
 {
-
 
 	glBindVertexArray(VAO);
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
@@ -38,12 +39,16 @@ void Particle::draw()
 
 }
 
+
+
+
 void Particle::update() 
 {	
-	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.1 - i * 0.01, 0.1 - i * 0.01, 0.1 - i * 0.01));
-	glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos + dirX[i], Ypos + dirY[i], Zpos + dirZ[i]));
-	//glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1, 0.));
-	Change = Trans * Scale;
-	++i;
+	
+		glm::mat4 Scale = glm::scale(Unit, glm::vec3(size, size, size));
+		glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos + dirX + ParticleX, Ypos + dirY, Zpos + dirZ + ParticleZ));
+		Change = Trans * Scale;
+	
+
 }
 

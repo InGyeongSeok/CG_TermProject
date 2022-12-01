@@ -11,7 +11,6 @@
 vector<glm::vec3> vertex1;
 vector<glm::vec3> vertex2;
 vector<glm::vec3> vertex3;
-
 vector<glm::vec3> test;
 //랜덤
 
@@ -75,6 +74,7 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	glutInitWindowSize(width, height);
 	glutCreateWindow("Project");
 
+	
 	glewExperimental = GL_TRUE;
 	glewInit();
 
