@@ -33,5 +33,7 @@ public:
 	void Draw();
 	friend void BulletCollideCat();
 	friend void BulletCollideDog();
+	friend void BulletCollideBear();
+
 	void Loction();
 };

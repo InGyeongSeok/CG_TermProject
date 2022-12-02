@@ -6,7 +6,8 @@
 
 extern vector<Cat*> cats;
 extern vector<Dog*> dogs;
-extern Bear bear;
+extern Bear* bear ;
+
 
 
 void timer(int value);

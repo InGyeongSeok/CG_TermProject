@@ -21,7 +21,7 @@ Bear::Bear() :
 	swordL(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), -1, 3)),
 	swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1, 3))
 {
-
+	HP = 100;
 }
 
 
@@ -48,6 +48,7 @@ void Bear::draw()
 
 void Bear::update()
 {
+	BulletCollideBear();
 	hero.location();
 	float dz = HeroLocationZ - Position.z;
 	float dx = HeroLocationX - Position.x;
@@ -115,22 +116,22 @@ Bear::~Bear()
 
 float Bear::getLeft()
 {
-	return Position.x - 0.15f;
+	return Position.x - 0.14f;
 }
 
 float Bear::getRight()
 {
-	return Position.x + 0.15f;
+	return Position.x + 0.14f;
 }
 
 float Bear::getBehind()
 {
-	return Position.z - 0.15f;
+	return Position.z - 0.14f;
 }
 
 float Bear::getFront()
 {
-	return Position.z + 0.15f;
+	return Position.z + 0.14f;
 }
 
 float Bear::getBottom()

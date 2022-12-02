@@ -23,5 +23,6 @@ public:
 	void update();
 	friend void BulletCollideCat();
 	friend void BulletCollideDog();
+	friend void BulletCollideBear();
 };
 

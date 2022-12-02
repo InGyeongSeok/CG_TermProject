@@ -83,6 +83,7 @@ extern void AnimalCollideDog();
 extern void BulletCollideCat();
 extern void DrawParticle(int j);
 extern void BulletCollideDog();
+extern void BulletCollideBear();
 extern bool commandGun;
 
 extern glm::vec3 GunDir;

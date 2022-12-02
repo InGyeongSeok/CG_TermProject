@@ -36,6 +36,7 @@ class Bear
 
 	glm::vec3 Position;
 	float Direction;
+	int HP;
 
 public:
 	Bear();
@@ -50,5 +51,7 @@ public:
 	float getFront();
 	float getBottom();
 	float getTop();
+
+	friend void BulletCollideBear();
 };
 
