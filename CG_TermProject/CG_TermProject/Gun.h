@@ -32,5 +32,6 @@ public:
 	void Update();
 	void Draw();
 	friend void BulletCollideCat();
+	friend void BulletCollideDog();
 	void Loction();
 };

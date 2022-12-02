@@ -24,7 +24,7 @@ Particle::~Particle() {
 void Particle::update() 
 {	
 	dirY -= speed;
-	if (dirY <= -0.8f) {
+	if (dirY <= -0.7f) {
 		isParticle = false;
 	}
 

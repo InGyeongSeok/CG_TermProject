@@ -29,6 +29,7 @@ swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,2))
 	Position.x = urd(dre);
 	Position.y = -1.0f;
 	Position.z = urd(dre);
+	HP = 40;
 }
 
 
@@ -119,22 +120,22 @@ Dog::~Dog()
 
 float Dog::getLeft()
 {
-	return Position.x - 0.15f;
+	return Position.x - 0.12f;
 }
 
 float Dog::getRight()
 {
-	return Position.x + 0.15f;
+	return Position.x + 0.12f;
 }
 
 float Dog::getBehind()
 {
-	return Position.z - 0.15f;
+	return Position.z - 0.12f;
 }
 
 float Dog::getFront()
 {
-	return Position.z + 0.15f;
+	return Position.z + 0.12f;
 }
 
 float Dog::getBottom()

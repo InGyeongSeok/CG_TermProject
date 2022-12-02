@@ -31,7 +31,7 @@ class Dog
 	Sword swordR;
 	Sword swordL;
 
-
+	int HP;
 	glm::vec3 Position;
 	float Direction;
 
@@ -52,5 +52,6 @@ public:
 	float getBottom();
 	float getTop();
 	friend void AnimalCollideDog();
+	friend void BulletCollideDog();
 };
 
