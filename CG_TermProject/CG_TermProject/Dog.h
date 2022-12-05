@@ -11,6 +11,9 @@
 #include "sword.h"
 #include "Hero.h"
 
+#include "Gun.h"
+#include "particle.h"
+
 extern Hero hero;
 
 class Dog

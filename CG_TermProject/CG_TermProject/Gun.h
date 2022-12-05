@@ -35,5 +35,6 @@ public:
 	friend void BulletCollideDog();
 	friend void BulletCollideBear();
 
+
 	void Loction();
 };

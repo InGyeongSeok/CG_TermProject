@@ -35,7 +35,7 @@ vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle
 
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
-Bear*bear=new Bear;
+//Bear*bear=new Bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
 World world{ 0,49,0 };
 Grass grass[30];
@@ -137,7 +137,7 @@ void draw() {
 		dogs[i]->draw();
 	}
 
-	bear->draw();
+	//bear->draw();
 	hero.Update();
 	hero.Draw();
 

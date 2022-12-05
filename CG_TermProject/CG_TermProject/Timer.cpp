@@ -43,7 +43,7 @@ void timer(int value) {
 		dogs[i]->update();
 	}
 	
-	bear.update();
+	//bear.update();
 	world.Update();
 	glutPostRedisplay();
 	glutTimerFunc(14, timer, 1);
