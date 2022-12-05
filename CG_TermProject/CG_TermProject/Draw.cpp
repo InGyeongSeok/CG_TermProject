@@ -38,8 +38,8 @@ vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 //Bear*bear=new Bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
 World world{ 0,49,0 };
-Grass grass[30];
-Tree tree[30];
+Tree tree[400];
+Grass grass[600];
 float CatEndPosX;
 float CatEndPosZ;
 
@@ -118,11 +118,21 @@ void draw() {
 
 	glEnable(GL_BLEND); //투명 객체 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	for (int i = 0; i < 30; ++i) {
+
+
+	for (int i = 0; i < 400; ++i) {
 		tree[i].Draw();
 		tree[i].Update();
 
 	}
+	
+
+
+	for (int i = 0; i < 600; ++i) {
+		grass[i].Draw();
+		grass[i].Update();
+	}
+
 	glDisable(GL_BLEND);
 	
 
@@ -141,11 +151,7 @@ void draw() {
 	hero.Update();
 	hero.Draw();
 
-	for (int i = 0; i < 30; ++i) {
-		grass[i].Draw();
-		grass[i].Update();
-	}
-
+	
 	for (Gun*& gunbullet : gun) {
 		gunbullet->Update();
 		gunbullet->Draw();

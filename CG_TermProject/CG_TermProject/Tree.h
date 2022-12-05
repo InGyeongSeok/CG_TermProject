@@ -11,7 +11,8 @@ class Tree
 	float Ypos;
 	float Zpos;
 	int Treenum;
-
+	float Direction;
+	int randN;
 public:
 
 	Tree();
@@ -22,5 +23,3 @@ public:
 
 };
 
-
-#pragma once

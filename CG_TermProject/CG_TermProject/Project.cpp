@@ -46,6 +46,7 @@ GLuint pyramidVAO, pyramidVBO;
 GLuint HeroHPVAO, HeroHPVBO;
 GLuint GrassVAO, GrassVBO;
 GLuint TreeTexture[3];
+GLuint GrassTexture[3];
 GLuint Texture[6];
 GLuint vertexShader; //--- 버텍스 세이더 객체
 GLuint fragmentShader; //--- 프래그먼트 세이더 객체
@@ -280,21 +281,21 @@ void InitBuffer()
 	glEnableVertexAttribArray(1);
 
 	///////////////////////////////////////////////////////////
-	ReadObj("grass.obj", vertex4);
-	glGenVertexArrays(1, &GrassVAO);
+	//ReadObj("grass.obj", vertex4);
+	//glGenVertexArrays(1, &GrassVAO);
 
-	glGenBuffers(1, &GrassVBO);
+	//glGenBuffers(1, &GrassVBO);
 
-	//--- VAO 객체 생성 및 바인딩
+	////--- VAO 객체 생성 및 바인딩
 
-	glBindVertexArray(GrassVAO);
+	//glBindVertexArray(GrassVAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, GrassVBO);
-	glBufferData(GL_ARRAY_BUFFER, vertex4.size() * sizeof(glm::vec3), &vertex4[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(1);
+	//glBindBuffer(GL_ARRAY_BUFFER, GrassVBO);
+	//glBufferData(GL_ARRAY_BUFFER, vertex4.size() * sizeof(glm::vec3), &vertex4[0], GL_STATIC_DRAW);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
+	//glEnableVertexAttribArray(1);
 	
 
 
@@ -380,19 +381,6 @@ void InitTexture()
 
 
 
-	//glGenTextures(1, &TreeTexture);
-	//glBindTexture(GL_TEXTURE_2D, TreeTexture);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	//int ImageWidth, ImageHeight, numberOfChannel;
-	//stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-	//string filename = "투명나무1.png";
-	//GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-	//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	//stbi_image_free(data);
 
 
 	glGenTextures(3, TreeTexture);
@@ -423,6 +411,35 @@ void InitTexture()
 		stbi_image_free(data);
 	}
 	
+
+	glGenTextures(3, GrassTexture);
+	for (int i = 0; i < 3; ++i) {
+		glBindTexture(GL_TEXTURE_2D, GrassTexture[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		int ImageWidth, ImageHeight, numberOfChannel;
+		stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+		string filename;
+
+		switch (i) {
+		case 0:
+			filename = "잔디1.png";
+			break;
+		case 1:
+			filename = "잔디2.png";
+			break;
+		case 2:
+			filename = "잔디3.png";
+			break;
+	
+		}
+		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		stbi_image_free(data);
+	}
 
 
 }

@@ -6,13 +6,13 @@
 
 class Grass
 {
-	glm::vec3 Color;
 	glm::mat4 Change;
-	float Size;
 	float Xpos;
 	float Ypos;
 	float Zpos;
-
+	int Grassnum;
+	float Direction;
+	int randN;
 public:
 
 	Grass();
@@ -22,5 +22,4 @@ public:
 	void Draw();
 
 };
-
 

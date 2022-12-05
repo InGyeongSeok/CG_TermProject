@@ -3,42 +3,56 @@
 
 Grass::~Grass()
 {
+
 }
 
 Grass::Grass()
 {
 	random_device rd;
 	default_random_engine dre(rd());
-	uniform_real_distribution<float> urd{ 0.5f, 1.f };
-	uniform_real_distribution<float> XZ{ -50.f,50.f };
-	uniform_real_distribution<float> size{ 0.005,0.01f };
-	Xpos = XZ(dre);
-	Zpos = XZ(dre);
-	
-	Color = glm::vec3(0, 1,0);
-	
+	uniform_real_distribution<float> X{ -40.f,40.f };
+	uniform_real_distribution<float> Z{ -40.f,40.0f };
+	uniform_int_distribution<int> Grass{ 0,2 };
+	Xpos = X(dre);
+	Zpos = Z(dre);
+	Grassnum = Grass(dre);
 }
 
 
 void Grass::Update()
 {
-	glm::mat4 Rotate = glm::rotate(Unit, glm::radians(-30.f), glm::vec3(0.f, 0, 1));
-	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.005, 0.005, 0.005));
-	glm::mat4 Trans = glm::translate(Unit, glm::vec3(0,2, 0));
+	float dz = HeroLocationZ - Xpos;
+	float dx = HeroLocationX - Zpos;
+	Direction = atan2(dx, dz);
 
-	Change = Trans  * Rotate * Scale;
+	glm::mat4 Rotate = glm::rotate(Unit, Direction, glm::vec3(0, 1, 0));
+	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.1, 0.1, 0.1));
+	glm::mat4 UPT = glm::translate(Unit, glm::vec3(0, 1, 0));
+	glm::mat4 DownT = glm::translate(Unit, glm::vec3(0, -1, 0));
+	glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos, 0, Zpos));
+
+	Change = Trans *DownT* Rotate * Scale*UPT;
 }
 
 
 void Grass::Draw()
 {
-	glBindVertexArray(GrassVAO);
-	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-	glUniform4f(Color, this->Color.r, this->Color.g, this->Color.b, 1.0);
+	glDisable(GL_DEPTH_TEST);
 
-	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환
-	glDrawArrays(GL_TRIANGLES, 0, vertex4.size() * 3);
+	glBindVertexArray(VAO);
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+	glUniform1i(selectColorLocation, 1);
+
+	GLuint model = glGetUniformLocation(shaderID, "modelTransform");
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
+
+
+	glBindTexture(GL_TEXTURE_2D, GrassTexture[Grassnum]);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+
+	glEnable(GL_DEPTH_TEST);
+	glUniform1i(selectColorLocation, 0);
 
 }
 
