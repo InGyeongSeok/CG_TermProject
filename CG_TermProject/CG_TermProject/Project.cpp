@@ -378,23 +378,6 @@ void InitTexture()
 	}
 
 
-
-
-	//glGenTextures(1, &TreeTexture);
-	//glBindTexture(GL_TEXTURE_2D, TreeTexture);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	//int ImageWidth, ImageHeight, numberOfChannel;
-	//stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-	//string filename = "투명나무1.png";
-	//GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-	//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	//stbi_image_free(data);
-
-
 	glGenTextures(3, TreeTexture);
 	for (int i = 0; i <3; ++i) {
 		glBindTexture(GL_TEXTURE_2D, TreeTexture[i]);
