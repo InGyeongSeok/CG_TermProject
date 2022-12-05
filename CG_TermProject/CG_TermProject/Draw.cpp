@@ -35,7 +35,7 @@ Bear bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
 World world{ 0,49,0 };
 Grass grass[30];
-Tree tree{ 0,0.5,0 };
+Tree tree[30];
 float CatEndPosX;
 float CatEndPosZ;
 
@@ -111,13 +111,13 @@ void draw() {
 
 	glEnable(GL_BLEND); //투명 객체 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	for (int i = 0; i < 30; ++i) {
+		tree[i].Draw();
+		tree[i].Update();
 
-
-	tree.Draw();
-	tree.Update();
+	}
 	glDisable(GL_BLEND);
-
-
+	
 
 	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
 	glUniform1i(selectColorLocation, 0);

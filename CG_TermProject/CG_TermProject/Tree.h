@@ -10,10 +10,11 @@ class Tree
 	float Xpos;
 	float Ypos;
 	float Zpos;
+	int Treenum;
 
 public:
 
-	Tree(float xpos, float ypos, float zpos);
+	Tree();
 
 	~Tree();
 	void Update();

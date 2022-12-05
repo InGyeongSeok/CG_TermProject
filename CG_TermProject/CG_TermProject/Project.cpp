@@ -45,7 +45,7 @@ GLuint sphereVAO, sphereVBO;
 GLuint pyramidVAO, pyramidVBO;
 GLuint HeroHPVAO, HeroHPVBO;
 GLuint GrassVAO, GrassVBO;
-GLuint TreeTexture;
+GLuint TreeTexture[3];
 GLuint Texture[6];
 GLuint vertexShader; //--- 버텍스 세이더 객체
 GLuint fragmentShader; //--- 프래그먼트 세이더 객체
@@ -219,7 +219,7 @@ void ReadObj(string file, vector<glm::vec3>& vertexInfo)
 
 void InitBuffer()
 {
-	ReadObj("box.obj",vertex1);
+	ReadObj("cube.obj",vertex1);
 	//ReadObj("pyramid.obj", &pyramidvertex, &pyramidcolor, &pyramidface);
 
 
@@ -330,43 +330,101 @@ void InitTexture()
 		string filename;
 
 		switch (i) {
+		case 0: {
+			filename = "옆면1.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		case 1: {
+			filename = "옆면2.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		case 2: { //위 
+			filename = "윗면.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break; 
+		}
+
+		case 3: {
+			filename = "옆면4.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		case 4: {//바닥
+			filename = "바닥.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		case 5: { //3
+			filename = "옆면3.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		}
+		
+	}
+
+
+
+
+	//glGenTextures(1, &TreeTexture);
+	//glBindTexture(GL_TEXTURE_2D, TreeTexture);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	//int ImageWidth, ImageHeight, numberOfChannel;
+	//stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+	//string filename = "투명나무1.png";
+	//GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+	//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	//stbi_image_free(data);
+
+
+	glGenTextures(3, TreeTexture);
+	for (int i = 0; i <3; ++i) {
+		glBindTexture(GL_TEXTURE_2D, TreeTexture[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		int ImageWidth, ImageHeight, numberOfChannel;
+		stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+		string filename;
+
+		switch (i) {
 		case 0:
-			filename = "1.png";
+			filename = "투명나무1.png";
 			break;
 		case 1:
-			filename = "2.png";
+			filename = "나무2.png";
 			break;
 		case 2:
-			filename = "3.png";
-			break;
-		case 3:
-			filename = "6.jpg";
-			break;
-		case 4:
-			filename = "4.png";
-			break;
-		case 5:
-			filename = "5.png";
+			filename = "나무3.png";
 			break;
 		}
 		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		stbi_image_free(data);
 	}
+	
 
-	glGenTextures(1, &TreeTexture);
-	glBindTexture(GL_TEXTURE_2D, TreeTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	int ImageWidth, ImageHeight, numberOfChannel;
-	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-	string filename = "투명나무1.png";
-	GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	stbi_image_free(data);
 }
 
 

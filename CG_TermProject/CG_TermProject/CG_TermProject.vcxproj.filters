@@ -46,7 +46,7 @@
     <Filter Include="Animal\Hero">
       <UniqueIdentifier>{570d1643-aae0-44be-9419-af575d498441}</UniqueIdentifier>
     </Filter>
-    <Filter Include="하늘배경">
+    <Filter Include="World">
       <UniqueIdentifier>{aa6d5cf5-c63d-45c5-9540-b46884dfd076}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -127,13 +127,13 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
-      <Filter>하늘배경</Filter>
+      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Grass.h">
-      <Filter>하늘배경</Filter>
+      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Tree.h">
-      <Filter>하늘배경</Filter>
+      <Filter>World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -210,13 +210,13 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Grass.cpp">
-      <Filter>하늘배경</Filter>
+      <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
-      <Filter>하늘배경</Filter>
+      <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="Tree.cpp">
-      <Filter>하늘배경</Filter>
+      <Filter>World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
