@@ -91,7 +91,7 @@ void Hero::Draw()
 	glUniform1i(SelectColor, 1);
 
 	GLuint aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(aColor, color.r, color.g, color.b);
+	glUniform4f(aColor, color.r, color.g, color.b,1.0);
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
 	glDrawArrays(GL_TRIANGLES, 0, vertex1.size() * 3);

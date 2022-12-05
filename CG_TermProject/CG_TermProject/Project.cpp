@@ -8,9 +8,15 @@
 #include "KeyboardUP.h"
 
 
-vector<glm::vec3> vertex1;
-vector<glm::vec3> vertex2;
-vector<glm::vec3> vertex3;
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
+
+
+vector<glm::vec3> vertex1; //박스
+vector<glm::vec3> vertex2; // 구
+vector<glm::vec3> vertex3; //피라미드
+vector<glm::vec3> vertex4; //잔디
 vector<glm::vec3> test;
 //랜덤
 
@@ -20,6 +26,7 @@ vector<glm::vec3> test;
 
 //gl에서 쓰는 함수 
 void InitBuffer();
+void InitTexture();
 GLvoid drawScene();
 GLvoid Reshape(int w, int h);
 GLvoid Keyboard(unsigned char key, int x, int y);
@@ -36,9 +43,10 @@ GLint width{ 1000 }, height{ 800 };
 GLuint VAO, VBO;
 GLuint sphereVAO, sphereVBO;
 GLuint pyramidVAO, pyramidVBO;
-GLuint testVAO, testVBO;
 GLuint HeroHPVAO, HeroHPVBO;
-
+GLuint GrassVAO, GrassVBO;
+GLuint TreeTexture[3];
+GLuint Texture[6];
 GLuint vertexShader; //--- 버텍스 세이더 객체
 GLuint fragmentShader; //--- 프래그먼트 세이더 객체
 
@@ -53,15 +61,21 @@ float HeroHP[4][3]{
 	{0.1, -0.1, 0},
 	{0.1, 0.1, 0}
 };
-//바닥 
-float XYZ[4][6]{
 
-	{-100.0,   -0.000001, -100.0,	0, 1, 0},
-   {100.0,   -0.000001, -100.0,	0, 1, 0 },
-   {100.0,   -0.000001, 100.0,	0, 1, 0},
-   {-100.0,   -0.000001, 100.0,	0, 1, 0}
+
+float textureVertex[36][2]{
+	{1,0},	{0,1},	{0,0},	{1,0},	{1,1},	{0,1},
+
+	{0,0},	{1,1},	{0,1},	{0,0},	{1,0},	{1,1},
+
+	{0,1},	{1,0},	{1,1},	{0,1},	{0,0},	{1,0},
+
+	{1,0},	{1,1},	{0,1},	{1,0},	{0,1},	{0,0},
+
+	{0,0},	{1,0},	{1,1},	{0,0},	{1,1},	{0,1},
+
+	{0,0},	{1,0},	{1,1},	{0,0},	{1,1},	{0,1}
 };
-
 
 GLuint crossVAO, crossVBO;
 
@@ -82,7 +96,7 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	glUseProgram(shaderID);
 
 	InitBuffer();
-
+	InitTexture();
 	glutDisplayFunc(drawScene); //--- 출력 콜백 함수
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(Keyboard);
@@ -205,7 +219,7 @@ void ReadObj(string file, vector<glm::vec3>& vertexInfo)
 
 void InitBuffer()
 {
-	ReadObj("box.obj",vertex1);
+	ReadObj("cube.obj",vertex1);
 	//ReadObj("pyramid.obj", &pyramidvertex, &pyramidcolor, &pyramidface);
 
 
@@ -224,7 +238,12 @@ void InitBuffer()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
 
-
+	GLuint textureVBO;
+	glGenBuffers(1, &textureVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, textureVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(textureVertex), textureVertex, GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0); //--- 텍스처 좌표 속성
+	glEnableVertexAttribArray(2);
 
 	///////////////////////////////////////////////////////////
 
@@ -261,35 +280,27 @@ void InitBuffer()
 	glEnableVertexAttribArray(1);
 
 	///////////////////////////////////////////////////////////
+	ReadObj("grass.obj", vertex4);
+	glGenVertexArrays(1, &GrassVAO);
 
-	glGenVertexArrays(1, &crossVAO);
-	glGenBuffers(1, &crossVBO);
-	glBindVertexArray(crossVAO);
+	glGenBuffers(1, &GrassVBO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, crossVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(XYZ), XYZ, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(1);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
+	//--- VAO 객체 생성 및 바인딩
 
+	glBindVertexArray(GrassVAO);
 
-	///////////////////////////////////////////////////////////
-
-	ReadObj("test.obj", test);
-
-	glGenVertexArrays(1, &testVAO);
-
-	glGenBuffers(1, &testVBO);
-
-	glBindVertexArray(testVAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, testVBO);
-	glBufferData(GL_ARRAY_BUFFER, test.size() * sizeof(glm::vec3), &test[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, GrassVBO);
+	glBufferData(GL_ARRAY_BUFFER, vertex4.size() * sizeof(glm::vec3), &vertex4[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
+	
+
+
+	///////////////////////////////////////////////////////////
+
+	
 	/////////////////////////////////////////////////////////
 	glGenVertexArrays(1, &HeroHPVAO);
 	glGenBuffers(1, &HeroHPVBO);
@@ -301,6 +312,121 @@ void InitBuffer()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 }
+
+
+void InitTexture()
+{
+	glGenTextures(6, Texture);
+
+	for (int i = 0; i < 6; ++i) {
+		glBindTexture(GL_TEXTURE_2D, Texture[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		int ImageWidth, ImageHeight, numberOfChannel;
+		stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+		string filename;
+
+		switch (i) {
+		case 0: {
+			filename = "옆면1.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		case 1: {
+			filename = "옆면2.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		case 2: { //위 
+			filename = "윗면.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break; 
+		}
+
+		case 3: {
+			filename = "옆면4.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		case 4: {//바닥
+			filename = "바닥.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		case 5: { //3
+			filename = "옆면3.png";
+			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		}
+		}
+		
+	}
+
+
+
+
+	//glGenTextures(1, &TreeTexture);
+	//glBindTexture(GL_TEXTURE_2D, TreeTexture);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	//int ImageWidth, ImageHeight, numberOfChannel;
+	//stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+	//string filename = "투명나무1.png";
+	//GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+	//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	//stbi_image_free(data);
+
+
+	glGenTextures(3, TreeTexture);
+	for (int i = 0; i <3; ++i) {
+		glBindTexture(GL_TEXTURE_2D, TreeTexture[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		int ImageWidth, ImageHeight, numberOfChannel;
+		stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+		string filename;
+
+		switch (i) {
+		case 0:
+			filename = "투명나무1.png";
+			break;
+		case 1:
+			filename = "나무2.png";
+			break;
+		case 2:
+			filename = "나무3.png";
+			break;
+		}
+		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		stbi_image_free(data);
+	}
+	
+
+
+}
+
 
 bool make_vertexShaders()
 {

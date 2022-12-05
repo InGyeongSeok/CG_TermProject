@@ -7,6 +7,9 @@
 #include "Hero.h"
 #include "Gun.h"
 #include "particle.h"
+#include "World.h"
+#include "Grass.h"
+#include "Tree.h"
 extern vector<Particle*> particle;
 GLvoid drawScene();
 

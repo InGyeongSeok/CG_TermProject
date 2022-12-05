@@ -29,6 +29,7 @@
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Ear.h" />
     <ClInclude Include="Eyes.h" />
+    <ClInclude Include="Grass.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="Head.h" />
     <ClInclude Include="Hero.h" />
@@ -41,8 +42,11 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Nose.h" />
     <ClInclude Include="particle.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="sword.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Tree.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animals.cpp" />
@@ -55,6 +59,7 @@
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Ear.cpp" />
     <ClCompile Include="Eyes.cpp" />
+    <ClCompile Include="Grass.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="Hero.cpp" />
@@ -69,6 +74,8 @@
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />
