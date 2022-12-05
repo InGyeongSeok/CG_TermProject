@@ -15,7 +15,7 @@ void Animals::draw()
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 	GLuint aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(aColor, this->Color.r, this->Color.g, this->Color.b);
+	glUniform4f(aColor, this->Color.r, this->Color.g, this->Color.b,1.);
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
 	DrawArrays();

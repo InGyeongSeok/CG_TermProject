@@ -46,6 +46,9 @@
     <Filter Include="Animal\Hero">
       <UniqueIdentifier>{570d1643-aae0-44be-9419-af575d498441}</UniqueIdentifier>
     </Filter>
+    <Filter Include="하늘배경">
+      <UniqueIdentifier>{aa6d5cf5-c63d-45c5-9540-b46884dfd076}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -120,15 +123,24 @@
     <ClInclude Include="particle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>하늘배경</Filter>
+    </ClInclude>
+    <ClInclude Include="Grass.h">
+      <Filter>하늘배경</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>하늘배경</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Motion.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Project.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
@@ -193,6 +205,18 @@
     </ClCompile>
     <ClCompile Include="particle.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Project.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Grass.cpp">
+      <Filter>하늘배경</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>하늘배경</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>하늘배경</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

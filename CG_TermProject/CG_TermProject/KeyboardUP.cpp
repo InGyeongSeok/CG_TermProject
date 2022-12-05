@@ -19,9 +19,7 @@ GLvoid KeyboardUP(unsigned char key, int x, int y)
 	case 'D':
 		isD = false;
 		break;
-	/*case' ':
-		isJump = false;
-		break;*/
+
 	}
 }
 

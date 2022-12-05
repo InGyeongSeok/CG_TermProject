@@ -44,7 +44,7 @@ void timer(int value) {
 	}
 	
 	bear.update();
-	
+	world.Update();
 	glutPostRedisplay();
 	glutTimerFunc(14, timer, 1);
 }

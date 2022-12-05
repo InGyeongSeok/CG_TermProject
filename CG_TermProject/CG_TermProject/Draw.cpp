@@ -8,8 +8,8 @@ void BulletCollideCat();
 bool isCollide2D(Cat r1, Gun r2);
 
 int HerogetHP = 10;
-float lightPosX = 7.0;
-float lightPosY = 1.0;
+float lightPosX = 0.0;
+float lightPosY = 20.0;
 float lightPosZ = 0.0;
 int lightcolorN = 0;
 float lightRot;
@@ -29,13 +29,13 @@ vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle
 						 new Particle,new Particle, new Particle, new Particle, new Particle
 						,new Particle, new Particle,new Particle,new Particle,new Particle };
 
-
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 Bear bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
-
-
+World world{ 0,49,0 };
+Grass grass[30];
+Tree tree{ 0,0.5,0 };
 float CatEndPosX;
 float CatEndPosZ;
 
@@ -83,53 +83,44 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 	TopView();
 
-	//camera3D();
-
 	draw();
 	
-
-	if (isBullet && BulletLimit == 0) {
-		BulletLimit += 1;
-		gun.push_back(new Gun{ cameraPos.x,cameraPos.y,cameraPos.z, TermGunDir.x,TermGunDir.y,TermGunDir.z });
-	}
 
 	glutSwapBuffers();
 };
 
+
+
+
+
 void draw() {
 
-	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
-	glUniform1i(SelectColor, 1);
-
-	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos �� ����: (0.0, 0.0, 5.0);
-	//glUniform3f(lightPosLocation, 1, 0.0, 0.0);
-
-	glm::vec4 tempv(lightPosX, lightPosY, lightPosZ, 1); //��ġ 
+	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos 
+	glm::vec4 tempv(lightPosX, lightPosY, lightPosZ, 1); 
 	glm::mat4 Lightrotate = glm::rotate(glm::mat4(1.f), glm::radians(lightRot), glm::vec3(0, 1, 0));
-
 	tempv = Lightrotate * tempv;
-
 	glUniform3f(lightPosLocation, tempv.x, tempv.y, tempv.z);
-
-	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor �� ����: (1.0, 1.0, 1.0) ���
+	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor 
 	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
-
-	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color�� ����: (1.0, 0.5, 0.3)�� ��
-	glUniform3f(aColor, 1, 1., 1.);
-
-	//////////////////////////////////////////////////////// 
-
-	glBindVertexArray(crossVAO);
-	aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(aColor, 0.2, 0.2, 0.2);
-
-	glm::mat4 Tx = glm::mat4(1.0f);
-	Tx = glm::translate(glm::mat4(1.0f), glm::vec3(0, -1.f, 0));
-	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Tx));
-	glDrawArrays(GL_QUADS, 0, 4);
+	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color
+	glUniform4f(aColor, 1, 1., 1.,1.);
 
 
+	world.Draw();
+
+
+	glEnable(GL_BLEND); //투명 객체 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+	tree.Draw();
+	tree.Update();
+	glDisable(GL_BLEND);
+
+
+
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
+	glUniform1i(selectColorLocation, 0);
 
 	for (int i = 0; i < cats.size(); ++i) {
 		cats[i]->draw();
@@ -143,10 +134,11 @@ void draw() {
 	hero.Update();
 	hero.Draw();
 
-	/*for (Particle*& test : particle) {
-		test->draw();
-		test->update();
-	}*/
+	for (int i = 0; i < 30; ++i) {
+		grass[i].Draw();
+		grass[i].Update();
+	}
+
 	for (Gun*& gunbullet : gun) {
 		gunbullet->Update();
 		gunbullet->Draw();
@@ -161,28 +153,14 @@ void draw() {
 		}
 	}
 
+	if (isBullet && BulletLimit == 0) {
+		BulletLimit += 1;
+		gun.push_back(new Gun{ cameraPos.x,cameraPos.y,cameraPos.z, TermGunDir.x,TermGunDir.y,TermGunDir.z });
+	}
 
-	///////////////////////////////////////////////////// test ��
-	//glm::mat4 Scale = glm::mat4(1.0f); //--- �̵� ��� ����
-	//glm::mat4 Change;
-	//Scale = glm::scale(Scale, glm::vec3(3, 3, 3));
-	//Tx = glm::translate(Unit, glm::vec3(0, -1.f, 0));
-	//Change = Tx * Scale;
-
-	//glBindVertexArray(testVAO);
-	//SelectColor = glGetUniformLocation(shaderID, "SelectColor");
-	//glUniform1i(SelectColor, 1);
-
-	//aColor = glGetUniformLocation(shaderID, "objectColor");
-	//glUniform3f(aColor, 128 / 255., 245 / 255., 255 / 255.);
-	//modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
-	//glDrawArrays(GL_TRIANGLES, 0, test.size() * 3);
-	///////////////////////////////////////////////////////////////////////////
-	
 	glBindVertexArray(HeroHPVAO);     //���ε�
 	aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(aColor, 1.0, 0.0, 0.0);
+	glUniform4f(aColor, 1.0, 0.0, 0.,1);
 
 	for (int i = 0; i < hero.InfoHP(); ++i) {
 		glm::mat4 Change;
@@ -263,35 +241,6 @@ void BulletCollideCat() {
 	}
 }
 
-//
-//void DrawParticle(int j)
-//{
-//	float catX = cats[j]->Position.x;
-//	float catZ = cats[j]->Position.z;
-//
-//	for (int i = 0; i < 10; ++i) {
-//		particle.push_back(new Particle{ catX,0,catZ });
-//	}
-//	for (int i = 0; i < 10; ++i) {
-//		particle[i]->draw();
-//		particle[i]->update();
-//	}
-//}
-
-//float distanceX = abs(gun[i]->GunDir.x - cats[j]->Position.x);
-//float distanceZ = abs(gun[i]->GunDir.z - cats[j]->Position.z);
-//if (distanceX < 0.05 || distanceZ < 0.05) {
-//	cats[j]->HP -= gun[i]->Damage;
-//	delete gun[i];
-//	if (0 == cats[j]->HP) {
-//		delete cats[j];
-//		cats.erase(cats.begin() + j);
-//		--j;
-//	}
-//	gun.erase(gun.begin() + i);
-//	--i;
-//	break;
-//}
 
 bool isCollide2D(Cat r1, Gun r2)
 {
