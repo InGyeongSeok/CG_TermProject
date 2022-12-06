@@ -4,18 +4,16 @@
 
 //좌표 XYZ / 스케일 / 색상 
 
-class World
+class Room
 {
 	glm::mat4 Change;
-	float Xpos;
-	float Ypos;
-	float Zpos;
+	int AnimalRoom;
 
 public:
 
-	World();
+	Room(int room);
 
-	~World();
+	~Room();
 	void Update();
 	void Draw();
 

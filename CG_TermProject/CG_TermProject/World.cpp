@@ -5,12 +5,9 @@ World::~World()
 {
 }
 
-World::World(float xpos, float ypos, float zpos)
+World::World()
 {
 
-	Ypos = ypos;
-	Zpos = zpos;
-	Xpos = xpos;
 
 }
 
@@ -19,7 +16,7 @@ void World::Update()
 {
 
 	glm::mat4 Scale = glm::scale(Unit, glm::vec3(40, 50,40));
-	glm::mat4 Trans = glm::translate(Unit, glm::vec3(Xpos, Ypos, Zpos));
+	glm::mat4 Trans = glm::translate(Unit, glm::vec3(0,49,0));
 
 	Change = Trans * Scale;
 }

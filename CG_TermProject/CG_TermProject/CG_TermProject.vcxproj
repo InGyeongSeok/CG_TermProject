@@ -29,6 +29,7 @@
     <ClInclude Include="CastleObj.h" />
     <ClInclude Include="CastleSide.h" />
     <ClInclude Include="Cat.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Ear.h" />
     <ClInclude Include="Eyes.h" />
@@ -62,6 +63,7 @@
     <ClCompile Include="CastleObj.cpp" />
     <ClCompile Include="CastleSide.cpp" />
     <ClCompile Include="Cat.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Ear.cpp" />
     <ClCompile Include="Eyes.cpp" />

@@ -147,6 +147,9 @@
     <ClInclude Include="CastleObj.h">
       <Filter>Castle</Filter>
     </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Motion.cpp">
@@ -237,6 +240,9 @@
       <Filter>Castle</Filter>
     </ClCompile>
     <ClCompile Include="CastleObj.cpp">
+      <Filter>Castle</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
       <Filter>Castle</Filter>
     </ClCompile>
   </ItemGroup>

@@ -12,7 +12,7 @@ bool isBearCollide = true;
 
 int HerogetHP = 10;
 float lightPosX = 0.0;
-float lightPosY = 20.0;
+float lightPosY = 30.0;
 float lightPosZ = 0.0;
 int lightcolorN = 0;
 float lightRot;
@@ -37,15 +37,15 @@ vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 //Bear*bear=new Bear;
 Hero hero(0.3, 0.3, 0.3, 0, 0.5, 20.0);
-World world{ 0,49,0 };
+World world{};
 Tree tree[400];
 Grass grass[600];
 Castle castle{};
 CastleSide CS1{};
 CastleObj test{};
-
-
-
+Room catRoom{ 0 };
+Room dogRoom{ 1 };
+Room bearRoom{ 2 };
 float CatEndPosX;
 float CatEndPosZ;
 
@@ -122,6 +122,7 @@ void draw() {
 	world.Draw();
 	
 
+
 	glEnable(GL_BLEND); //투명 객체 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -146,8 +147,12 @@ void draw() {
 
 	glDisable(GL_BLEND);
 	
-
-
+	catRoom.Draw();
+	catRoom.Update();
+	dogRoom.Draw();
+	dogRoom.Update();
+	bearRoom.Draw();
+	bearRoom.Update();
 
 	test.Draw();
 	test.Update();

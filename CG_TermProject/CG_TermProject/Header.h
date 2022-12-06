@@ -34,6 +34,7 @@ extern GLuint GrassVAO;
 extern GLuint castleVAO;
 extern GLuint TreeTexture[3];
 extern GLuint GrassTexture[3];
+extern GLuint RoomTexture[3];
 extern GLuint HeroHPVAO;
 extern float Rot;
 extern vector<glm::vec3> vertex1; //����ü
