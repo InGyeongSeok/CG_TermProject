@@ -1,5 +1,12 @@
 #pragma once
 #include "Header.h"
+#include "CatAttack.h"
+#include "DogAttack.h"
+#include "BearAttack.h"
+
+extern CatAttack catattack[6];
+extern DogAttack dogattack[6];
+extern BearAttack bearattack;
 
 class Hero
 {
@@ -11,7 +18,7 @@ class Hero
 	float scaleX;
 	float scaleY;
 	float scaleZ;
-	float HP;
+	int HP;
 	float PosX;
 	float PosY;
 	float PosZ;

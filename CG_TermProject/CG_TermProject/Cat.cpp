@@ -1,5 +1,5 @@
 #include "Cat.h"
-
+int add;
 
 Cat::Cat() : 
 head(Head(glm::vec3(207. / 255, 207. / 255, 207. / 255),1)),
@@ -23,15 +23,18 @@ beardR3(Beard(glm::vec3(36. / 255, 36. / 255, 36. / 255), 1, 3,1)),
 swordL(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), -1,1)),
 swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,1))
 {
-
 	random_device rd;
 	default_random_engine dre(rd());
 	uniform_real_distribution<float> urd{ -10, 10 };
 	Position.x = urd(dre);
 	Position.y = -1.0f;
 	Position.z = urd(dre);
-	HP = 20;
-
+	HP = 10;
+	Attack = 10;
+	CatCrushHero = false;
+	Index = add;
+	cout << add << endl;
+	++add;
 }
 
 
@@ -96,10 +99,13 @@ void Cat::update()
 	}
 	
 	if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {
-		
-		hero.damage();
-		
+		CatCrushHero = true;
+		catattack[Index].Activate = true;
  	}
+	else {
+		CatCrushHero = false;
+		catattack[Index].Activate = false;
+	}
 
 
 	nose.keyIn(Position, Direction);
