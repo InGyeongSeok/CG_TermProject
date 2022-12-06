@@ -49,8 +49,11 @@
     <Filter Include="World">
       <UniqueIdentifier>{aa6d5cf5-c63d-45c5-9540-b46884dfd076}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Castle">
-      <UniqueIdentifier>{76059738-dae6-4d76-864b-07ad1ceb204d}</UniqueIdentifier>
+    <Filter Include="Attack">
+      <UniqueIdentifier>{dd271e27-39c5-4443-a34d-7509911f2e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CatDogBear">
+      <UniqueIdentifier>{074d78df-5d43-4811-8faf-6b0d1687186c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,9 +96,6 @@
     <ClInclude Include="Nose.h">
       <Filter>Animal\Nose</Filter>
     </ClInclude>
-    <ClInclude Include="Cat.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="KeyboardUP.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -110,12 +110,6 @@
     </ClInclude>
     <ClInclude Include="sword.h">
       <Filter>Animal\Sword</Filter>
-    </ClInclude>
-    <ClInclude Include="Dog.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Bear.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Hero.h">
       <Filter>Animal\Hero</Filter>
@@ -138,14 +132,23 @@
     <ClInclude Include="Tree.h">
       <Filter>World</Filter>
     </ClInclude>
-    <ClInclude Include="Castle.h">
-      <Filter>Castle</Filter>
+    <ClInclude Include="CatAttack.h">
+      <Filter>Attack</Filter>
     </ClInclude>
-    <ClInclude Include="CastleSide.h">
-      <Filter>Castle</Filter>
+    <ClInclude Include="DogAttack.h">
+      <Filter>Attack</Filter>
     </ClInclude>
-    <ClInclude Include="CastleObj.h">
-      <Filter>Castle</Filter>
+    <ClInclude Include="Cat.h">
+      <Filter>CatDogBear</Filter>
+    </ClInclude>
+    <ClInclude Include="Dog.h">
+      <Filter>CatDogBear</Filter>
+    </ClInclude>
+    <ClInclude Include="Bear.h">
+      <Filter>CatDogBear</Filter>
+    </ClInclude>
+    <ClInclude Include="BearAttack.h">
+      <Filter>Attack</Filter>
     </ClInclude>
     <ClInclude Include="Room.h">
       <Filter>Castle</Filter>
@@ -188,9 +191,6 @@
     <ClCompile Include="Nose.cpp">
       <Filter>Animal\Nose</Filter>
     </ClCompile>
-    <ClCompile Include="Cat.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="KeyboardUP.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -205,12 +205,6 @@
     </ClCompile>
     <ClCompile Include="Sword.cpp">
       <Filter>Animal\Sword</Filter>
-    </ClCompile>
-    <ClCompile Include="Dog.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Bear.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Hero.cpp">
       <Filter>Animal\Hero</Filter>
@@ -233,14 +227,23 @@
     <ClCompile Include="Tree.cpp">
       <Filter>World</Filter>
     </ClCompile>
-    <ClCompile Include="Castle.cpp">
-      <Filter>Castle</Filter>
+    <ClCompile Include="CatAttack.cpp">
+      <Filter>Attack</Filter>
     </ClCompile>
-    <ClCompile Include="CastleSide.cpp">
-      <Filter>Castle</Filter>
+    <ClCompile Include="DogAttack.cpp">
+      <Filter>Attack</Filter>
     </ClCompile>
-    <ClCompile Include="CastleObj.cpp">
-      <Filter>Castle</Filter>
+    <ClCompile Include="Cat.cpp">
+      <Filter>CatDogBear</Filter>
+    </ClCompile>
+    <ClCompile Include="Dog.cpp">
+      <Filter>CatDogBear</Filter>
+    </ClCompile>
+    <ClCompile Include="Bear.cpp">
+      <Filter>CatDogBear</Filter>
+    </ClCompile>
+    <ClCompile Include="BearAttack.cpp">
+      <Filter>Attack</Filter>
     </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>Castle</Filter>

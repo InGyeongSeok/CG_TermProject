@@ -6,10 +6,12 @@ float HeroMovZ;
 
 float HeroLocationX{};
 float HeroLocationZ{};
+CatAttack catattack[6];
+DogAttack dogattack[6];
+BearAttack bearattack;
 
 bool jumpUp = true;
 
-	//color.r, color.g, color.b;
 Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 {
 	random_device rd;
@@ -23,7 +25,7 @@ Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 	PosY = Y;
 	PosZ = Z;
 	HP = 100;
-	
+
 }
 
 Hero::~Hero()
@@ -33,21 +35,42 @@ Hero::~Hero()
 
 void Hero::damage()
 {
-	HP -= 0.07;
-	lightColorG-= 0.0005f;
-	lightColorB-= 0.0005f;
-	if (lightColorG < 0.35) { 
+
+	HP = 100;
+	lightColorG = 1.0;
+	lightColorB = 1.0;
+	for (int i = 0; i < 6; ++i) {
+		HP -= (catattack[i].AttackCount) * 10 / 24;
+		lightColorG -= catattack[i].AttackCount * 0.1f/24.;
+		lightColorB -= catattack[i].AttackCount * 0.1f/24.;
+
+		HP -= (dogattack[i].AttackCount) * 20 / 24;
+		lightColorG -= dogattack[i].AttackCount * 0.2f / 24.;
+		lightColorB -= dogattack[i].AttackCount * 0.2f / 24.;
+	}
+
+
+	HP -= (bearattack.AttackCount) * 30 / 24;
+	lightColorG -= bearattack.AttackCount * 0.3f / 24.;
+	lightColorB -= bearattack.AttackCount * 0.3f / 24.;
+
+
+	if (lightColorG < 0.0) {
 		lightColorB = 0;
 		lightColorG = 0;
 		lightColorR = 0;
 	}
 }
+
+
+
 int Hero::InfoHP() {
-	return abs((int)HP)/10;
+	return HP/10;
 }
 
 void Hero::Update()
 {
+	damage();
 	glm::mat4 Scale = glm::scale(Unit, glm::vec3(scaleX, scaleY, scaleZ));
 	glm::mat4 Trans = glm::translate(Unit, glm::vec3(PosX+HeroMovX, PosY+ HeroMovY, PosZ+ HeroMovZ));
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
@@ -90,7 +113,7 @@ void Hero::Draw()
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
 	glDrawArrays(GL_TRIANGLES, 0, vertex1.size() * 3);
 
-	
+
 }
 
 void Hero::location()

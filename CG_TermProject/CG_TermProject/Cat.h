@@ -45,8 +45,12 @@ class Cat
 
 	glm::vec3 Position;
 	float Direction;
+	bool CatCrushHero;
 
 	int HP;
+	int Attack;
+
+	int Index;
 
 public:
 	Cat();

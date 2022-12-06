@@ -39,9 +39,7 @@ void camera() {
 	unsigned int viewPosLocation = glGetUniformLocation(shaderID, "viewPos");
 	glUniform3f(viewPosLocation, cameraPos.x, cameraPos.y, cameraPos.z);
 
-
 }
-
 
 void TopView()
 {

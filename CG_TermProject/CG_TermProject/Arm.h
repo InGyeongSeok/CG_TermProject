@@ -1,5 +1,8 @@
 #pragma once
 #include "Animals.h"
+#include "CatAttack.h"
+#include "Hero.h"
+
 class Arm : public Animals
 {
 private:
