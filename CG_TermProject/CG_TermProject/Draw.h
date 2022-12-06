@@ -10,8 +10,7 @@
 #include "World.h"
 #include "Grass.h"
 #include "Tree.h"
-#include "Castle.h"
-#include "CastleSide.h"
+
 #include "CastleObj.h"
 #include "Room.h"
 extern vector<Particle*> particle;

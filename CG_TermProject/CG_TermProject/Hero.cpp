@@ -3,6 +3,8 @@
 float HeroMovX;
 float HeroMovY;
 float HeroMovZ;
+float MovX;
+float MovZ;
 
 float HeroLocationX{};
 float HeroLocationZ{};
@@ -69,12 +71,16 @@ int Hero::InfoHP() {
 }
 
 void Hero::Update()
-{
+{ 
+	// 0, 0.5, 20.0
 	damage();
 	glm::mat4 Scale = glm::scale(Unit, glm::vec3(scaleX, scaleY, scaleZ));
-	glm::mat4 Trans = glm::translate(Unit, glm::vec3(PosX+HeroMovX, PosY+ HeroMovY, PosZ+ HeroMovZ));
+	glm::mat4 Trans;
+	
+		Trans = glm::translate(Unit, glm::vec3(PosX + HeroMovX, PosY + HeroMovY, PosZ + HeroMovZ));
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
 	Change = Trans * Scale * AddTrans;
+	
 }
 
 void Hero::Jump()

@@ -45,8 +45,7 @@ Hero hero(0.3, 0.3, 0.3, 0, 0.5, 20.0);
 World world{};
 Tree tree[400];
 Grass grass[600];
-Castle castle{};
-CastleSide CS1{};
+
 CastleObj test{};
 Room catRoom{ 0 };
 Room dogRoom{ 1 };

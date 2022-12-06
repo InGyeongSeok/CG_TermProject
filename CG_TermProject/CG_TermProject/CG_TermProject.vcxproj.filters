@@ -55,6 +55,9 @@
     <Filter Include="CatDogBear">
       <UniqueIdentifier>{074d78df-5d43-4811-8faf-6b0d1687186c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Door">
+      <UniqueIdentifier>{3628a6e3-d9da-4629-85f7-cdac927613bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -150,8 +153,17 @@
     <ClInclude Include="BearAttack.h">
       <Filter>Attack</Filter>
     </ClInclude>
+    <ClInclude Include="CastleObj.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="Room.h">
-      <Filter>Castle</Filter>
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Tunnel.h">
+      <Filter>Door</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Door</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -159,9 +171,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
@@ -245,8 +254,20 @@
     <ClCompile Include="BearAttack.cpp">
       <Filter>Attack</Filter>
     </ClCompile>
+    <ClCompile Include="CastleObj.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="Room.cpp">
-      <Filter>Castle</Filter>
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Tunnel.cpp">
+      <Filter>Door</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
