@@ -36,10 +36,16 @@ vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
 //Bear*bear=new Bear;
-Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
+Hero hero(0.3, 0.3, 0.3, 0, 0.5, 20.0);
 World world{ 0,49,0 };
 Tree tree[400];
 Grass grass[600];
+Castle castle{};
+CastleSide CS1{};
+CastleObj test{};
+
+
+
 float CatEndPosX;
 float CatEndPosZ;
 
@@ -114,7 +120,7 @@ void draw() {
 
 
 	world.Draw();
-
+	
 
 	glEnable(GL_BLEND); //투명 객체 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -126,7 +132,12 @@ void draw() {
 
 	}
 	
+	
 
+	/*castle.Draw();
+	castle.Update();
+	CS1.Draw();
+	CS1.Update();*/
 
 	for (int i = 0; i < 600; ++i) {
 		grass[i].Draw();
@@ -135,6 +146,11 @@ void draw() {
 
 	glDisable(GL_BLEND);
 	
+
+
+
+	test.Draw();
+	test.Update();
 
 	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
 	glUniform1i(selectColorLocation, 0);

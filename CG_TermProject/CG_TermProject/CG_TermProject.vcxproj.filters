@@ -49,6 +49,9 @@
     <Filter Include="World">
       <UniqueIdentifier>{aa6d5cf5-c63d-45c5-9540-b46884dfd076}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Castle">
+      <UniqueIdentifier>{76059738-dae6-4d76-864b-07ad1ceb204d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -135,6 +138,15 @@
     <ClInclude Include="Tree.h">
       <Filter>World</Filter>
     </ClInclude>
+    <ClInclude Include="Castle.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
+    <ClInclude Include="CastleSide.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
+    <ClInclude Include="CastleObj.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Motion.cpp">
@@ -217,6 +229,15 @@
     </ClCompile>
     <ClCompile Include="Tree.cpp">
       <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Castle.cpp">
+      <Filter>Castle</Filter>
+    </ClCompile>
+    <ClCompile Include="CastleSide.cpp">
+      <Filter>Castle</Filter>
+    </ClCompile>
+    <ClCompile Include="CastleObj.cpp">
+      <Filter>Castle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

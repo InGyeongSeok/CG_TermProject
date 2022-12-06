@@ -135,9 +135,7 @@ Cat::~Cat()
 void Cat::damage()
 {
 	HP -= 10;
-	if (HP < 0) {
-		cout << "cat dead" << endl;
-	}
+	
 }
 
 

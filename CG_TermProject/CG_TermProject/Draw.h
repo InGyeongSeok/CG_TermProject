@@ -10,6 +10,9 @@
 #include "World.h"
 #include "Grass.h"
 #include "Tree.h"
+#include "Castle.h"
+#include "CastleSide.h"
+#include "CastleObj.h"
 extern vector<Particle*> particle;
 GLvoid drawScene();
 

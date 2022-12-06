@@ -25,6 +25,9 @@
     <ClInclude Include="Beard.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Castle.h" />
+    <ClInclude Include="CastleObj.h" />
+    <ClInclude Include="CastleSide.h" />
     <ClInclude Include="Cat.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Ear.h" />
@@ -55,6 +58,9 @@
     <ClCompile Include="Beard.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Castle.cpp" />
+    <ClCompile Include="CastleObj.cpp" />
+    <ClCompile Include="CastleSide.cpp" />
     <ClCompile Include="Cat.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Ear.cpp" />

@@ -4,6 +4,8 @@ in vec3 FragPos;			//--- 위치값
 in vec3 Normal;				//--- 버텍스 세이더에서 받은 노멀값
 in vec2 TexCoord;			//--- 텍스처 좌표
 
+in vec3 yanggang;
+
 out vec4 FragColor;			//--- 최종 객체의 색 저장
 
 uniform vec3 lightPos;		//--- 조명의 위치
@@ -44,6 +46,8 @@ void main()
 	vec4 result;
 	if(1 == selectColor)			// 1이면 텍스처, 아니면 objectColor
 		result = texture(outTexture, TexCoord) * vec4((ambient + diffuse + specular), 1.0);
+	else if(2 == selectColor)
+		result = vec4(yanggang, 1.0) * vec4((ambient + diffuse + specular), 1.0);
 	else
 		result = vec4((ambient + diffuse + specular), 1.f) * objectColor;  		//--- 최종 조명 설정된 픽셀 색상: (주변조명 + 산란반사조명 + 거울반사조명) * 객체 색상
 

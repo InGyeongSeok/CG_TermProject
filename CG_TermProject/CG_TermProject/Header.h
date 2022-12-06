@@ -31,6 +31,7 @@ extern GLuint sphereVAO;
 extern GLuint pyramidVAO;
 extern GLuint crossVAO;
 extern GLuint GrassVAO;
+extern GLuint castleVAO;
 extern GLuint TreeTexture[3];
 extern GLuint GrassTexture[3];
 extern GLuint HeroHPVAO;
@@ -39,6 +40,7 @@ extern vector<glm::vec3> vertex1; //����ü
 extern vector<glm::vec3> vertex2; //��
 extern vector<glm::vec3> vertex3; //�Ƕ�̵�
 extern vector<glm::vec3> vertex4;
+extern vector<glm::vec3> vertex5;
 extern float lightRot;
 
 extern float lightPosX;
@@ -86,7 +88,8 @@ extern glm::vec3 GunDir;
 extern bool isParticle;
 extern bool isBullet ;
 extern const glm::mat4 Unit;
-
+extern GLuint CastleTexture;
+extern GLuint CastleSideTexTure;
 extern GLuint Texture[6];
 extern float CatEndPosX;
 extern float CatEndPosZ;

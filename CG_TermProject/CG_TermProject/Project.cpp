@@ -13,18 +13,28 @@
 
 
 
-vector<glm::vec3> vertex1; //ï¿½Ú½ï¿½
-vector<glm::vec3> vertex2; // ï¿½ï¿½
-vector<glm::vec3> vertex3; //ï¿½Ç¶ï¿½Ìµï¿½
-vector<glm::vec3> vertex4; //ï¿½Üµï¿½
-vector<glm::vec3> test;
-//ï¿½ï¿½ï¿½ï¿½
+vector<glm::vec3> vertex1; //¹Ú½º
+vector<glm::vec3> vertex2; // ±¸
+vector<glm::vec3> vertex3; //ÇÇ¶ó¹Ìµå
+vector<glm::vec3> vertex4; //ÀÜµð
+vector<glm::vec3> vertex5; //¼º 
+vector<glm::vec3> vcolor5;
+void makeCastleColor() {
+	random_device sk;
+	default_random_engine skdre(sk());
+	uniform_real_distribution<float> skurd{0.f, 1.f};
+
+	for (int i = 0; i < vertex5.size() / 2; ++i) {
+		vcolor5.push_back(glm::vec3(skurd(skdre), skurd(skdre), skurd(skdre)));
+	}
+}
+//·£´ý
 
 //random_device rd1;
 //default_random_engine dre1(rd1());
 //uniform_real_distribution<float> urd1{ 0.01f, 0.017f };
 
-//glï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ 
+//gl¿¡¼­ ¾²´Â ÇÔ¼ö 
 void InitBuffer();
 void InitTexture();
 GLvoid drawScene();
@@ -36,7 +46,7 @@ GLuint make_shaderProgram();
 void timer(int value);
 GLvoid Motion(int x, int y);
 GLvoid Mouse(int button, int state, int x, int y);
-//Ã¢ Å©ï¿½ï¿½
+//Ã¢ Å©±â
 GLint width{ 1000 }, height{ 800 };
 
 //VAO, VBO
@@ -45,11 +55,14 @@ GLuint sphereVAO, sphereVBO;
 GLuint pyramidVAO, pyramidVBO;
 GLuint HeroHPVAO, HeroHPVBO;
 GLuint GrassVAO, GrassVBO;
+GLuint castleVAO, castleVBO, castleColorVBO;
 GLuint TreeTexture[3];
 GLuint GrassTexture[3];
 GLuint Texture[6];
-GLuint vertexShader; //--- ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Ã¼
-GLuint fragmentShader; //--- ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½Æ® ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Ã¼
+GLuint CastleTexture;
+GLuint CastleSideTexTure;
+GLuint vertexShader; //--- ¹öÅØ½º ¼¼ÀÌ´õ °´Ã¼
+GLuint fragmentShader; //--- ÇÁ·¡±×¸ÕÆ® ¼¼ÀÌ´õ °´Ã¼
 
 char* filetobuf(string file);
 void ReadObj(string file, vector<glm::vec3>* vertex, vector<glm::vec3>* vcolor, vector<glm::ivec3>* face);
@@ -80,9 +93,9 @@ float textureVertex[36][2]{
 
 GLuint crossVAO, crossVBO;
 
-void main(int argc, char** argv) //--- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ý¹ï¿½ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+void main(int argc, char** argv) //--- À©µµ¿ì Ãâ·ÂÇÏ°í ÄÝ¹éÇÔ¼ö ¼³Á¤
 {
-	//--- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+	//--- À©µµ¿ì »ý¼ºÇÏ±â
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(0, 0);
@@ -93,12 +106,12 @@ void main(int argc, char** argv) //--- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ý
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	shaderID = make_shaderProgram(); //--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+	shaderID = make_shaderProgram(); //--- ¼¼ÀÌ´õ ÇÁ·Î±×·¥ ¸¸µé±â
 	glUseProgram(shaderID);
 
 	InitBuffer();
 	InitTexture();
-	glutDisplayFunc(drawScene); //--- ï¿½ï¿½ï¿½ ï¿½Ý¹ï¿½ ï¿½Ô¼ï¿½
+	glutDisplayFunc(drawScene); //--- Ãâ·Â ÄÝ¹é ÇÔ¼ö
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(Keyboard);
 	//glutMotionFunc(Motion);
@@ -183,20 +196,20 @@ void ReadObj(string file, vector<glm::vec3>& vertexInfo)
 			for (int i = -1; i < 3; ++i) {
 				string word;
 				getline(slice, word, ' ');
-				if (i == -1) continue;                  // f ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³Ê¶Ú´ï¿½
+				if (i == -1) continue;                  // f ÀÐÀ»¶© °Ç³Ê¶Ú´Ù
 				if (word.find("/") != string::npos) {
 					istringstream slash(word);
 					string slashtmp;
 					getline(slash, slashtmp, '/');
 
-					vfacetemp[i] = atoi(slashtmp.c_str()) - 1;         //f ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ï¿½ï¿½Â°ï¿½ï¿½ï¿½ï¿½(v)   //ï¿½è¿­ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Å¶ï¿½ -1ï¿½ï¿½ï¿½ï¿½
+					vfacetemp[i] = atoi(slashtmp.c_str()) - 1;         //f ÀÐÀ»¶© Ã¹¹øÂ°°ª¸¸(v)   //¹è¿­ÀÎµ¦½º ¾µ°Å¶ó -1ÇØÁÜ
 
 					getline(slash, slashtmp, '/');
 					getline(slash, slashtmp, '/');
 					vnfacetemp[i] = atoi(slashtmp.c_str()) - 1;
 				}
 				else {
-					vfacetemp[i] = atoi(word.c_str()) - 1;         //f ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ï¿½ï¿½Â°ï¿½ï¿½ï¿½ï¿½(v)   //ï¿½è¿­ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Å¶ï¿½ -1ï¿½ï¿½ï¿½ï¿½
+					vfacetemp[i] = atoi(word.c_str()) - 1;         //f ÀÐÀ»¶© Ã¹¹øÂ°°ª¸¸(v)   //¹è¿­ÀÎµ¦½º ¾µ°Å¶ó -1ÇØÁÜ
 				}
 			}
 			vFace.push_back(vfacetemp);
@@ -228,14 +241,14 @@ void InitBuffer()
 
 	glGenBuffers(1, &VBO);
 
-	//--- VAO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
+	//--- VAO °´Ã¼ »ý¼º ¹× ¹ÙÀÎµù
 
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, vertex1.size() * sizeof(glm::vec3), &vertex1[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);      // ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½Ó¼ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.(0ï¿½ï¿½ ï¿½è¿­ È°ï¿½ï¿½È­)
+	glEnableVertexAttribArray(0);      // ¹öÅØ½º ¼Ó¼º ¹è¿­À» »ç¿ëÇÏµµ·Ï ÇÑ´Ù.(0¹ø ¹è¿­ È°¼ºÈ­)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
 
@@ -243,7 +256,7 @@ void InitBuffer()
 	glGenBuffers(1, &textureVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, textureVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(textureVertex), textureVertex, GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0); //--- ï¿½Ø½ï¿½Ã³ ï¿½ï¿½Ç¥ ï¿½Ó¼ï¿½
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0); //--- ÅØ½ºÃ³ ÁÂÇ¥ ¼Ó¼º
 	glEnableVertexAttribArray(2);
 
 	///////////////////////////////////////////////////////////
@@ -260,7 +273,7 @@ void InitBuffer()
 	glBindBuffer(GL_ARRAY_BUFFER, sphereVBO);
 	glBufferData(GL_ARRAY_BUFFER, vertex2.size() * sizeof(glm::vec3), &vertex2[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);      // ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½Ó¼ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.(0ï¿½ï¿½ ï¿½è¿­ È°ï¿½ï¿½È­)
+	glEnableVertexAttribArray(0);      // ¹öÅØ½º ¼Ó¼º ¹è¿­À» »ç¿ëÇÏµµ·Ï ÇÑ´Ù.(0¹ø ¹è¿­ È°¼ºÈ­)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
 	///////////////////////////////////////////////////////////
@@ -276,37 +289,41 @@ void InitBuffer()
 	glBindBuffer(GL_ARRAY_BUFFER, pyramidVBO);
 	glBufferData(GL_ARRAY_BUFFER, vertex3.size() * sizeof(glm::vec3), &vertex3[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);      // ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½Ó¼ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.(0ï¿½ï¿½ ï¿½è¿­ È°ï¿½ï¿½È­)
+	glEnableVertexAttribArray(0);      // ¹öÅØ½º ¼Ó¼º ¹è¿­À» »ç¿ëÇÏµµ·Ï ÇÑ´Ù.(0¹ø ¹è¿­ È°¼ºÈ­)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
 
-	///////////////////////////////////////////////////////////
-	//ReadObj("grass.obj", vertex4);
-	//glGenVertexArrays(1, &GrassVAO);
-
-	//glGenBuffers(1, &GrassVBO);
-
-	////--- VAO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
-
-	//glBindVertexArray(GrassVAO);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, GrassVBO);
-	//glBufferData(GL_ARRAY_BUFFER, vertex4.size() * sizeof(glm::vec3), &vertex4[0], GL_STATIC_DRAW);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	//glEnableVertexAttribArray(0);      // ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½Ó¼ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.(0ï¿½ï¿½ ï¿½è¿­ È°ï¿½ï¿½È­)
-	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
-	//glEnableVertexAttribArray(1);
 	
 
 
 	///////////////////////////////////////////////////////////
+	ReadObj("castle.obj", vertex5);
+	makeCastleColor();
+	glGenVertexArrays(1, &castleVAO);
+
+	glGenBuffers(1, &castleVBO);
+	glGenBuffers(1, &castleColorVBO);
+
+	glBindVertexArray(castleVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, castleVBO);
+	glBufferData(GL_ARRAY_BUFFER, vertex5.size() * sizeof(glm::vec3), &vertex5[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);      // ¹öÅØ½º ¼Ó¼º ¹è¿­À» »ç¿ëÇÏµµ·Ï ÇÑ´Ù.(0¹ø ¹è¿­ È°¼ºÈ­)
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(1);
+
+	glBindBuffer(GL_ARRAY_BUFFER, castleColorVBO);
+	glBufferData(GL_ARRAY_BUFFER, vcolor5.size() * sizeof(glm::vec3), &vcolor5[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(5);      // ¹öÅØ½º ¼Ó¼º ¹è¿­À» »ç¿ëÇÏµµ·Ï ÇÑ´Ù.(5¹ø ¹è¿­ È°¼ºÈ­)
 
 	
 	/////////////////////////////////////////////////////////
 	glGenVertexArrays(1, &HeroHPVAO);
 	glGenBuffers(1, &HeroHPVBO);
 
-	//// ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¢ ï¿½ï¿½ï¿½ï¿½ï¿½
+	//// Á¤Á¡, »ö»ó Á¢±Ù ±ÔÄ¢ ¸¸µé±â
 	glBindVertexArray(HeroHPVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, HeroHPVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(HeroHP), HeroHP, GL_STATIC_DRAW);
@@ -327,26 +344,26 @@ void InitTexture()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		int ImageWidth, ImageHeight, numberOfChannel;
-		stbi_set_flip_vertically_on_load(true); //--- ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å²Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ß°ï¿½
+		stbi_set_flip_vertically_on_load(true); //--- ÀÌ¹ÌÁö°¡ °Å²Ù·Î ÀÐÈù´Ù¸é Ãß°¡
 		string filename;
 
 		switch (i) {
 		case 0: {
-			filename = "ï¿½ï¿½ï¿½ï¿½1.png";
+			filename = "¿·¸é2.png";
 			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		}
 		case 1: {
-			filename = "ï¿½ï¿½ï¿½ï¿½2.png";
+			filename = "¿·¸é3.png";
 			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		}
-		case 2: { //ï¿½ï¿½ 
-			filename = "ï¿½ï¿½ï¿½ï¿½.png";
+		case 2: { //À§ 
+			filename = "¿·¸é3.png";
 			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
@@ -354,21 +371,21 @@ void InitTexture()
 		}
 
 		case 3: {
-			filename = "ï¿½ï¿½ï¿½ï¿½4.png";
+			filename = "¿·¸é1.png";
 			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		}
-		case 4: {//ï¿½Ù´ï¿½
-			filename = "ï¿½Ù´ï¿½.png";
+		case 4: {//¹Ù´Ú
+			filename = "¹Ù´Ú.png";
 			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		}
 		case 5: { //3
-			filename = "ï¿½ï¿½ï¿½ï¿½3.png";
+			filename = "¿·¸é4.png";
 			GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
@@ -392,18 +409,18 @@ void InitTexture()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		int ImageWidth, ImageHeight, numberOfChannel;
-		stbi_set_flip_vertically_on_load(true); //--- ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å²Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ß°ï¿½
+		stbi_set_flip_vertically_on_load(true); //--- ÀÌ¹ÌÁö°¡ °Å²Ù·Î ÀÐÈù´Ù¸é Ãß°¡
 		string filename;
 
 		switch (i) {
 		case 0:
-			filename = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1.png";
+			filename = "Åõ¸í³ª¹«1.png";
 			break;
 		case 1:
-			filename = "ï¿½ï¿½ï¿½ï¿½2.png";
+			filename = "³ª¹«2.png";
 			break;
 		case 2:
-			filename = "ï¿½ï¿½ï¿½ï¿½3.png";
+			filename = "³ª¹«3.png";
 			break;
 		}
 		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
@@ -421,18 +438,18 @@ void InitTexture()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		int ImageWidth, ImageHeight, numberOfChannel;
-		stbi_set_flip_vertically_on_load(true); //--- ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å²Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ß°ï¿½
+		stbi_set_flip_vertically_on_load(true); //--- ÀÌ¹ÌÁö°¡ °Å²Ù·Î ÀÐÈù´Ù¸é Ãß°¡
 		string filename;
 
 		switch (i) {
 		case 0:
-			filename = "ï¿½Üµï¿½1.png";
+			filename = "ÀÜµð1.png";
 			break;
 		case 1:
-			filename = "ï¿½Üµï¿½2.png";
+			filename = "ÀÜµð2.png";
 			break;
 		case 2:
-			filename = "ï¿½Üµï¿½3.png";
+			filename = "ÀÜµð3.png";
 			break;
 	
 		}
@@ -442,14 +459,43 @@ void InitTexture()
 	}
 
 
+	glGenTextures(1, &CastleTexture);
+	glBindTexture(GL_TEXTURE_2D, CastleTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int ImageWidth, ImageHeight, numberOfChannel;
+	stbi_set_flip_vertically_on_load(true); //--- ÀÌ¹ÌÁö°¡ °Å²Ù·Î ÀÐÈù´Ù¸é Ãß°¡
+	string filename="¼º.png";
+
+	GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	stbi_image_free(data);
+	
+	glGenTextures(1, &CastleSideTexTure);
+	glBindTexture(GL_TEXTURE_2D, CastleSideTexTure);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	//int ImageWidth, ImageHeight, numberOfChannel;
+	stbi_set_flip_vertically_on_load(true); //--- ÀÌ¹ÌÁö°¡ °Å²Ù·Î ÀÐÈù´Ù¸é Ãß°¡
+	filename = "¼º¿·.png";
+
+	data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	stbi_image_free(data);
 }
 
 
 bool make_vertexShaders()
 {
 	GLchar* vertexSource;
-	//--- ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Ð¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½
-	//--- filetobuf: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½Ð¾î¼­ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
+	//--- ¹öÅØ½º ¼¼ÀÌ´õ ÀÐ¾î ÀúÀåÇÏ°í ÄÄÆÄÀÏ ÇÏ±â
+	//--- filetobuf: »ç¿ëÀÚÁ¤ÀÇ ÇÔ¼ö·Î ÅØ½ºÆ®¸¦ ÀÐ¾î¼­ ¹®ÀÚ¿­¿¡ ÀúÀåÇÏ´Â ÇÔ¼ö
 	vertexSource = filetobuf("vertex.glsl");
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
@@ -460,17 +506,17 @@ bool make_vertexShaders()
 	if (!result)
 	{
 		glGetShaderInfoLog(vertexShader, 512, NULL, errorLog);
-		cerr << "ERROR: vertex shader ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n" << errorLog << endl;
+		cerr << "ERROR: vertex shader ÄÄÆÄÀÏ ½ÇÆÐ\n" << errorLog << endl;
 		return false;
 	}
 }
 
-//--- ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½Æ® ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½
+//--- ÇÁ·¡±×¸ÕÆ® ¼¼ÀÌ´õ °´Ã¼ ¸¸µé±â
 bool make_fragmentShaders()
 {
 	GLchar* fragmentSource;
-	//--- ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½Æ® ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Ð¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
-	fragmentSource = filetobuf("fragment.glsl"); // ï¿½ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½Ì´ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½
+	//--- ÇÁ·¡±×¸ÕÆ® ¼¼ÀÌ´õ ÀÐ¾î ÀúÀåÇÏ°í ÄÄÆÄÀÏÇÏ±â
+	fragmentSource = filetobuf("fragment.glsl"); // ÇÁ·¡±×¼¼ÀÌ´õ ÀÐ¾î¿À±â
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
 	glCompileShader(fragmentShader);
@@ -480,42 +526,42 @@ bool make_fragmentShaders()
 	if (!result)
 	{
 		glGetShaderInfoLog(fragmentShader, 512, NULL, errorLog);
-		cerr << "ERROR: fragment shader ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n" << errorLog << endl;
+		cerr << "ERROR: fragment shader ÄÄÆÄÀÏ ½ÇÆÐ\n" << errorLog << endl;
 		return false;
 	}
 }
 
-//--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+//--- ¼¼ÀÌ´õ ÇÁ·Î±×·¥ ¸¸µé±â
 GLuint make_shaderProgram()
 {
 
-	//--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Ð¾ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
-	make_vertexShaders(); //--- ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
-	make_fragmentShaders(); //--- ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½Æ® ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+	//--- ¼¼ÀÌ´õ ÀÐ¾î¿Í¼­ ¼¼ÀÌ´õ ÇÁ·Î±×·¥ ¸¸µé±â
+	make_vertexShaders(); //--- ¹öÅØ½º ¼¼ÀÌ´õ ¸¸µé±â
+	make_fragmentShaders(); //--- ÇÁ·¡±×¸ÕÆ® ¼¼ÀÌ´õ ¸¸µé±â
 
 	GLuint ShaderProgramID;
-	ShaderProgramID = glCreateProgram(); //--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½3
-	glAttachShader(ShaderProgramID, vertexShader); //--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
-	glAttachShader(ShaderProgramID, fragmentShader); //--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×¸ï¿½Æ® ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
-	glLinkProgram(ShaderProgramID); //--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½Å©ï¿½Ï±ï¿½
-	glDeleteShader(vertexShader); //--- ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	ShaderProgramID = glCreateProgram(); //--- ¼¼ÀÌ´õ ÇÁ·Î±×·¥ ¸¸µé±â3
+	glAttachShader(ShaderProgramID, vertexShader); //--- ¼¼ÀÌ´õ ÇÁ·Î±×·¥¿¡ ¹öÅØ½º ¼¼ÀÌ´õ ºÙÀÌ±â
+	glAttachShader(ShaderProgramID, fragmentShader); //--- ¼¼ÀÌ´õ ÇÁ·Î±×·¥¿¡ ÇÁ·¡±×¸ÕÆ® ¼¼ÀÌ´õ ºÙÀÌ±â
+	glLinkProgram(ShaderProgramID); //--- ¼¼ÀÌ´õ ÇÁ·Î±×·¥ ¸µÅ©ÇÏ±â
+	glDeleteShader(vertexShader); //--- ¼¼ÀÌ´õ °´Ã¼¸¦ ¼¼ÀÌ´õ ÇÁ·Î±×·¥¿¡ ¸µÅ©ÇßÀ½À¸·Î, ¼¼ÀÌ´õ °´Ã¼ ÀÚÃ¼´Â »èÁ¦ °¡´É
 	glDeleteShader(fragmentShader);
 
 	GLint result;
 	GLchar errorLog[512];
 
-	glGetProgramiv(ShaderProgramID, GL_LINK_STATUS, &result); // ---ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï±ï¿½
+	glGetProgramiv(ShaderProgramID, GL_LINK_STATUS, &result); // ---¼¼ÀÌ´õ°¡ Àß ¿¬°áµÇ¾ú´ÂÁö Ã¼Å©ÇÏ±â
 	if (!result) {
 		glGetProgramInfoLog(ShaderProgramID, 512, NULL, errorLog);
-		cerr << "ERROR: shader program ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n" << errorLog << endl;
+		cerr << "ERROR: shader program ¿¬°á ½ÇÆÐ\n" << errorLog << endl;
 		return false;
 	}
-	glUseProgram(ShaderProgramID);         //--- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
-	//--- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½, ï¿½ï¿½ ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½
-	//--- glUseProgram ï¿½Ô¼ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
-	//--- ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+	glUseProgram(ShaderProgramID);         //--- ¸¸µé¾îÁø ¼¼ÀÌ´õ ÇÁ·Î±×·¥ »ç¿ëÇÏ±â
+	//--- ¿©·¯ °³ÀÇ ¼¼ÀÌ´õÇÁ·Î±×·¥ ¸¸µé ¼ö ÀÖ°í, ±× Áß ÇÑ°³ÀÇ ÇÁ·Î±×·¥À» »ç¿ëÇÏ·Á¸é
+	//--- glUseProgram ÇÔ¼ö¸¦ È£ÃâÇÏ¿© »ç¿ë ÇÒ Æ¯Á¤ ÇÁ·Î±×·¥À» ÁöÁ¤ÇÑ´Ù.
+	//--- »ç¿ëÇÏ±â Á÷Àü¿¡ È£ÃâÇÒ ¼ö ÀÖ´Ù.
 	return ShaderProgramID;
 
-	//ï¿½ï¿½ï¿½×½ï¿½Æ®ï¿½ï¿½Þ¸ï¿½
+	//±êÅ×½ºÆ®¿ë¸Þ¸ð
 }
 
