@@ -150,6 +150,9 @@
     <ClInclude Include="BearAttack.h">
       <Filter>Attack</Filter>
     </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Castle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Motion.cpp">
@@ -241,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="BearAttack.cpp">
       <Filter>Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Castle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

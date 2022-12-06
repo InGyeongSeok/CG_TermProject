@@ -13,6 +13,7 @@
 #include "Castle.h"
 #include "CastleSide.h"
 #include "CastleObj.h"
+#include "Room.h"
 extern vector<Particle*> particle;
 GLvoid drawScene();
 
