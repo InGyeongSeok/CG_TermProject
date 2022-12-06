@@ -16,16 +16,16 @@ void Room::Update()
 
 	glm::mat4 Scale;
 	glm::mat4 Trans;
-	if (AnimalRoom == 0) {
-		Scale = glm::scale(Unit, glm::vec3(20, 30, 20));
+	if (AnimalRoom == 0) {//고양이
+		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
 		Trans = glm::translate(Unit, glm::vec3(-100, 29, 0));
 	}
-	if (AnimalRoom == 1) {
-		Scale = glm::scale(Unit, glm::vec3(20, 30, 20));
+	if (AnimalRoom == 1) {//강아지
+		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
 		Trans = glm::translate(Unit, glm::vec3(100, 29, 0));
 	}
-	if (AnimalRoom == 2) {
-		Scale = glm::scale(Unit, glm::vec3(20, 30, 20));
+	if (AnimalRoom == 2) {//곰
+		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
 		Trans = glm::translate(Unit, glm::vec3(0, 29, -100));
 	}
 	Change = Trans * Scale;

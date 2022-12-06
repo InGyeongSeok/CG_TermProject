@@ -27,10 +27,11 @@ swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,2))
 {
 	random_device rd;
 	default_random_engine dre(rd());
-	uniform_real_distribution<float> urd{ -10, 10 };
-	Position.x = urd(dre);
+	uniform_real_distribution<float> urdX{ 95, 105 };
+	uniform_real_distribution<float> urdZ{ -5, 5 };
+	Position.x = urdX(dre);
 	Position.y = -1.0f;
-	Position.z = urd(dre);
+	Position.z = urdZ(dre);
 	HP = 40;
 	Attack = 20;
 	Index = DAC;

@@ -19,7 +19,7 @@ Hero::Hero(float SX, float SY, float SZ, float X, float Y, float Z) : Unit(1.f)
 	random_device rd;
 	default_random_engine dre(rd());
 	uniform_real_distribution<float> urd{ 0, 255 };
-	color = glm::vec3(urd(dre) / 255., urd(dre) / 255., urd(dre) / 255.);
+	color = glm::vec3(255 / 255., 255 / 255., 255 / 255.);
 	scaleX = SX;
 	scaleY = SY;
 	scaleZ = SZ;

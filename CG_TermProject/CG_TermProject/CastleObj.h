@@ -2,7 +2,6 @@
 #pragma once
 #include "Header.h"
 
-//좌표 XYZ / 스케일 / 색상 
 
 class CastleObj
 {
