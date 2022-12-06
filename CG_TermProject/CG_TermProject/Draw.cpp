@@ -28,8 +28,6 @@ bool isBullet = false;
 vector<Gun*> gun;
 bool isCollideBear(Bear r1, Gun r2);
 
-//CatAttack catattack[6];
-
 vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle, new Particle
 						,new Particle, new Particle,new Particle,new Particle,new Particle,
 						 new Particle,new Particle, new Particle, new Particle, new Particle
@@ -40,8 +38,7 @@ vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle
 
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
-//Bear*bear=new Bear;
-Hero hero(0.3, 0.3, 0.3, 0, 0.5, 20.0);
+Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
 World world{};
 Tree tree[400];
 Grass grass[600];
@@ -97,7 +94,7 @@ GLvoid drawScene()
 
 	glViewport(width / 1.26, height / 1.35, 200,200);
 	projection = glm::mat4(1.0f);
-	projection = glm::ortho(-13.0f, 13.0f, -13.0f, 13.0f, -13.0f, 13.0f);
+	projection = glm::ortho(-12.0f, 12.0f, -12.0f, 12.0f, -12.0f, 12.0f);
 	projectionLocation = glGetUniformLocation(shaderID, "projectionTransform");
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 	TopView();

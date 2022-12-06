@@ -18,7 +18,7 @@ Bear::Bear() :
 	nose(Nose(glm::vec3(36. / 255, 36. / 255, 36. / 255), 3)),
 	eyesL(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), -1, 3)),
 	eyesR(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), 1, 3)),
-	Position(glm::vec3(1.f, -1.f, -1.f)), Direction(0.f),
+	Position(glm::vec3(0.f, -1.f, -100.f)), Direction(0.f),
 	swordL(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), -1, 3)),
 	swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1, 3))
 {

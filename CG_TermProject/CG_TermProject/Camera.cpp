@@ -17,7 +17,7 @@ glm::vec3 cameraPos;
 void camera() {
 
 	//glm::vec3 cameraPos(carAddX + 1, carAddY, carAddZ + 10);      //--- 카메라 위치 (어디서 볼건지)
-	cameraPos = glm::vec3(carAddX +0, carAddY + cameraJump, carAddZ + 20);      //--- 카메라 위치 (어디서 볼건지)
+	cameraPos = glm::vec3(carAddX +0, carAddY + cameraJump, carAddZ + 10);      //--- 카메라 위치 (어디서 볼건지)
 	//cameraPos = glm::vec3(carAddX + 0, carAddY + cameraJump, carAddZ + 0);
 	glm::mat4 VAngleY_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(-VAngleY), glm::vec3(0.0, 1.0, 0.0)); //y?
 	glm::mat4 VAngleX_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(-VAngleX), glm::vec3(1.0, 0.0, 0.0)); // x
@@ -43,7 +43,7 @@ void camera() {
 
 void TopView()
 {
-	glm::vec3 cameraPos = glm::vec3(0.f, 10.f, 0);
+	glm::vec3 cameraPos = glm::vec3(0.f, 1.f, 0);
 	glm::vec3 cameraDirection = glm::vec3(0.f, 0.0f, 0.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::mat4 view = glm::mat4(1.0f);
