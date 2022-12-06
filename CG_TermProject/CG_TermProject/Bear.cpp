@@ -1,5 +1,6 @@
 #include "Bear.h"
 
+bool BearLife = true;
 Bear::Bear() :
 	head(Head(glm::vec3(255. / 255, 167. / 255, 167. / 255), 3)),
 	body(Body(glm::vec3(255. / 255, 167. / 255, 167. / 255), 3)),
@@ -12,7 +13,7 @@ Bear::Bear() :
 	earR(Ear(glm::vec3(255. / 255, 167. / 255, 167. / 255), 1, 3)),
 
 	eyebrowL(Beard(glm::vec3(0. / 255, 0. / 255, 0. / 255), -1, 1, 3)),
-	eyebrowR(Beard(glm::vec3(0. / 255,0. / 255, 0. / 255), 1, 2, 3)),
+	eyebrowR(Beard(glm::vec3(0. / 255, 0. / 255, 0. / 255), 1, 2, 3)),
 
 	nose(Nose(glm::vec3(36. / 255, 36. / 255, 36. / 255), 3)),
 	eyesL(Eyes(glm::vec3(255. / 255, 54. / 255, 54. / 255), -1, 3)),
@@ -22,6 +23,7 @@ Bear::Bear() :
 	swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1, 3))
 {
 	HP = 100;
+	Attack = 30;
 }
 
 
@@ -48,7 +50,6 @@ void Bear::draw()
 
 void Bear::update()
 {
-	//BulletCollideBear();
 	hero.location();
 	float dz = HeroLocationZ - Position.z;
 	float dx = HeroLocationX - Position.x;
@@ -83,9 +84,10 @@ void Bear::update()
 
 	
 	if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {
-
-		//hero.damage();
-
+		bearattack.Activate = true;
+	}
+	else {
+		bearattack.Activate = false;
 	}
 
 	nose.keyIn(Position, Direction);

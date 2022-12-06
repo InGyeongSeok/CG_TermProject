@@ -1,5 +1,7 @@
 #include "Dog.h"
 
+int DAC;
+
 Dog::Dog() : 
 head(Head(glm::vec3(156. / 255, 91. / 255, 54. / 255),2)),
 body(Body(glm::vec3(156. / 255, 91. / 255, 54. / 255),2)),
@@ -30,6 +32,9 @@ swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,2))
 	Position.y = -1.0f;
 	Position.z = urd(dre);
 	HP = 40;
+	Attack = 20;
+	Index = DAC;
+	++DAC;
 }
 
 
@@ -89,9 +94,10 @@ void Dog::update()
 	}
 
 	if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {
-
-		//hero.damage();
-
+		dogattack[Index].Activate = true;
+	}
+	else {
+		dogattack[Index].Activate = false;
 	}
 
 

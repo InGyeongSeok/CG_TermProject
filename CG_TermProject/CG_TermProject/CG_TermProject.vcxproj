@@ -22,6 +22,7 @@
     <ClInclude Include="Animals.h" />
     <ClInclude Include="Arm.h" />
     <ClInclude Include="Bear.h" />
+    <ClInclude Include="BearAttack.h" />
     <ClInclude Include="Beard.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="Camera.h" />
@@ -29,7 +30,9 @@
     <ClInclude Include="CastleObj.h" />
     <ClInclude Include="CastleSide.h" />
     <ClInclude Include="Cat.h" />
+    <ClInclude Include="CatAttack.h" />
     <ClInclude Include="Dog.h" />
+    <ClInclude Include="DogAttack.h" />
     <ClInclude Include="Ear.h" />
     <ClInclude Include="Eyes.h" />
     <ClInclude Include="Grass.h" />
@@ -55,6 +58,7 @@
     <ClCompile Include="Animals.cpp" />
     <ClCompile Include="Arm.cpp" />
     <ClCompile Include="Bear.cpp" />
+    <ClCompile Include="BearAttack.cpp" />
     <ClCompile Include="Beard.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -62,7 +66,9 @@
     <ClCompile Include="CastleObj.cpp" />
     <ClCompile Include="CastleSide.cpp" />
     <ClCompile Include="Cat.cpp" />
+    <ClCompile Include="CatAttack.cpp" />
     <ClCompile Include="Dog.cpp" />
+    <ClCompile Include="DogAttack.cpp" />
     <ClCompile Include="Ear.cpp" />
     <ClCompile Include="Eyes.cpp" />
     <ClCompile Include="Grass.cpp" />

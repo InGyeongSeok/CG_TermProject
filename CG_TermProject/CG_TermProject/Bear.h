@@ -37,6 +37,8 @@ class Bear
 	glm::vec3 Position;
 	float Direction;
 	int HP;
+	int Attack;
+
 
 public:
 	Bear();

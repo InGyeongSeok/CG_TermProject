@@ -4,8 +4,12 @@ void draw();
 float circleSize = 2;
 void AnimalCollideCat();
 void AnimalCollideDog();
+struct CatAttack;
+
 void BulletCollideCat();
 void BulletCollideDog();
+
+
 bool isCollideDog(Dog r1, Gun r2);
 bool isCollide2D(Cat r1, Gun r2);
 bool isBearCollide = true;
@@ -24,6 +28,7 @@ bool isBullet = false;
 vector<Gun*> gun;
 bool isCollideBear(Bear r1, Gun r2);
 
+//CatAttack catattack[6];
 
 vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle, new Particle
 						,new Particle, new Particle,new Particle,new Particle,new Particle,
@@ -35,17 +40,11 @@ vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle
 
 vector<Cat*> cats{ new Cat, new Cat, new Cat, new Cat, new Cat, new Cat };
 vector<Dog*> dogs{ new Dog, new Dog, new Dog, new Dog, new Dog, new Dog };
-//Bear*bear=new Bear;
-Hero hero(0.3, 0.3, 0.3, 0, 0.5, 20.0);
+Bear bear;
+Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
 World world{ 0,49,0 };
 Tree tree[400];
 Grass grass[600];
-Castle castle{};
-CastleSide CS1{};
-CastleObj test{};
-
-
-
 float CatEndPosX;
 float CatEndPosZ;
 
@@ -57,7 +56,7 @@ default_random_engine dre(rd());
 uniform_real_distribution<float> urd{ 0, 255 };
 
 
-GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
+GLvoid drawScene() 
 {
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
@@ -71,17 +70,16 @@ GLvoid drawScene() //--- �ݹ� �Լ�: �׸��� �ݹ� �Լ�
 	glEnable(GL_DEPTH_TEST);  
 	glEnable(GL_DITHER);       
 	//glEnable(GL_CULL_FACE);  
-	glEnable(GL_LINE_SMOOTH);   // ��Ƽ �ٸ����
-	glEnable(GL_POLYGON_SMOOTH);// ��Ƽ �ٸ����
-	glShadeModel(GL_SMOOTH);    // �ε巯�� ������ �����մϴ�.
+	glEnable(GL_LINE_SMOOTH);   
+	glEnable(GL_POLYGON_SMOOTH);
+	glShadeModel(GL_SMOOTH);    
 	//glEnable(GL_CULL_FACE);
 	//glFrontFace(GL_CW);
 
-	glm::mat4 projection; // ��������
+	glm::mat4 projection; 
 
 	projection = glm::perspective(glm::radians(90.0f), (float)width / height, 0.1f, 200.0f);
-	//												ȭ�����, ������ǥ(ī�޶� �ٷ� �� ����), ����
-	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- ���� ��ȯ �� ����
+	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); 
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 	glViewport(0, 0, width, height);
 	camera();
@@ -120,7 +118,7 @@ void draw() {
 
 
 	world.Draw();
-	
+
 
 	glEnable(GL_BLEND); //투명 객체 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -132,12 +130,7 @@ void draw() {
 
 	}
 	
-	
 
-	/*castle.Draw();
-	castle.Update();
-	CS1.Draw();
-	CS1.Update();*/
 
 	for (int i = 0; i < 600; ++i) {
 		grass[i].Draw();
@@ -146,11 +139,6 @@ void draw() {
 
 	glDisable(GL_BLEND);
 	
-
-
-
-	test.Draw();
-	test.Update();
 
 	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
 	glUniform1i(selectColorLocation, 0);
@@ -163,7 +151,9 @@ void draw() {
 		dogs[i]->draw();
 	}
 
-	//bear->draw();
+	if (BearLife) {
+		bear.draw();
+	}
 	hero.Update();
 	hero.Draw();
 
@@ -240,18 +230,7 @@ void AnimalCollideDog() {
 			}
 		}
 	}
-	//for (int i = 0; i < dogs.size(); ++i) {
-	//	for (int j = i; j < dogs.size(); ++j) {
-	//		float distanceX = abs(dogs[i]->Position.x - dogs[j]->Position.x);
-	//		float distanceZ = abs(dogs[i]->Position.z - dogs[j]->Position.z);
-	//		if (distanceX <= 0.2f) {
-	//			dogs[i]->Position.x += 0.2f;
-	//		}
-	//		if (distanceZ <= 0.2f) {
-	//			dogs[i]->Position.z += 0.2f;
-	//		}
-	//	}
-	//}
+
 }
 
 
@@ -313,30 +292,27 @@ void BulletCollideDog() {
 }
 
 void BulletCollideBear() {
-	//if (isBearCollide) {
 
-	//	for (int i = 0; i < gun.size(); ++i) {
-	//		if (isCollideBear(*bear, *gun[i])) {
-	//			bear->HP -= gun[i]->Damage;
-	//			delete gun[i];
-	//			if (0 == bear->HP) {
-	//				for (int i = 0; i < 40; ++i) {
-	//					particle[i]->dirY = -0.2;
-	//				}
-	//				CatEndPosX = bear->Position.x;
-	//				CatEndPosZ = bear->Position.z;
-	//				isParticle = true;
-	//				delete bear;
-	//			}
-	//			gun.erase(gun.begin() + i);
-	//			--i;
-	//			isBearCollide = false;
-	//		}
-
-	//	}
-	//}
-
+		for (int i = 0; i < gun.size(); ++i) {
+			if (isCollideBear(bear, *gun[i])) {
+				bear.HP -= gun[i]->Damage;
+				cout << bear.HP << endl;
+				delete gun[i];
+				if (0 == bear.HP) {
+					for (int i = 0; i < 40; ++i) {
+						particle[i]->dirY = -0.2;
+					}
+					CatEndPosX = bear.Position.x;
+					CatEndPosZ = bear.Position.z;
+					BearLife = false;
+					isParticle = true;
+				}
+				gun.erase(gun.begin() + i);
+				--i;
+			}
+		}
 }
+
 bool isCollide2D(Cat r1, Gun r2)
 {
 	if (r1.getRight() < r2.getLeft() || r1.getLeft() > r2.getRight()) return false;
@@ -359,3 +335,6 @@ bool isCollideBear(Bear r1, Gun r2)
 	if (r1.getFront() < r2.getBehind() || r1.getBehind() > r2.getFront()) return false;
 	return true;
 }
+
+
+

@@ -35,6 +35,8 @@ class Dog
 	Sword swordL;
 
 	int HP;
+	int Attack;
+	int Index;
 	glm::vec3 Position;
 	float Direction;
 

@@ -42,8 +42,10 @@ void timer(int value) {
 	for (int i = 0; i < dogs.size(); ++i) {
 		dogs[i]->update();
 	}
-	
-	//bear.update();
+
+	if (BearLife) {
+		bear.update();
+	}
 	world.Update();
 	glutPostRedisplay();
 	glutTimerFunc(14, timer, 1);
