@@ -5,13 +5,11 @@
 class Tunnel
 {
 	glm::mat4 Change;
-	float Xpos;
-	float Zpos;
-
+	int Open;
 
 public:
 
-	Tunnel(double xPos, double zPos);
+	Tunnel(int open);
 
 	~Tunnel();
 	void Update();

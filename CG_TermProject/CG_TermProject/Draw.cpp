@@ -43,11 +43,13 @@ World world{};
 Tree tree[400];
 Grass grass[600];
 
-CastleObj test{};
+CastleObj castle{};
 Room catRoom{ 0 };
 Room dogRoom{ 1 };
 Room bearRoom{ 2 };
 Bear bear;
+Tunnel Catopen{ 1 };
+Tunnel Dogopen{ 2 };
 
 float CatEndPosX;
 float CatEndPosZ;
@@ -150,12 +152,19 @@ void draw() {
 	dogRoom.Update();
 	bearRoom.Draw();
 	bearRoom.Update();
+	
 
-	test.Draw();
-	test.Update();
+
+	castle.Draw();
+	castle.Update();
 
 	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
 	glUniform1i(selectColorLocation, 0);
+
+	Catopen.Draw();
+	Catopen.Update();
+	Dogopen.Draw();
+	Dogopen.Update();
 
 	for (int i = 0; i < cats.size(); ++i) {
 		cats[i]->draw();
