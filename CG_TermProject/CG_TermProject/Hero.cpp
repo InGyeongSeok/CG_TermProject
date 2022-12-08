@@ -89,22 +89,61 @@ void Hero::Update()
 			catlive = true;
 			bearlive = false;
 			doglive = false;
+
+			CarX = -100;
+			CarY = 1.0;
+			CarZ = 0.0;
+
+			CarDX = -100;
+			CarDY = 0.0;
+			CarDZ = 0.0;
+			ortho = 5.0;
+
+			lightPosX = -100;
+			lightPosY = 15.0;
+			lightPosZ = 0;
 		}
-		if (PosZ < -7 && catdead==6) {
+		if (PosZ < -7 && catdead == 6) {
 			PosX = 100;
 			PosZ = 0;
 			doglive = true;
 			catlive = false;
 			bearlive = false;
+			CarX = 100;
+			CarY = 1.0;
+			CarZ = 0.0;
+
+			CarDX = 100;
+			CarDY = 0.0;
+			CarDZ = 0.0;
+			ortho = 5.0;
+
+			lightPosX = 100;
+			lightPosY = 15.0;
+			lightPosZ = 0;
+
 			catdead++;
 		}
 		if (PosZ < -7 && dogdead == 6) {
 			PosX = 0;
 			PosZ = -100;
 			dogdead++;
+
 			doglive = false;
 			bearlive = true;
 			catlive = false;
+			CarX = 0.0;
+			CarY = 1.0;
+			CarZ = -100.0;
+
+			CarDX = 0.0;
+			CarDY = 0.0;
+			CarDZ = -100.0;
+			ortho = 5.0;
+
+			lightPosX = 0;
+			lightPosY = 15.0;
+			lightPosZ = -100;
 		}
 		
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));

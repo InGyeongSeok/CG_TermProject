@@ -112,3 +112,13 @@ extern float openingCat;
 extern float openingDog;
 extern int catdead;
 extern int dogdead;
+
+
+
+extern float CarX ;
+extern float CarY ;
+extern float CarZ ;
+extern float CarDX;
+extern float CarDY;
+extern float CarDZ;
+extern float ortho;

@@ -27,8 +27,8 @@ swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,2))
 {
 	random_device rd;
 	default_random_engine dre(rd());
-	uniform_real_distribution<float> urdX{ 95, 105 };
-	uniform_real_distribution<float> urdZ{ -5, 5 };
+	uniform_real_distribution<float> urdX{ 97, 103 };
+	uniform_real_distribution<float> urdZ{ -3, 3 };
 	Position.x = urdX(dre);
 	Position.y = -1.0f;
 	Position.z = urdZ(dre);
@@ -69,29 +69,32 @@ void Dog::update()
 	Direction = atan2(dx, dz);
 
 	closelineX = HeroLocationX - Position.x;
-	if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
-
-		if (closelineX >= 0.5) {
-			closelineX -= 0.01;
-			Position.x += 0.01;
-		}
-		if (closelineX < -0.5) {
-			closelineX += 0.01;
-			Position.x -= 0.01;
-		}
-	}
-
 	closelineZ = HeroLocationZ - Position.z;
-	if (!(closelineZ <= 0.5 && closelineZ >= -0.5)) {
-		if (closelineZ > 0.5) {
-			closelineZ -= 0.01;
-			Position.z += 0.01;
-		}
-		if (closelineZ < -0.5) {
-			closelineZ += 0.01;
-			Position.z -= 0.01;
+	if (doglive) {
+
+		if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
+
+			if (closelineX >= 0.5) {
+				closelineX -= 0.01;
+				Position.x += 0.01;
+			}
+			if (closelineX < -0.5) {
+				closelineX += 0.01;
+				Position.x -= 0.01;
+			}
 		}
 
+		if (!(closelineZ <= 0.5 && closelineZ >= -0.5)) {
+			if (closelineZ > 0.5) {
+				closelineZ -= 0.01;
+				Position.z += 0.01;
+			}
+			if (closelineZ < -0.5) {
+				closelineZ += 0.01;
+				Position.z -= 0.01;
+			}
+
+		}
 	}
 
 	if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {

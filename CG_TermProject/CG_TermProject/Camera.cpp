@@ -15,6 +15,15 @@ float cameraJump{};
 glm::vec3 TermGunDir;
 glm::vec3 cameraPos;
 
+
+float CarX = 0.0;
+float CarY = 1.0;
+float CarZ = 0.0;
+
+float CarDX = 0.0;
+float CarDY = 0.0;
+float CarDZ = 0.0;
+
 void camera() {
 
 	//glm::vec3 cameraPos(carAddX + 1, carAddY, carAddZ + 10);      //--- 카메라 위치 (어디서 볼건지)
@@ -26,13 +35,13 @@ void camera() {
 			third = false;
 		}
 		if (-5 > carAddX)
-			carAddX += 0.5;
+			carAddX += 1.0;
 		if (5 < carAddX)
-			carAddX -= 0.5;
+			carAddX -= 1.0;
 		if (-105 > carAddZ)
-			carAddZ += 0.5;
+			carAddZ += 1.0;
 		if (-95 < carAddZ)
-			carAddZ -= 0.5;
+			carAddZ -= 1.0;
 		//bearlive = false;
 	}
 	else if (doglive) {
@@ -42,13 +51,13 @@ void camera() {
 			second = false;
 		}
 		if (95 > carAddX)
-			carAddX += 0.5;
+			carAddX += 1.0;
 		if (105 < carAddX)
-			carAddX -= 0.5;
+			carAddX -= 1.0;
 		if (-5 > carAddZ)
-			carAddZ += 0.5;
+			carAddZ += 1.0;
 		if (+5 < carAddZ)
-			carAddZ -= 0.5;
+			carAddZ -= 1.0;
 		//doglive = false;
 	}
 	else if (catlive) {
@@ -58,13 +67,13 @@ void camera() {
 			first = false;
 		}
 		if (-105 > carAddX)
-			carAddX += 0.5;
+			carAddX += 1.0;
 		if (-95 < carAddX)
-			carAddX -= 0.5;
+			carAddX -= 1.0;
 		if (-5 > carAddZ)
-			carAddZ += 0.5;
+			carAddZ += 1.0;
 		if (+5 < carAddZ)
-			carAddZ -= 0.5;
+			carAddZ -= 1.0;
 		//catlive = false;
 	}
 	
@@ -93,8 +102,8 @@ void camera() {
 
 void TopView()
 {
-	glm::vec3 cameraPos = glm::vec3(0.f, 1.f, 0);
-	glm::vec3 cameraDirection = glm::vec3(0.f, 0.0f, 0.0f);
+	glm::vec3 cameraPos = glm::vec3(CarX, CarY, CarZ);
+	glm::vec3 cameraDirection = glm::vec3(CarDX, CarDY, CarDZ);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::mat4 view = glm::mat4(1.0f);
 

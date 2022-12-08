@@ -25,12 +25,12 @@ swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,1))
 {
 	random_device rd;
 	default_random_engine dre(rd());
-	uniform_real_distribution<float> urdX{ -104,-94  };
-	uniform_real_distribution<float> urdZ{ -4, 4 };
+	uniform_real_distribution<float> urdX{ -104,-97  };
+	uniform_real_distribution<float> urdZ{ -3, 3 };
 	Position.x = urdX(dre);
 	Position.y = -1.0f;
 	Position.z = urdZ(dre);
-	HP = 10;
+	HP = 20;
 	Attack = 10;
 	CatCrushHero = false;
 	Index = add;
@@ -84,27 +84,32 @@ void Cat::update()
 		Direction = atan2(dx, dz);
 
 		closelineX = HeroLocationX - Position.x;
-		if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
-
-			if (closelineX >= 0.5) {
-				closelineX -= 0.01;
-				Position.x += 0.01;
-			}
-			if (closelineX < -0.5) {
-				closelineX += 0.01;
-				Position.x -= 0.01;
-			}
-		}
-
 		closelineZ = HeroLocationZ - Position.z;
-		if (!(closelineZ <= 0.5 && closelineZ >= -0.5)) {
-			if (closelineZ > 0.5) {
-				closelineZ -= 0.01;
-				Position.z += 0.01;
+
+		if (catlive) {
+
+			if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
+
+				if (closelineX >= 0.5) {
+					closelineX -= 0.01;
+					Position.x += 0.01;
+				}
+				if (closelineX < -0.5) {
+					closelineX += 0.01;
+					Position.x -= 0.01;
+				}
 			}
-			if (closelineZ < -0.5) {
-				closelineZ += 0.01;
-				Position.z -= 0.01;
+
+			if (!(closelineZ <= 0.5 && closelineZ >= -0.5)) {
+				if (closelineZ > 0.5) {
+					closelineZ -= 0.01;
+					Position.z += 0.01;
+				}
+				if (closelineZ < -0.5) {
+					closelineZ += 0.01;
+					Position.z -= 0.01;
+				}
+
 			}
 
 		}

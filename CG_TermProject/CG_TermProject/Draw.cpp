@@ -38,6 +38,8 @@ float lightColorG = 1.0f;
 float lightColorB = 1.0f;
 bool isParticle = false;
 bool isBullet = false;
+
+float ortho = 12.0;		
 vector<Gun*> gun;
 bool isCollideBear(Bear r1, Gun r2);
 
@@ -108,20 +110,35 @@ GLvoid drawScene()
 	glViewport(0, 0, width, height);
 	camera();
 	draw();
-	
-	
+	for (int i = 0; i < hero.InfoHP(); ++i) {
+		glm::mat4 Change;
+		Change = Unit;
+		GLuint projectionTransform = glGetUniformLocation(shaderID, "projectionTransform");
+		glUniformMatrix4fv(projectionTransform, 1, GL_FALSE, glm::value_ptr(Change));
+		Change = Unit;
+		GLuint viewTransform = glGetUniformLocation(shaderID, "viewTransform");
+		glUniformMatrix4fv(viewTransform, 1, GL_FALSE, glm::value_ptr(Change));
+
+		glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.3));
+		glm::mat4 Trans = glm::translate(Unit, glm::vec3(-0.95, 0.95, 0));
+		Change = Trans * Scale;
+		Change = glm::translate(Unit, glm::vec3(i * 0.08f, 0, 0)) * Change;
+		GLuint modelTransform = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(modelTransform, 1, GL_FALSE, glm::value_ptr(Change));
+
+		glDrawArrays(GL_POLYGON, 0, 4);
+	}
 
 	glViewport(width / 1.26, height / 1.35, 200,200);
 	projection = glm::mat4(1.0f);
-	projection = glm::ortho(-12.0f, 12.0f, -12.0f, 12.0f, -12.0f, 12.0f);
+	projection = glm::ortho(-ortho, ortho, -ortho, ortho, -ortho, ortho);
 	projectionLocation = glGetUniformLocation(shaderID, "projectionTransform");
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, &projection[0][0]);
 	TopView();
 
 	draw();
-	
 
-	glutSwapBuffers();
+	glutSwapBuffers();	
 };
 
 
@@ -239,24 +256,7 @@ void draw() {
 	aColor = glGetUniformLocation(shaderID, "objectColor");
 	glUniform4f(aColor, 1.0, 0.0, 0.,1);
 
-	for (int i = 0; i < hero.InfoHP(); ++i) {
-		glm::mat4 Change;
-		Change = Unit;
-		GLuint projectionTransform = glGetUniformLocation(shaderID, "projectionTransform");
-		glUniformMatrix4fv(projectionTransform, 1, GL_FALSE, glm::value_ptr(Change));
-		Change = Unit;
-		GLuint viewTransform = glGetUniformLocation(shaderID, "viewTransform");
-		glUniformMatrix4fv(viewTransform, 1, GL_FALSE, glm::value_ptr(Change));
-
-		glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.3));
-		glm::mat4 Trans = glm::translate(Unit, glm::vec3(-0.95, 0.95, 0));
-		Change = Trans * Scale;
-		Change = glm::translate(Unit, glm::vec3(i * 0.08f, 0, 0)) * Change;
-		GLuint modelTransform = glGetUniformLocation(shaderID, "modelTransform");
-		glUniformMatrix4fv(modelTransform, 1, GL_FALSE, glm::value_ptr(Change));
-
-		glDrawArrays(GL_POLYGON, 0, 4);
-	}      
+	
 
 }
 
@@ -486,13 +486,13 @@ void HeroVSBear()
 	if (HeroVSRoom(hero, bearRoom)) {
 
 		if (hero.PosX < bearRoom.PositionX - 5)
-			hero.PosX += 0.5;
+			hero.PosX += 1.0;
 		if (hero.PosX > bearRoom.PositionX + 5)
-			hero.PosX -= 0.5;
+			hero.PosX -= 1.0;
 		if (hero.PosZ < bearRoom.PositionZ - 5)
-			hero.PosZ += 0.5;
+			hero.PosZ += 1.0;
 		if (hero.PosZ > bearRoom.PositionZ + 5)
-			hero.PosZ -= 0.5;
+			hero.PosZ -= 1.0;
 	}
 }
 
@@ -501,13 +501,13 @@ void HeroVSCat()
 	if (HeroVSRoom(hero, catRoom)) {
 
 		if (hero.PosX < catRoom.PositionX - 5)
-			hero.PosX += 0.5;
+			hero.PosX += 1.0;
 		if (hero.PosX > catRoom.PositionX + 5)
-			hero.PosX -= 0.5;
+			hero.PosX -= 1.0;
 		if (hero.PosZ < catRoom.PositionZ - 5)
-			hero.PosZ += 0.5;
+			hero.PosZ += 1.0;
 		if (hero.PosZ > catRoom.PositionZ + 5)
-			hero.PosZ -= 0.5;
+			hero.PosZ -= 1.0;
 	}
 }
 
@@ -516,12 +516,12 @@ void HeroVSDog()
 	if (HeroVSRoom(hero, dogRoom)) {
 
 		if (hero.PosX < dogRoom.PositionX - 5)
-			hero.PosX += 0.5;
+			hero.PosX += 1.0;
 		if (hero.PosX > dogRoom.PositionX + 5)
-			hero.PosX -= 0.5;
+			hero.PosX -= 1.0;
 		if (hero.PosZ < dogRoom.PositionZ - 5)
-			hero.PosZ += 0.5;
+			hero.PosZ += 1.0;
 		if (hero.PosZ > dogRoom.PositionZ + 5)
-			hero.PosZ -= 0.5;
+			hero.PosZ -= 1.0;
 	}
 }
