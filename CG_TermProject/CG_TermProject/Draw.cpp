@@ -72,9 +72,8 @@ DoorR Dogright{ 2 };
 Tunnel Catopen{ 1 };
 DoorL Catleft{ 1 };
 DoorR Catright{ 1 };
-Gameover catHdead{ -100,0 };
-Gameover dogHdead{ 100,0 };
-Gameover bearHdead{0,-100 };
+
+
 float CatEndPosX;
 float CatEndPosZ;
 
@@ -160,10 +159,7 @@ void draw() {
 		lightColorR = 0.5f;
 		lightColorG = 0.5f;
 		lightColorB = 0.5f;
-		for (int i = 0; i < 6; ++i) {
-			delete dogs[i];
-			delete cats[i];
-		}
+		
 		
 	}
 	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos 
@@ -191,14 +187,7 @@ void draw() {
 
 	}
 	
-	if (herodead) {
-		catHdead.Draw();
-		dogHdead.Draw();
-		bearHdead.Draw();
-		catHdead.Update();
-		dogHdead.Update();
-		bearHdead.Update();
-	}
+	
 
 
 	for (int i = 0; i < 600; ++i) {
@@ -208,11 +197,18 @@ void draw() {
 
 	glDisable(GL_BLEND);
 	
-	if (catdead == 6)
-		catopen = true;
 
-	if (dogdead == 6)
+	if (catdead == 6) {
+		catopen = true;
+		dogopen = false;
+	}
+		
+
+	if (dogdead == 6) {
+		catopen = false;
 		dogopen = true;
+	}
+	
 
 	catRoom.Draw();
 	catRoom.Update();
@@ -221,29 +217,32 @@ void draw() {
 	bearRoom.Draw();
 	bearRoom.Update();
 	
-
-
 	castle.Draw();
 	castle.Update();
 
-	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
-	glUniform1i(selectColorLocation, 0);
 
-	
-
-	Catopen.Draw();
-	Catopen.Update();
 	Catleft.Draw();
 	Catleft.Update();
 	Catright.Draw();
 	Catright.Update();
 
-	Dogopen.Draw();
-	Dogopen.Update();
+
 	Dogleft.Draw();
 	Dogleft.Update();
 	Dogright.Draw();
 	Dogright.Update();
+
+
+
+
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
+	glUniform1i(selectColorLocation, 0);
+
+	Dogopen.Draw();
+	Dogopen.Update();
+	Catopen.Draw();
+	Catopen.Update();
+	
 
 	crown.Draw();
 	crown.Update();
@@ -391,7 +390,6 @@ void BulletCollideBear() {
 		for (int i = 0; i < gun.size(); ++i) {
 			if (isCollideBear(bear, *gun[i])) {
 				bear.HP -= gun[i]->Damage;
-				cout << bear.HP << endl;
 				delete gun[i];
 				if (0 == bear.HP) {
 					for (int i = 0; i < 40; ++i) {

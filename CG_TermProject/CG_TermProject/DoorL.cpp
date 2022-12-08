@@ -32,14 +32,18 @@ void DoorL::Draw()
 	if (dogopen || catopen) {
 
 		glBindVertexArray(VAO);
-		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-		glUniform4f(Color, 1, 0, 0., 1.0);
+		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+		glUniform1i(selectColorLocation, 1);
+		GLuint model = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
+		glBindTexture(GL_TEXTURE_2D, DoorTexture[0]);
+		glDrawArrays(GL_TRIANGLES, 30, 6);
 
-		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환
-
-		glDrawArrays(GL_TRIANGLES, 0, vertex1.size() * 3);
 	}
 }
 
 
+//for (int i = 0; i < 6; ++i) {
+//	glBindTexture(GL_TEXTURE_2D, Texture[i]);
+//	glDrawArrays(GL_TRIANGLES, i * 6, 6);
+//}

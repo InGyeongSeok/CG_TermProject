@@ -31,7 +31,6 @@
     <ClInclude Include="Crown.h" />
     <ClInclude Include="DoorL.h" />
     <ClInclude Include="DoorR.h" />
-    <ClInclude Include="Gameover.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="CatAttack.h" />
     <ClInclude Include="Dog.h" />
@@ -71,7 +70,6 @@
     <ClCompile Include="Crown.cpp" />
     <ClCompile Include="DoorL.cpp" />
     <ClCompile Include="DoorR.cpp" />
-    <ClCompile Include="Gameover.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="CatAttack.cpp" />
     <ClCompile Include="Dog.cpp" />

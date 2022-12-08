@@ -16,6 +16,9 @@ Gun::~Gun()
 
 void Gun::Update()
 {
+	if (herodead) {
+		Damage = 0;
+	}
 	BulletCollideBear();
 	BulletCollideDog();
 	BulletCollideCat();

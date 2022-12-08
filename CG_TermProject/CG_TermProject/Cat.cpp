@@ -86,7 +86,7 @@ void Cat::update()
 		closelineX = HeroLocationX - Position.x;
 		closelineZ = HeroLocationZ - Position.z;
 
-		if (catlive) {
+		if (catlive && !herodead) {
 
 			if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
 

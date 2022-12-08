@@ -59,7 +59,7 @@ void Bear::update()
 	closelineX = HeroLocationX - Position.x;
 	closelineZ = HeroLocationZ - Position.z;
 
-	if (bearlive) {
+	if (bearlive && !herodead) {
 		if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
 
 			if (closelineX >= 0.5) {

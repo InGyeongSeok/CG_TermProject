@@ -74,9 +74,6 @@ int Hero::InfoHP() {
 
 void Hero::Update()
 { 
-	
-	cout << "PosX -" << PosX << endl;
-	cout << "PosZ -" << PosZ << endl;
 
 	damage();
 	glm::mat4 Scale = glm::scale(Unit, glm::vec3(scaleX, scaleY, scaleZ));

@@ -63,7 +63,8 @@ GLuint TreeTexture[3];
 GLuint GrassTexture[3];
 GLuint Texture[6];
 GLuint GameoverTexture;
-GLuint RoomTexture[3];
+GLuint RoomTexture[6];
+GLuint DoorTexture[2];
 GLuint CastleTexture;
 GLuint CastleSideTexTure;
 GLuint vertexShader; //--- 버텍스 세이더 객체
@@ -482,8 +483,8 @@ void InitTexture()
 
 
 
-	glGenTextures(3, RoomTexture);
-	for (int i = 0; i < 3; ++i) {
+	glGenTextures(6, RoomTexture);
+	for (int i = 0; i < 6; ++i) {
 		glBindTexture(GL_TEXTURE_2D, RoomTexture[i]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -491,7 +492,7 @@ void InitTexture()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		int ImageWidth, ImageHeight, numberOfChannel;
-		stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+		//stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
 		string filename;
 
 		switch (i) {
@@ -503,6 +504,15 @@ void InitTexture()
 			break;
 		case 2:
 			filename = "Bearroom.png"; //핑크 
+			break;
+		case 3:
+			filename = "Catroomdead.png"; //회색 
+			break;
+		case 4:
+			filename = "Dogroomdead.png"; //갈색 
+			break;
+		case 5:
+			filename = "Bearroomdead.png"; //핑크 
 			break;
 		}
 		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
@@ -520,10 +530,37 @@ void InitTexture()
 
 	int ImageWidth, ImageHeight, numberOfChannel;
 	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-	string filename = "Bearroom.png";
+	string filename = "종료.PNG";
 	GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	stbi_image_free(data);
+
+	
+	glGenTextures(2, DoorTexture);
+	for (int i = 0; i < 2; ++i) {
+		glBindTexture(GL_TEXTURE_2D, DoorTexture[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		int ImageWidth, ImageHeight, numberOfChannel;
+		stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+		string filename;
+
+		switch (i) {
+		case 0:
+			filename = "제발1.png";
+			break;
+		case 1:
+			filename = "제발2.png";
+			break;
+
+		}
+		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		stbi_image_free(data);
+	}
 
 }
 

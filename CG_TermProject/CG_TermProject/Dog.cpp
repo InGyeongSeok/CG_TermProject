@@ -70,7 +70,7 @@ void Dog::update()
 
 	closelineX = HeroLocationX - Position.x;
 	closelineZ = HeroLocationZ - Position.z;
-	if (doglive) {
+	if (doglive && !herodead) {
 
 		if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
 

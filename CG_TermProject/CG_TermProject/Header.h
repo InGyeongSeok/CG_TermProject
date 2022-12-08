@@ -15,9 +15,9 @@
 #include <gl/glew.h>                     
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
-#include <glm/glm/glm.hpp>
-#include <glm/glm/ext.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
+#include <gl/glm/glm.hpp>
+#include <gl/glm/ext.hpp>
+#include <gl/glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 
@@ -36,7 +36,8 @@ extern GLuint crownVAO;
 extern GLuint TreeTexture[3];
 extern GLuint GrassTexture[3];
 extern GLuint GameoverTexture;
-extern GLuint RoomTexture[3];
+extern GLuint RoomTexture[6];
+extern GLuint DoorTexture[2];
 extern GLuint HeroHPVAO;
 extern float Rot;
 extern vector<glm::vec3> vertex1; //����ü

@@ -10,17 +10,17 @@ Room::Room(int room)
 	AnimalRoom = room;
 	if (AnimalRoom == 0) {
 		PositionX = -100;
-		PositionY = 29;
+		PositionY = 14;
 		PositionZ = 0;
 	}
 	if (AnimalRoom == 1) {
 		PositionX = 100;
-		PositionY = 29;
+		PositionY = 14;
 		PositionZ = 0;
 	}
 	if (AnimalRoom == 2) {
 		PositionX = 0;
-		PositionY = 28.5;
+		PositionY = 14;
 		PositionZ = -100;
 	}
 }
@@ -32,15 +32,15 @@ void Room::Update()
 	glm::mat4 Scale;
 	glm::mat4 Trans;
 	if (AnimalRoom == 0) {//고양이
-		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
+		Scale = glm::scale(Unit, glm::vec3(5, 15, 5));
 		Trans = glm::translate(Unit, glm::vec3(PositionX, PositionY, PositionZ));
 	}
 	if (AnimalRoom == 1) {//강아지
-		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
+		Scale = glm::scale(Unit, glm::vec3(5, 15, 5));
 		Trans = glm::translate(Unit, glm::vec3(PositionX, PositionY, PositionZ));
 	}
 	if (AnimalRoom == 2) {//곰
-		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
+		Scale = glm::scale(Unit, glm::vec3(5, 15, 5));
 		Trans = glm::translate(Unit, glm::vec3(PositionX, PositionY, PositionZ));
 	}                                                        
 	Change = Trans * Scale;
@@ -56,11 +56,28 @@ void Room::Draw()
 	GLuint model = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
 
-	for (int i = 0; i < 6; ++i) {
-		glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom]);
-		glDrawArrays(GL_TRIANGLES, i * 6, 6);
-	}
 	
+	if (herodead) {
+		
+		for (int i = 0; i < 6; ++i) {
+			if (i == 4) {
+				glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom]);
+				glDrawArrays(GL_TRIANGLES, i * 6, 6);
+			}
+			else {
+				glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom + 3]);
+				glDrawArrays(GL_TRIANGLES, i * 6, 6);
+			}
+		}
+		
+	}
+	else {
+		for (int i = 0; i < 6; ++i) {
+			glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom]);
+			glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		}
+	}
+
 
 }
 
