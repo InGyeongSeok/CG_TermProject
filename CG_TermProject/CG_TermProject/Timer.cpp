@@ -40,13 +40,14 @@ void timer(int value) {
 		bear.update();
 	}
 
-	if (catopen && !(openingCat >= 1)) {
+	if (catdead ==6 && !(openingCat >= 1)) {
 		openingCat += 0.01;
 	}
 
-	if (dogopen && !(openingDog >= 1)) {
+	if (dogdead == 6 && !(openingDog >= 1)) {
 		openingDog += 0.01;
 	}
+
 	world.Update();
 	glutPostRedisplay();
 	glutTimerFunc(14, timer, 1);

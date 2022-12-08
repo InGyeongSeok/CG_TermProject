@@ -168,6 +168,12 @@
     <ClInclude Include="DoorR.h">
       <Filter>Door</Filter>
     </ClInclude>
+    <ClInclude Include="Crown.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameover.h">
+      <Filter>Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Motion.cpp">
@@ -274,6 +280,12 @@
     </ClCompile>
     <ClCompile Include="DoorR.cpp">
       <Filter>Door</Filter>
+    </ClCompile>
+    <ClCompile Include="Crown.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameover.cpp">
+      <Filter>Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

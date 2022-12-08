@@ -6,7 +6,7 @@ float MovZ;
 bool catlive = false;
 bool doglive = false;
 bool bearlive = false;
-
+bool herodead = false;
 float HeroLocationX{};
 float HeroLocationZ{};
 CatAttack catattack[6];
@@ -58,10 +58,11 @@ void Hero::damage()
 	lightColorB -= bearattack.AttackCount * 0.3f / 24.;
 
 
-	if (lightColorG < 0.0) {
-		lightColorB = 0;
-		lightColorG = 0;
-		lightColorR = 0;
+	if (lightColorG < 0.1) {
+		herodead = true;
+		lightColorB = 0.1;
+		lightColorG = 0.1;
+		lightColorR = 0.1;
 	}
 }
 

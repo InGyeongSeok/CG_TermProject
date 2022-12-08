@@ -1,7 +1,7 @@
 #include "Tunnel.h"
 
-bool catopen = false;
-bool dogopen = false;
+bool catopen = true;
+bool dogopen = true;
 
 Tunnel::~Tunnel()
 {
