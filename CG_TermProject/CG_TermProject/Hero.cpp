@@ -87,23 +87,36 @@ void Hero::Update()
 			PosX = -100;
 			PosZ = 0;
 			catlive = true;
+			bearlive = false;
+			doglive = false;
 		}
 		if (PosZ < -7 && catdead==6) {
 			PosX = 100;
 			PosZ = 0;
 			doglive = true;
+			catlive = false;
+			bearlive = false;
 			catdead++;
 		}
 		if (PosZ < -7 && dogdead == 6) {
 			PosX = 0;
 			PosZ = -100;
 			dogdead++;
+			doglive = false;
 			bearlive = true;
+			catlive = false;
 		}
 		
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
 	Change = Trans * Scale * AddTrans;
-	
+	if(catlive && catdead <6)
+		HeroVSCat();
+		
+	if(doglive && dogdead < 6)
+		HeroVSDog();
+		
+	if(bearlive)
+		HeroVSBear();
 }
 
 void Hero::Jump()
@@ -176,4 +189,24 @@ void Hero::isD()
 {
 	PosZ  += 0.075 * glm::sin(glm::radians(VAngleY));
 	PosX  += 0.075 * glm::cos(glm::radians(VAngleY));
+}
+
+float Hero::getLeft()
+{
+	return PosX - 0.12f;
+}
+
+float Hero::getRight()
+{
+	return PosX + 0.12f;
+}
+
+float Hero::getBehind()
+{
+	return PosZ - 0.12f;
+}
+
+float Hero::getFront()
+{
+	return PosZ + 0.12f;
 }

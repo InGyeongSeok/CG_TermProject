@@ -25,6 +25,9 @@ public:
 	friend void Catroomtest();
 	friend void Dogroomtest();
 	friend void Bearroomtest();
+	friend void HeroVSDog();
+	friend void HeroVSBear();
+	friend void HeroVSCat();
 };
 
 

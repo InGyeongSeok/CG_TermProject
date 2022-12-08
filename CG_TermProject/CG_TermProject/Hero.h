@@ -36,6 +36,12 @@ public:
 	void Draw();
 	int InfoHP();
 	void location();
-
-
+	float getLeft();
+	float getRight();
+	float getBehind();
+	float getFront();
+	
+	friend void HeroVSDog();
+	friend void HeroVSBear();
+	friend void HeroVSCat();
 };
