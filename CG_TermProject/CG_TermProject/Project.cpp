@@ -19,6 +19,8 @@ vector<glm::vec3> vertex3; //피라미드
 vector<glm::vec3> vertex4; //잔디
 vector<glm::vec3> vertex5; //성 
 vector<glm::vec3> vcolor5;
+vector<glm::vec3> vertex6; //왕관
+
 void makeCastleColor() {
 	random_device sk;
 	default_random_engine skdre(sk());
@@ -51,6 +53,7 @@ GLint width{ 1000 }, height{ 800 };
 
 //VAO, VBO
 GLuint VAO, VBO;
+GLuint crownVAO, crownVBO;
 GLuint sphereVAO, sphereVBO;
 GLuint pyramidVAO, pyramidVBO;
 GLuint HeroHPVAO, HeroHPVBO;
@@ -59,6 +62,7 @@ GLuint castleVAO, castleVBO, castleColorVBO;
 GLuint TreeTexture[3];
 GLuint GrassTexture[3];
 GLuint Texture[6];
+GLuint GameoverTexture;
 GLuint RoomTexture[3];
 GLuint CastleTexture;
 GLuint CastleSideTexTure;
@@ -330,6 +334,23 @@ void InitBuffer()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(HeroHP), HeroHP, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
+	/////////////////////////////////////////////////////
+
+	ReadObj("crown1.obj", vertex6);
+
+	glGenVertexArrays(1, &crownVAO);
+
+	glGenBuffers(1, &crownVBO);
+
+	glBindVertexArray(crownVAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, crownVBO);
+	glBufferData(GL_ARRAY_BUFFER, vertex6.size() * sizeof(glm::vec3), &vertex6[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);      // 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(1);
 }
 
 
@@ -460,36 +481,6 @@ void InitTexture()
 	}
 
 
-	glGenTextures(1, &CastleTexture);
-	glBindTexture(GL_TEXTURE_2D, CastleTexture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	int ImageWidth, ImageHeight, numberOfChannel;
-	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-	string filename="성.png";
-
-	GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	stbi_image_free(data);
-	
-	glGenTextures(1, &CastleSideTexTure);
-	glBindTexture(GL_TEXTURE_2D, CastleSideTexTure);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	//int ImageWidth, ImageHeight, numberOfChannel;
-	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-	filename = "성옆.png";
-
-	data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	stbi_image_free(data);
-
 
 	glGenTextures(3, RoomTexture);
 	for (int i = 0; i < 3; ++i) {
@@ -518,6 +509,22 @@ void InitTexture()
 		glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		stbi_image_free(data);
 	}
+
+
+	glGenTextures(1, &GameoverTexture);
+	glBindTexture(GL_TEXTURE_2D, GameoverTexture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int ImageWidth, ImageHeight, numberOfChannel;
+	stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+	string filename = "Bearroom.png";
+	GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	stbi_image_free(data);
+
 }
 
 

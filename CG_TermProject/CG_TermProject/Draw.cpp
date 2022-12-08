@@ -24,8 +24,10 @@ void HeroVSCat();
 bool isCollideDog(Dog r1, Gun r2);
 bool isCollide2D(Cat r1, Gun r2);
 bool isBearCollide = true;
+
 int catdead{};
 int dogdead{};
+int beardead{};
 
 int HerogetHP = 10;
 float lightPosX = 0.0;
@@ -57,7 +59,7 @@ Hero hero(0.3, 0.3, 0.3, 0, 0.5, 10.0);
 World world{};
 Tree tree[400];
 Grass grass[600];
-
+Crown crown{};
 CastleObj castle{};
 Room catRoom{ 0 };
 Room dogRoom{ 1 };
@@ -70,7 +72,9 @@ DoorR Dogright{ 2 };
 Tunnel Catopen{ 1 };
 DoorL Catleft{ 1 };
 DoorR Catright{ 1 };
-
+Gameover catHdead{ -100,0 };
+Gameover dogHdead{ 100,0 };
+Gameover bearHdead{0,-100 };
 float CatEndPosX;
 float CatEndPosZ;
 
@@ -147,6 +151,21 @@ GLvoid drawScene()
 
 void draw() {
 
+	if (beardead) {
+		lightColorR = 1.0f;
+		lightColorG = 1.0f;
+		lightColorB = 1.0f;
+	}
+	if (herodead) {
+		lightColorR = 0.5f;
+		lightColorG = 0.5f;
+		lightColorB = 0.5f;
+		for (int i = 0; i < 6; ++i) {
+			delete dogs[i];
+			delete cats[i];
+		}
+		
+	}
 	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos 
 	glm::vec4 tempv(lightPosX, lightPosY, lightPosZ, 1); 
 	glm::mat4 Lightrotate = glm::rotate(glm::mat4(1.f), glm::radians(lightRot), glm::vec3(0, 1, 0));
@@ -157,8 +176,8 @@ void draw() {
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color
 	glUniform4f(aColor, 1, 1., 1.,1.);
 
-
 	world.Draw();
+
 
 
 
@@ -172,6 +191,14 @@ void draw() {
 
 	}
 	
+	if (herodead) {
+		catHdead.Draw();
+		dogHdead.Draw();
+		bearHdead.Draw();
+		catHdead.Update();
+		dogHdead.Update();
+		bearHdead.Update();
+	}
 
 
 	for (int i = 0; i < 600; ++i) {
@@ -218,6 +245,12 @@ void draw() {
 	Dogright.Draw();
 	Dogright.Update();
 
+	crown.Draw();
+	crown.Update();
+
+	if (herodead) {
+		
+	}
 	for (int i = 0; i < cats.size(); ++i) {
 		cats[i]->draw();
 	}
@@ -367,6 +400,7 @@ void BulletCollideBear() {
 					CatEndPosX = bear.Position.x;
 					CatEndPosZ = bear.Position.z;
 					BearLife = false;
+					beardead = true;
 					isParticle = true;
 				}
 				gun.erase(gun.begin() + i);

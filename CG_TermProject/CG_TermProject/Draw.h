@@ -15,6 +15,8 @@
 #include "Room.h"
 #include "DoorL.h"
 #include "DoorR.h"
+#include "Crown.h"
+#include "Gameover.h"
 extern vector<Particle*> particle;
 GLvoid drawScene();
 

@@ -32,8 +32,10 @@ extern GLuint pyramidVAO;
 extern GLuint crossVAO;
 extern GLuint GrassVAO;
 extern GLuint castleVAO;
+extern GLuint crownVAO;
 extern GLuint TreeTexture[3];
 extern GLuint GrassTexture[3];
+extern GLuint GameoverTexture;
 extern GLuint RoomTexture[3];
 extern GLuint HeroHPVAO;
 extern float Rot;
@@ -42,6 +44,7 @@ extern vector<glm::vec3> vertex2; //��
 extern vector<glm::vec3> vertex3; //�Ƕ�̵�
 extern vector<glm::vec3> vertex4;
 extern vector<glm::vec3> vertex5;
+extern vector<glm::vec3> vertex6;
 extern float lightRot;
 
 extern float lightPosX;
@@ -50,7 +53,7 @@ extern float lightPosZ;
 extern float lightColorR;
 extern float lightColorG;
 extern float lightColorB;
-
+extern bool herodead;
 extern float Addx;
 extern float carY;
 
@@ -122,3 +125,4 @@ extern float CarDX;
 extern float CarDY;
 extern float CarDZ;
 extern float ortho;
+extern int beardead;
