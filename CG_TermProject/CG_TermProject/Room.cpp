@@ -26,8 +26,8 @@ void Room::Update()
 	}
 	if (AnimalRoom == 2) {//°õ
 		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
-		Trans = glm::translate(Unit, glm::vec3(0, 29, -100));
-	}
+		Trans = glm::translate(Unit, glm::vec3(0, 28.5, -100));
+	}                                                        
 	Change = Trans * Scale;
 }
 

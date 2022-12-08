@@ -60,24 +60,24 @@ void Bear::update()
 	if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
 
 		if (closelineX >= 0.5) {
-			closelineX -= 0.01;
-			Position.x += 0.01;
+			closelineX -= 0.03;
+			Position.x += 0.03;
 		}
 		if (closelineX < -0.5) {
-			closelineX += 0.01;
-			Position.x -= 0.01;
+			closelineX += 0.03;
+			Position.x -= 0.03;
 		}
 	}
 
 	closelineZ = HeroLocationZ - Position.z;
 	if (!(closelineZ <= 0.5 && closelineZ >= -0.5)) {
 		if (closelineZ > 0.5) {
-			closelineZ -= 0.01;
-			Position.z += 0.01;
+			closelineZ -= 0.03;
+			Position.z += 0.03;
 		}
 		if (closelineZ < -0.5) {
-			closelineZ += 0.01;
-			Position.z -= 0.01;
+			closelineZ += 0.03;
+			Position.z -= 0.03;
 		}
 
 	}

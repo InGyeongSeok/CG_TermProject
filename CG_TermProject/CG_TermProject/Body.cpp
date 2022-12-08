@@ -21,7 +21,7 @@ void Body::update()
 		Scale = glm::scale(Unit, glm::vec3(0.035, 0.05, 0.035));	//몸통길이 0.3, 너비 0.15
 		//Scale = glm::scale(Unit, glm::vec3(0.1, 0.15, 0.1));
 		Change = Scale * Trans;		//위로 올리고 축소
-
+		
 		Trans = glm::translate(Unit, glm::vec3(0, 0.2, 0));
 		Change = Trans * Change;	//다리 위로 올려줌
 

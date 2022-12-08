@@ -9,7 +9,6 @@ struct CatAttack;
 void BulletCollideCat();
 void BulletCollideDog();
 
-
 bool isCollideDog(Dog r1, Gun r2);
 bool isCollide2D(Cat r1, Gun r2);
 bool isBearCollide = true;
