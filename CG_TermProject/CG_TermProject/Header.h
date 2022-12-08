@@ -86,13 +86,17 @@ extern void AnimalCollideDog();
 extern void BulletCollideCat();
 extern void BulletCollideDog();
 extern void BulletCollideBear();
+extern void Catroomtest();
+extern void Dogroomtest();
+extern void Bearroomtest();
+
 
 extern bool commandGun;
 extern bool BearLife;
 
 extern glm::vec3 GunDir;
 extern bool isParticle;
-extern bool isBullet ;
+extern bool isBullet;
 extern const glm::mat4 Unit;
 extern GLuint CastleTexture;
 extern GLuint CastleSideTexTure;

@@ -25,8 +25,8 @@ swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,1))
 {
 	random_device rd;
 	default_random_engine dre(rd());
-	uniform_real_distribution<float> urdX{ -105,-95  };
-	uniform_real_distribution<float> urdZ{ -5, 5 };
+	uniform_real_distribution<float> urdX{ -104,-94  };
+	uniform_real_distribution<float> urdZ{ -4, 4 };
 	Position.x = urdX(dre);
 	Position.y = -1.0f;
 	Position.z = urdZ(dre);
@@ -65,73 +65,84 @@ void Cat::draw()
 
 
 void Cat::update()
-{
-	
-	hero.location();
-	float dz = HeroLocationZ - Position.z;
-	float dx = HeroLocationX - Position.x;
+{/*
+	if (Position.x > -95)
+		Position.x -= 0.1;
+	if (Position.x < -105)
+		Position.x += 0.1;
 
-	Direction = atan2(dx, dz);
+	if (Position.z > 5)
+		Position.z -= 0.1;
+	if (Position.z < -5)
+		Position.z += 0.1;*/
 
-	closelineX = HeroLocationX - Position.x;
-	if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
 
-		if (closelineX >= 0.5) {
-			closelineX -= 0.01;
-			Position.x += 0.01;
+		hero.location();
+		float dz = HeroLocationZ - Position.z;
+		float dx = HeroLocationX - Position.x;
+
+		Direction = atan2(dx, dz);
+
+		closelineX = HeroLocationX - Position.x;
+		if (!(closelineX <= 0.5 && closelineX >= -0.5)) {
+
+			if (closelineX >= 0.5) {
+				closelineX -= 0.01;
+				Position.x += 0.01;
+			}
+			if (closelineX < -0.5) {
+				closelineX += 0.01;
+				Position.x -= 0.01;
+			}
 		}
-		if (closelineX < -0.5) {
-			closelineX += 0.01;
-			Position.x -= 0.01;
+
+		closelineZ = HeroLocationZ - Position.z;
+		if (!(closelineZ <= 0.5 && closelineZ >= -0.5)) {
+			if (closelineZ > 0.5) {
+				closelineZ -= 0.01;
+				Position.z += 0.01;
+			}
+			if (closelineZ < -0.5) {
+				closelineZ += 0.01;
+				Position.z -= 0.01;
+			}
+
 		}
+
+		if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {
+			CatCrushHero = true;
+			catattack[Index].Activate = true;
+		}
+		else {
+			CatCrushHero = false;
+			catattack[Index].Activate = false;
+		}
+
+
+		nose.keyIn(Position, Direction);
+		head.keyIn(Position, Direction);
+		armL.keyIn(Position, Direction);
+		armR.keyIn(Position, Direction);
+		body.keyIn(Position, Direction);
+		legL.keyIn(Position, Direction);
+		legR.keyIn(Position, Direction);
+		eyesL.keyIn(Position, Direction);
+		eyesR.keyIn(Position, Direction);
+		earL.keyIn(Position, Direction);
+		earR.keyIn(Position, Direction);
+		beardL1.keyIn(Position, Direction);
+		beardR1.keyIn(Position, Direction);
+		beardL2.keyIn(Position, Direction);
+		beardR2.keyIn(Position, Direction);
+		beardL3.keyIn(Position, Direction);
+		beardR3.keyIn(Position, Direction);
+		swordL.keyIn(Position, Direction);
+		swordR.keyIn(Position, Direction);
+
+		AnimalCollideCat();
+		Catroomtest();
 	}
 
-	closelineZ = HeroLocationZ - Position.z;
-	if (!(closelineZ <= 0.5 && closelineZ >= -0.5)) {
-		if (closelineZ > 0.5) {
-			closelineZ -= 0.01;
-			Position.z += 0.01;
-		}
-		if (closelineZ < -0.5) {
-			closelineZ += 0.01;
-			Position.z -= 0.01;
-		}
-
-	}
-	
-	if ((closelineX <= 0.5 && closelineX >= -0.5) && (closelineZ <= 0.5 && closelineZ >= -0.5)) {
-		CatCrushHero = true;
-		catattack[Index].Activate = true;
- 	}
-	else {
-		CatCrushHero = false;
-		catattack[Index].Activate = false;
-	}
-
-
-	nose.keyIn(Position, Direction);
-	head.keyIn(Position, Direction);
-	armL.keyIn(Position, Direction);
-	armR.keyIn(Position, Direction);
-	body.keyIn(Position, Direction);
-	legL.keyIn(Position, Direction);
-	legR.keyIn(Position, Direction);
-	eyesL.keyIn(Position, Direction);
-	eyesR.keyIn(Position, Direction);
-	earL.keyIn(Position, Direction);
-	earR.keyIn(Position, Direction);
-	beardL1.keyIn(Position, Direction);
-	beardR1.keyIn(Position, Direction);
-	beardL2.keyIn(Position, Direction);
-	beardR2.keyIn(Position, Direction);
-	beardL3.keyIn(Position, Direction);
-	beardR3.keyIn(Position, Direction);
-	swordL.keyIn(Position, Direction);
-	swordR.keyIn(Position, Direction);
-
-	AnimalCollideCat();
-
-}
 
 Cat::~Cat()
 {
@@ -144,7 +155,6 @@ void Cat::damage()
 	HP -= 10;
 	
 }
-
 
 float Cat::getLeft()
 {
@@ -175,5 +185,3 @@ float Cat::getTop()
 {
 	return 0.0f;				
 }
-
-

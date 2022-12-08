@@ -20,7 +20,6 @@ extern Hero hero;
 class Cat
 {
 
-	
 	Head head;
 	Nose nose;
 	Body body;
@@ -68,5 +67,6 @@ public:
 	float getTop();
 	friend void AnimalCollideCat();
 	friend void BulletCollideCat();
+	friend void Catroomtest();
 };
 

@@ -107,6 +107,7 @@ void Bear::update()
 
 	swordL.keyIn(Position, Direction);
 	swordR.keyIn(Position, Direction);
+	Bearroomtest();
 }
 
 

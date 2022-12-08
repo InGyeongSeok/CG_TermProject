@@ -36,4 +36,6 @@ public:
 	void Draw();
 	int InfoHP();
 	void location();
+
+
 };

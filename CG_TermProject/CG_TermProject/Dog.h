@@ -58,5 +58,6 @@ public:
 	float getTop();
 	friend void AnimalCollideDog();
 	friend void BulletCollideDog();
+	friend void Dogroomtest();
 };
 

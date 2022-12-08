@@ -9,6 +9,16 @@ struct CatAttack;
 void BulletCollideCat();
 void BulletCollideDog();
 
+void Catroomtest();
+void Dogroomtest();
+void Bearroomtest();
+
+bool isCollideCatroom(Cat r1, Room r2);
+bool isCollideDogroom(Dog r1, Room r2);
+bool isCollideBearroom(Bear r1, Room r2);
+
+
+
 bool isCollideDog(Dog r1, Gun r2);
 bool isCollide2D(Cat r1, Gun r2);
 bool isBearCollide = true;
@@ -249,9 +259,11 @@ void draw() {
 }
 
 void AnimalCollideCat() {
+
 	for (int i = 0; i < cats.size(); ++i) {
 		for (int j = i + 1; j < cats.size(); ++j) {
 			float distanceX = abs(cats[i]->Position.x - cats[j]->Position.x);
+
 			float distanceZ = abs(cats[i]->Position.z - cats[j]->Position.z);
 			if (distanceX <= 0.1f) {
 				cats[i]->Position.x += 0.1f;
@@ -376,7 +388,6 @@ bool isCollideDog(Dog r1, Gun r2)
 }
 
 
-
 bool isCollideBear(Bear r1, Gun r2)
 {
 	if (r1.getRight() < r2.getLeft() || r1.getLeft() > r2.getRight()) return false;
@@ -385,4 +396,78 @@ bool isCollideBear(Bear r1, Gun r2)
 }
 
 
+bool isCollideCatroom(Cat r1, Room r2)
+{
+	if (r1.getRight() < r2.getLeft() || r1.getLeft() > r2.getRight()) return false;
+	if (r1.getFront() < r2.getBehind() || r1.getBehind() > r2.getFront()) return false;
+	return true;
+}
+
+bool isCollideDogroom(Dog r1, Room r2)
+{
+	if (r1.getRight() < r2.getLeft() || r1.getLeft() > r2.getRight()) return false;
+	if (r1.getFront() < r2.getBehind() || r1.getBehind() > r2.getFront()) return false;
+	return true;
+}
+
+bool isCollideBearroom(Bear r1, Room r2)
+{
+	if (r1.getRight() < r2.getLeft() || r1.getLeft() > r2.getRight()) return false;
+	if (r1.getFront() < r2.getBehind() || r1.getBehind() > r2.getFront()) return false;
+	return true;
+}
+
+
+void Catroomtest()
+{
+	for (int i = 0; i < 6; ++i) {
+		if (isCollideCatroom(*cats[i], catRoom)) {
+
+			if(cats[i]->Position.x < catRoom.PositionX - 5)
+				cats[i]->Position.x +=1;
+			if(cats[i]->Position.x > catRoom.PositionX+5)
+				cats[i]->Position.x -= 1;
+			if(cats[i]->Position.z < catRoom.PositionZ - 5)
+				cats[i]->Position.z += 1;
+			if (cats[i]->Position.z > catRoom.PositionZ + 5)
+				cats[i]->Position.z -=1;
+		}
+	}
+}
+
+
+void Dogroomtest()
+{
+	for (int i = 0; i < 6; ++i) {
+		if (isCollideDogroom(*dogs[i], dogRoom)) {
+
+			if (dogs[i]->Position.x < dogRoom.PositionX - 5)
+				dogs[i]->Position.x += 1;
+			if (dogs[i]->Position.x > dogRoom.PositionX + 5)
+				dogs[i]->Position.x -= 1;
+			if (dogs[i]->Position.z < dogRoom.PositionZ - 5)
+				dogs[i]->Position.z += 1;
+			if (dogs[i]->Position.z > dogRoom.PositionZ + 5)
+				dogs[i]->Position.z -= 1;
+		}
+	}
+}
+
+
+void Bearroomtest()
+{
+	
+		if (isCollideBearroom(bear, bearRoom)) {
+
+			if (bear.Position.x < bearRoom.PositionX - 5)
+				bear.Position.x += 1;
+			if (bear.Position.x > bearRoom.PositionX + 5)
+				bear.Position.x -= 1;
+			if (bear.Position.z < bearRoom.PositionZ - 5)
+				bear.Position.z += 1;
+			if (bear.Position.z > bearRoom.PositionZ + 5)
+				bear.Position.z -= 1;
+		}
+	
+}
 

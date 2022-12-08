@@ -8,6 +8,21 @@ Room::~Room()
 Room::Room(int room)
 {
 	AnimalRoom = room;
+	if (AnimalRoom == 0) {
+		PositionX = -100;
+		PositionY = 29;
+		PositionZ = 0;
+	}
+	if (AnimalRoom == 1) {
+		PositionX = 100;
+		PositionY = 29;
+		PositionZ = 0;
+	}
+	if (AnimalRoom == 2) {
+		PositionX = 0;
+		PositionY = 28.5;
+		PositionZ = -100;
+	}
 }
 
 
@@ -18,15 +33,15 @@ void Room::Update()
 	glm::mat4 Trans;
 	if (AnimalRoom == 0) {//고양이
 		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
-		Trans = glm::translate(Unit, glm::vec3(-100, 29, 0));
+		Trans = glm::translate(Unit, glm::vec3(PositionX, PositionY, PositionZ));
 	}
 	if (AnimalRoom == 1) {//강아지
 		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
-		Trans = glm::translate(Unit, glm::vec3(100, 29, 0));
+		Trans = glm::translate(Unit, glm::vec3(PositionX, PositionY, PositionZ));
 	}
 	if (AnimalRoom == 2) {//곰
 		Scale = glm::scale(Unit, glm::vec3(5, 30, 5));
-		Trans = glm::translate(Unit, glm::vec3(0, 28.5, -100));
+		Trans = glm::translate(Unit, glm::vec3(PositionX, PositionY, PositionZ));
 	}                                                        
 	Change = Trans * Scale;
 }
@@ -50,3 +65,23 @@ void Room::Draw()
 }
 
 
+float Room::getLeft()
+{
+
+	return PositionX - 5.f;
+}
+
+float Room::getRight()
+{
+	return PositionX + 5.f;
+}
+
+float Room::getBehind()
+{
+	return PositionZ - 5.f;
+}
+
+float Room::getFront()
+{
+	return PositionZ + 5.f;
+}

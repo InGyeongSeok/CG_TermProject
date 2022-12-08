@@ -119,6 +119,7 @@ void Dog::update()
 	swordR.keyIn(Position, Direction);
 
 	AnimalCollideDog();
+	Dogroomtest();
 }
 
 Dog::~Dog()
