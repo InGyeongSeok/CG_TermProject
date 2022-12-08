@@ -28,7 +28,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CastleObj.h" />
     <ClInclude Include="Cat.h" />
-    <ClInclude Include="Door.h" />
+    <ClInclude Include="DoorL.h" />
+    <ClInclude Include="DoorR.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="CatAttack.h" />
     <ClInclude Include="Dog.h" />
@@ -65,7 +66,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CastleObj.cpp" />
     <ClCompile Include="Cat.cpp" />
-    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="DoorL.cpp" />
+    <ClCompile Include="DoorR.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="CatAttack.cpp" />
     <ClCompile Include="Dog.cpp" />

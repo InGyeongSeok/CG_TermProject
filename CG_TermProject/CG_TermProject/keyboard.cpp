@@ -32,7 +32,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case'Z':
 		carAddZ += 1;
 		break;
-		
+
 	case 'q':
 	case 'Q':
 		glutLeaveMainLoop();

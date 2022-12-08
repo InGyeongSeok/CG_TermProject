@@ -100,3 +100,8 @@ extern GLuint Texture[6];
 extern float CatEndPosX;
 extern float CatEndPosZ;
 
+extern bool catopen;
+extern bool dogopen;
+extern float openingCat;
+extern float openingDog;
+extern int catdead;

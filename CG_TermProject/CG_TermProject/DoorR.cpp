@@ -1,41 +1,39 @@
-#include "Tunnel.h"
+#include "DoorR.h"
 
-bool catopen = false;
-bool dogopen = false;
 
-Tunnel::~Tunnel()
+DoorR::~DoorR()
 {
 }
 
-Tunnel::Tunnel(int open)
+DoorR::DoorR(int open)
 {
 	Open = open;
 }
 
 
-void Tunnel::Update()
+void DoorR::Update()
 {
 	//FixUpdate();
 	//Tx = glm::translate(Tx, glm::vec3(0, 0, 0));
-	glm::mat4 Scale = glm::scale(Unit, glm::vec3(1, 1, 2));
+	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.5, 1, 0.125));
 	glm::mat4 Trans;
 	if (Open == 1) {
-		Trans = glm::translate(Unit, glm::vec3(-100, 0, -6.9));
+		Trans = glm::translate(Unit, glm::vec3(-99.5+openingCat, 0, -4.9));
 
 	}
-	else 
-		Trans = glm::translate(Unit, glm::vec3(100, 0, -6.9));
+	else
+		Trans = glm::translate(Unit, glm::vec3(100.5+openingDog, 0, -4.9));
 	//glm::mat4 Trans1 = glm::translate(Unit, glm::vec3(0, 1, 0));
-	Change = Trans* Scale;
+	Change = Trans * Scale;
 }
 
-void Tunnel::Draw()
+void DoorR::Draw()
 {
 	if (dogopen || catopen) {
 
 		glBindVertexArray(VAO);
 		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-		glUniform4f(Color, 0.2, 0.2, 0.2, 1.0);
+		glUniform4f(Color, 0, 0, 1., 1.0);
 
 		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환

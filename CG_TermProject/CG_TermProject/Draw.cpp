@@ -13,6 +13,8 @@ void BulletCollideDog();
 bool isCollideDog(Dog r1, Gun r2);
 bool isCollide2D(Cat r1, Gun r2);
 bool isBearCollide = true;
+int catdead{};
+int dogdead{};
 
 int HerogetHP = 10;
 float lightPosX = 0.0;
@@ -48,8 +50,13 @@ Room catRoom{ 0 };
 Room dogRoom{ 1 };
 Room bearRoom{ 2 };
 Bear bear;
-Tunnel Catopen{ 1 };
 Tunnel Dogopen{ 2 };
+DoorL Dogleft{ 2 };
+DoorR Dogright{ 2 };
+
+Tunnel Catopen{ 1 };
+DoorL Catleft{ 1 };
+DoorR Catright{ 1 };
 
 float CatEndPosX;
 float CatEndPosZ;
@@ -146,6 +153,12 @@ void draw() {
 
 	glDisable(GL_BLEND);
 	
+	if (catdead == 6)
+		catopen = true;
+
+	if (dogdead == 6)
+		dogopen = true;
+
 	catRoom.Draw();
 	catRoom.Update();
 	dogRoom.Draw();
@@ -161,10 +174,21 @@ void draw() {
 	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
 	glUniform1i(selectColorLocation, 0);
 
+	
+
 	Catopen.Draw();
 	Catopen.Update();
+	Catleft.Draw();
+	Catleft.Update();
+	Catright.Draw();
+	Catright.Update();
+
 	Dogopen.Draw();
 	Dogopen.Update();
+	Dogleft.Draw();
+	Dogleft.Update();
+	Dogright.Draw();
+	Dogright.Update();
 
 	for (int i = 0; i < cats.size(); ++i) {
 		cats[i]->draw();
@@ -273,6 +297,7 @@ void BulletCollideCat() {
 					CatEndPosZ = cats[j]->Position.z;
 					isParticle = true;
 					delete cats[j];
+					catdead++;
 					cats.erase(cats.begin() + j);
 					--j;
 				}
@@ -301,6 +326,7 @@ void BulletCollideDog() {
 					CatEndPosZ = dogs[j]->Position.z;
 					isParticle = true;
 					delete dogs[j];
+					dogdead++;
 					dogs.erase(dogs.begin() + j);
 					--j;
 				}

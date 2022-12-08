@@ -13,6 +13,8 @@
 #include "Tunnel.h"
 #include "CastleObj.h"
 #include "Room.h"
+#include "DoorL.h"
+#include "DoorR.h"
 extern vector<Particle*> particle;
 GLvoid drawScene();
 

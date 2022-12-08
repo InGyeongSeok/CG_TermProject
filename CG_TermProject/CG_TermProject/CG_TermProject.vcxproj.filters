@@ -162,7 +162,10 @@
     <ClInclude Include="Tunnel.h">
       <Filter>Door</Filter>
     </ClInclude>
-    <ClInclude Include="Door.h">
+    <ClInclude Include="DoorL.h">
+      <Filter>Door</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorR.h">
       <Filter>Door</Filter>
     </ClInclude>
   </ItemGroup>
@@ -266,7 +269,10 @@
     <ClCompile Include="Tunnel.cpp">
       <Filter>Door</Filter>
     </ClCompile>
-    <ClCompile Include="Door.cpp">
+    <ClCompile Include="DoorL.cpp">
+      <Filter>Door</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorR.cpp">
       <Filter>Door</Filter>
     </ClCompile>
   </ItemGroup>

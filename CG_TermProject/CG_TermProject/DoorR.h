@@ -3,16 +3,16 @@
 #include "Header.h"
 
 
-class Tunnel
+class DoorR
 {
 	glm::mat4 Change;
 	int Open;
 
 public:
 
-	Tunnel(int open);
+	DoorR(int open);
 
-	~Tunnel();
+	~DoorR();
 	void Update();
 	void Draw();
 
