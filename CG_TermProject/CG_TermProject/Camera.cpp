@@ -1,6 +1,7 @@
 #include "Camera.h"
-
-
+bool first = true;
+bool second = true;
+bool third = true;
 GLuint shaderID;
 
 float carY;
@@ -18,22 +19,55 @@ void camera() {
 
 	//glm::vec3 cameraPos(carAddX + 1, carAddY, carAddZ + 10);      //--- 카메라 위치 (어디서 볼건지)
 	cameraPos = glm::vec3(carAddX +0, carAddY + cameraJump, carAddZ);      //--- 카메라 위치 (어디서 볼건지)
-	if (catlive) {
-		carAddX = -100;
-		carAddZ = 0;
-		catlive = false;
-	}
-	if (doglive) {
-		carAddX = 100;
-		carAddZ = 0;
-		doglive = false;
-	}
 	if (bearlive) {
-		carAddX = 0;
-		carAddZ = -100;
-		bearlive = false;
+		if (third) {
+			carAddX = 0;
+			carAddZ = -100;
+			third = false;
+		}
+		if (-5 > carAddX)
+			carAddX += 0.5;
+		if (5 < carAddX)
+			carAddX -= 0.5;
+		if (-105 > carAddZ)
+			carAddZ += 0.5;
+		if (-95 < carAddZ)
+			carAddZ -= 0.5;
+		//bearlive = false;
 	}
-
+	else if (doglive) {
+		if (second) {
+			carAddX = 100;
+			carAddZ = 0;
+			second = false;
+		}
+		if (95 > carAddX)
+			carAddX += 0.5;
+		if (105 < carAddX)
+			carAddX -= 0.5;
+		if (-5 > carAddZ)
+			carAddZ += 0.5;
+		if (+5 < carAddZ)
+			carAddZ -= 0.5;
+		//doglive = false;
+	}
+	else if (catlive) {
+		if (first) {
+			carAddX = -100;
+			carAddZ = 0;
+			first = false;
+		}
+		if (-105 > carAddX)
+			carAddX += 0.5;
+		if (-95 < carAddX)
+			carAddX -= 0.5;
+		if (-5 > carAddZ)
+			carAddZ += 0.5;
+		if (+5 < carAddZ)
+			carAddZ -= 0.5;
+		//catlive = false;
+	}
+	
 	//cameraPos = glm::vec3(carAddX + 0, carAddY + cameraJump, carAddZ + 0);
 	glm::mat4 VAngleY_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(-VAngleY), glm::vec3(0.0, 1.0, 0.0)); //y?
 	glm::mat4 VAngleX_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(-VAngleX), glm::vec3(1.0, 0.0, 0.0)); // x

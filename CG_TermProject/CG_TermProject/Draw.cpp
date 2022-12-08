@@ -16,8 +16,10 @@ void Bearroomtest();
 bool isCollideCatroom(Cat r1, Room r2);
 bool isCollideDogroom(Dog r1, Room r2);
 bool isCollideBearroom(Bear r1, Room r2);
-
-
+bool HeroVSRoom(Hero r1, Room r2);
+void HeroVSDog();
+void HeroVSBear();
+void HeroVSCat();
 
 bool isCollideDog(Dog r1, Gun r2);
 bool isCollide2D(Cat r1, Gun r2);
@@ -417,6 +419,12 @@ bool isCollideBearroom(Bear r1, Room r2)
 	return true;
 }
 
+bool HeroVSRoom(Hero r1, Room r2)
+{
+	if (r1.getRight() < r2.getLeft() || r1.getLeft() > r2.getRight()) return false;
+	if (r1.getFront() < r2.getBehind() || r1.getBehind() > r2.getFront()) return false;
+	return true;
+}
 
 void Catroomtest()
 {
@@ -471,3 +479,49 @@ void Bearroomtest()
 	
 }
 
+
+
+void HeroVSBear()
+{
+	if (HeroVSRoom(hero, bearRoom)) {
+
+		if (hero.PosX < bearRoom.PositionX - 5)
+			hero.PosX += 0.5;
+		if (hero.PosX > bearRoom.PositionX + 5)
+			hero.PosX -= 0.5;
+		if (hero.PosZ < bearRoom.PositionZ - 5)
+			hero.PosZ += 0.5;
+		if (hero.PosZ > bearRoom.PositionZ + 5)
+			hero.PosZ -= 0.5;
+	}
+}
+
+void HeroVSCat()
+{
+	if (HeroVSRoom(hero, catRoom)) {
+
+		if (hero.PosX < catRoom.PositionX - 5)
+			hero.PosX += 0.5;
+		if (hero.PosX > catRoom.PositionX + 5)
+			hero.PosX -= 0.5;
+		if (hero.PosZ < catRoom.PositionZ - 5)
+			hero.PosZ += 0.5;
+		if (hero.PosZ > catRoom.PositionZ + 5)
+			hero.PosZ -= 0.5;
+	}
+}
+
+void HeroVSDog()
+{
+	if (HeroVSRoom(hero, dogRoom)) {
+
+		if (hero.PosX < dogRoom.PositionX - 5)
+			hero.PosX += 0.5;
+		if (hero.PosX > dogRoom.PositionX + 5)
+			hero.PosX -= 0.5;
+		if (hero.PosZ < dogRoom.PositionZ - 5)
+			hero.PosZ += 0.5;
+		if (hero.PosZ > dogRoom.PositionZ + 5)
+			hero.PosZ -= 0.5;
+	}
+}

@@ -89,7 +89,9 @@ extern void BulletCollideBear();
 extern void Catroomtest();
 extern void Dogroomtest();
 extern void Bearroomtest();
-
+extern void HeroVSDog();
+extern void HeroVSBear();
+extern void HeroVSCat();
 
 extern bool commandGun;
 extern bool BearLife;
