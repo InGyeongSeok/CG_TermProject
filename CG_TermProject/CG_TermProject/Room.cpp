@@ -71,11 +71,33 @@ void Room::Draw()
 		}
 		
 	}
+	else if(beardead) {
+		for (int i = 0; i < 6; ++i) {
+			if (i == 4) {
+				glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom]);
+				glDrawArrays(GL_TRIANGLES, i * 6, 6);
+			}
+			else {
+				glBindTexture(GL_TEXTURE_2D, ScoreTexture[hero.InfoHP() - 2]);
+				glDrawArrays(GL_TRIANGLES, i * 6, 6);
+			}
+		}
+	}
 	else {
 		for (int i = 0; i < 6; ++i) {
 			glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom]);
 			glDrawArrays(GL_TRIANGLES, i * 6, 6);
 		}
+		/*for (int i = 0; i < 6; ++i) {
+			if (i == 4) {
+				glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom]);
+				glDrawArrays(GL_TRIANGLES, i * 6, 6);
+			}
+			else {
+				glBindTexture(GL_TEXTURE_2D, ScoreTexture[hero.InfoHP() - 1]);
+				glDrawArrays(GL_TRIANGLES, i * 6, 6);
+			}
+		}*/
 	}
 
 

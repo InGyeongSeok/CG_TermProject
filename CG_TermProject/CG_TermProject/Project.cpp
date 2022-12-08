@@ -62,6 +62,7 @@ GLuint castleVAO, castleVBO, castleColorVBO;
 GLuint TreeTexture[3];
 GLuint GrassTexture[3];
 GLuint Texture[6];
+GLuint ScoreTexture[9];
 GLuint GameoverTexture;
 GLuint RoomTexture[6];
 GLuint DoorTexture[2];
@@ -418,11 +419,6 @@ void InitTexture()
 		
 	}
 
-
-
-
-
-
 	glGenTextures(3, TreeTexture);
 	for (int i = 0; i <3; ++i) {
 		glBindTexture(GL_TEXTURE_2D, TreeTexture[i]);
@@ -451,6 +447,53 @@ void InitTexture()
 		stbi_image_free(data);
 	}
 	
+	glGenTextures(9, ScoreTexture);
+	for (int i = 0; i < 9; ++i) {
+		glBindTexture(GL_TEXTURE_2D, ScoreTexture[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		int ImageWidth, ImageHeight, numberOfChannel;
+		stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+		string filename;
+
+		switch (i) {
+		case 0:
+			filename = "180.png";
+			break;
+		case 1:
+			filename = "190.png";
+			break;
+		case 2:
+			filename = "200.png";
+			break;
+		case 3:
+			filename = "210.png";
+			break;
+		case 4:
+			filename = "220.png";
+			break;
+		case 5:
+			filename = "230.png";
+			break;
+		case 6:
+			filename = "240.png";
+			break;
+		case 7:
+			filename = "250.png";
+			break;
+		case 8:
+			filename = "260.png";
+			break;
+
+		}
+		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+		glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		stbi_image_free(data);
+	}
+
 
 	glGenTextures(3, GrassTexture);
 	for (int i = 0; i < 3; ++i) {

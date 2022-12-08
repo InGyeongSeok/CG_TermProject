@@ -38,6 +38,7 @@ extern GLuint GrassTexture[3];
 extern GLuint GameoverTexture;
 extern GLuint RoomTexture[6];
 extern GLuint DoorTexture[2];
+extern GLuint ScoreTexture[9];
 extern GLuint HeroHPVAO;
 extern float Rot;
 extern vector<glm::vec3> vertex1; //����ü
