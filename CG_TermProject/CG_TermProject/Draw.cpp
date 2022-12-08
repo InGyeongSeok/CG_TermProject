@@ -346,7 +346,7 @@ void BulletCollideDog() {
 				break;
 			}
 
-		}
+		} 
 
 	}
 }
@@ -371,7 +371,7 @@ void BulletCollideBear() {
 				--i;
 			}
 		}
-}
+} 
 
 bool isCollide2D(Cat r1, Gun r2)
 {
