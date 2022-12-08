@@ -45,6 +45,7 @@ float ortho = 12.0;
 vector<Gun*> gun;
 bool isCollideBear(Bear r1, Gun r2);
 
+
 vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle, new Particle
 						,new Particle, new Particle,new Particle,new Particle,new Particle,
 						 new Particle,new Particle, new Particle, new Particle, new Particle
@@ -87,6 +88,7 @@ uniform_real_distribution<float> urd{ 0, 255 };
 
 GLvoid drawScene() 
 {
+
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
