@@ -70,11 +70,11 @@ extern float cameraJump;
 
 extern float VAngleX;
 extern float VAngleY;
-extern float HeroMovX;
 extern float HeroMovY;
-extern float HeroMovZ;
 //156. / 255, 91. / 255, 54. / 255 �� ����!?
-
+extern bool catlive;
+extern bool doglive;
+extern bool bearlive;
 
 
 extern float HeroLocationX;
@@ -105,3 +105,4 @@ extern bool dogopen;
 extern float openingCat;
 extern float openingDog;
 extern int catdead;
+extern int dogdead;

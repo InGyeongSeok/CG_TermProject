@@ -26,6 +26,10 @@ class Hero
 public:
 	Hero(float SX, float SY, float SZ, float X, float Y, float Z);
 	~Hero();
+	void isW();
+	void isA();
+	void isS();
+	void isD();
 	void Jump();
 	void damage();
 	void Update();

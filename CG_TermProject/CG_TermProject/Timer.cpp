@@ -6,30 +6,25 @@ void timer(int value) {
 		carAddZ -= 0.075 * glm::cos(glm::radians(VAngleY));
 		carAddX += 0.075 * glm::sin(glm::radians(VAngleY));
 
-		HeroMovZ -= 0.075 * glm::cos(glm::radians(VAngleY));
-		HeroMovX += 0.075 * glm::sin(glm::radians(VAngleY));
-		
+	
+		hero.isW();
 	}
 	else if (isA) {
 		carAddZ -= 0.075 * glm::sin(glm::radians(VAngleY));
 		carAddX -= 0.075 * glm::cos(glm::radians(VAngleY));
-
-		HeroMovZ -= 0.075 * glm::sin(glm::radians(VAngleY));
-		HeroMovX -= 0.075 * glm::cos(glm::radians(VAngleY));
+		hero.isA();
 	}
 	else if (isS) {
 		carAddZ += 0.075 * glm::cos(glm::radians(VAngleY));
 		carAddX -= 0.075 * glm::sin(glm::radians(VAngleY));
-
-		HeroMovZ += 0.075 * glm::cos(glm::radians(VAngleY));
-		HeroMovX -= 0.075 * glm::sin(glm::radians(VAngleY));
+		hero.isS();
+	
 	}
 	else if (isD) {
 		carAddZ += 0.075 * glm::sin(glm::radians(VAngleY));
 		carAddX += 0.075 * glm::cos(glm::radians(VAngleY));
-
-		HeroMovZ += 0.075 * glm::sin(glm::radians(VAngleY));
-		HeroMovX += 0.075 * glm::cos(glm::radians(VAngleY));
+		hero.isD();
+		
 	}
 	if (isJump) {
 		hero.Jump();

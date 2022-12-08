@@ -1,10 +1,11 @@
 #include "Hero.h"
 
-float HeroMovX;
 float HeroMovY;
-float HeroMovZ;
 float MovX;
 float MovZ;
+bool catlive = false;
+bool doglive = false;
+bool bearlive = false;
 
 float HeroLocationX{};
 float HeroLocationZ{};
@@ -77,7 +78,25 @@ void Hero::Update()
 	glm::mat4 Scale = glm::scale(Unit, glm::vec3(scaleX, scaleY, scaleZ));
 	glm::mat4 Trans;
 	
-		Trans = glm::translate(Unit, glm::vec3(PosX + HeroMovX, PosY + HeroMovY, PosZ + HeroMovZ));
+		Trans = glm::translate(Unit, glm::vec3(PosX, PosY + HeroMovY, PosZ ));
+		cout << PosZ << endl;
+		if (PosZ < -20) {
+			PosX = -100;
+			PosZ = 0;
+			catlive = true;
+		}
+		else if (PosZ < -7 && catdead==6) {
+			PosX = 100;
+			PosZ = 0;
+			doglive = true;
+			catdead++;
+		}
+		else if (PosZ < -7 && dogdead == 6) {
+			PosX = 0;
+			PosZ = -100;
+			bearlive = true;
+		}
+		
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
 	Change = Trans * Scale * AddTrans;
 	
@@ -124,6 +143,33 @@ void Hero::Draw()
 
 void Hero::location()
 {
-	HeroLocationX = PosX + HeroMovX;
-	HeroLocationZ = PosZ + HeroMovZ;
+	HeroLocationX = PosX;
+	HeroLocationZ = PosZ;
+}
+
+void Hero::isW()
+{
+	PosZ -= 0.075 * glm::cos(glm::radians(VAngleY));
+	PosX += 0.075 * glm::sin(glm::radians(VAngleY));
+}
+
+void Hero::isA()
+{
+
+
+	PosZ -= 0.075 * glm::sin(glm::radians(VAngleY));
+	PosX -= 0.075 * glm::cos(glm::radians(VAngleY));
+
+}
+
+void Hero::isS()
+{
+	PosZ += 0.075 * glm::cos(glm::radians(VAngleY));
+	PosX -= 0.075 * glm::sin(glm::radians(VAngleY));
+}
+
+void Hero::isD()
+{
+	PosZ  += 0.075 * glm::sin(glm::radians(VAngleY));
+	PosX  += 0.075 * glm::cos(glm::radians(VAngleY));
 }
