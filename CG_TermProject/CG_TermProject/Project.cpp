@@ -12,6 +12,7 @@
 #include "stb_image.h"
 
 
+	
 
 vector<glm::vec3> vertex1; //박스
 vector<glm::vec3> vertex2; // 구
@@ -101,6 +102,8 @@ GLuint crossVAO, crossVBO;
 
 void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 {
+	
+	//sndPlaySound(L"전투.wav", SND_ASYNC | SND_LOOP);
 	//--- 윈도우 생성하기
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
