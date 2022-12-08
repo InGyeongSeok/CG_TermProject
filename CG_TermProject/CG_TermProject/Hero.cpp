@@ -79,21 +79,22 @@ void Hero::Update()
 	glm::mat4 Trans;
 	
 		Trans = glm::translate(Unit, glm::vec3(PosX, PosY + HeroMovY, PosZ ));
-		cout << PosZ << endl;
-		if (PosZ < -20) {
+		
+		if (PosZ < -20 && catdead ==0) {
 			PosX = -100;
 			PosZ = 0;
 			catlive = true;
 		}
-		else if (PosZ < -7 && catdead==6) {
+		if (PosZ < -7 && catdead==6) {
 			PosX = 100;
 			PosZ = 0;
 			doglive = true;
 			catdead++;
 		}
-		else if (PosZ < -7 && dogdead == 6) {
+		if (PosZ < -7 && dogdead == 6) {
 			PosX = 0;
 			PosZ = -100;
+			dogdead++;
 			bearlive = true;
 		}
 		

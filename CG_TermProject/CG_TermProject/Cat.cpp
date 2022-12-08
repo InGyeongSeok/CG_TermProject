@@ -34,7 +34,7 @@ swordR(Sword(glm::vec3(72. / 255, 255. / 255, 255. / 255), 1,1))
 	Attack = 10;
 	CatCrushHero = false;
 	Index = add;
-	cout << add << endl;
+
 	++add;
 }
 
