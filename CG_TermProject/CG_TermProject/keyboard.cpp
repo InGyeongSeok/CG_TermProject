@@ -37,10 +37,6 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	case 'Q':
 		glutLeaveMainLoop();
 		break;
-
-	case't':
-		glutFullScreenToggle();
-		break;
 	}
 	glutPostRedisplay(); //--- ������ �ٲ� ������ ��� �ݹ� �Լ��� ȣ���Ͽ� ȭ���� refresh �Ѵ�
 }

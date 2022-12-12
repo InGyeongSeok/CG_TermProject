@@ -22,8 +22,6 @@
 #include <gl/glm/ext.hpp>
 #include <gl/glm/gtc/matrix_transform.hpp>
 
-
-
 using namespace std;
 
 extern GLint width, height;
