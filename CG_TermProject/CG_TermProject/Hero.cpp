@@ -1,5 +1,8 @@
 #include "Hero.h"
 
+#include "Sound.h"
+extern Sound playSound;
+
 float HeroMovY;
 float MovX;
 float MovZ;
@@ -63,6 +66,9 @@ void Hero::damage()
 		lightColorB = 0.1;
 		lightColorG = 0.1;
 		lightColorR = 0.1;
+
+		// 죽으면 사운드 멈춤
+		playSound.stopBGM();
 	}
 }
 
@@ -100,6 +106,9 @@ void Hero::Update()
 			lightPosX = -100;
 			lightPosY = 15.0;
 			lightPosZ = 0;
+
+			// 캣라운드로 들어갈 때 브금 실행
+			playSound.BasicBGM();
 		}
 		if (PosZ < -7 && catdead == 6) {
 			PosX = 100;
