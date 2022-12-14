@@ -58,6 +58,9 @@
     <Filter Include="Door">
       <UniqueIdentifier>{3628a6e3-d9da-4629-85f7-cdac927613bf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{445c4a88-2f56-4957-84dc-f9d5ceb859cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -171,6 +174,9 @@
     <ClInclude Include="Crown.h">
       <Filter>World</Filter>
     </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Motion.cpp">
@@ -281,6 +287,9 @@
     <ClCompile Include="Crown.cpp">
       <Filter>World</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="vertex.glsl">
@@ -289,5 +298,10 @@
     <None Include="fragment.glsl">
       <Filter>리소스 파일</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="최종총소리.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
   </ItemGroup>
 </Project>

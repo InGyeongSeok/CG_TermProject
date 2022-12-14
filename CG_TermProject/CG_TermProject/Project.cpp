@@ -6,13 +6,9 @@
 #include "Mouse.h"
 #include "Camera.h"
 #include "KeyboardUP.h"
-
-
+#include "Sound.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-
-
-	
 
 vector<glm::vec3> vertex1; //박스
 vector<glm::vec3> vertex2; // 구
@@ -21,6 +17,8 @@ vector<glm::vec3> vertex4; //잔디
 vector<glm::vec3> vertex5; //성 
 vector<glm::vec3> vcolor5;
 vector<glm::vec3> vertex6; //왕관
+
+Sound playSound;
 
 void makeCastleColor() {
 	random_device sk;
@@ -111,7 +109,7 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(width, height);
 	glutCreateWindow("Project");
-
+	
 	
 	glewExperimental = GL_TRUE;
 	glewInit();

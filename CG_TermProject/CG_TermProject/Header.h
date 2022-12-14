@@ -3,9 +3,14 @@
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "freeglut.lib")
 #include <iostream>
+
+
 #include <Windows.h>
-#include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
+
+#include <mmsystem.h>
+#include <Digitalv.h>
+
 #include <fstream>
 #include <string>
 #include <vector>

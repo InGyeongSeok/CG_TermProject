@@ -50,6 +50,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Nose.h" />
     <ClInclude Include="particle.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="sword.h" />
     <ClInclude Include="Timer.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="Nose.cpp" />
     <ClCompile Include="particle.cpp" />
     <ClCompile Include="Project.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sword.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Tree.cpp" />
@@ -98,6 +100,9 @@
   <ItemGroup>
     <None Include="fragment.glsl" />
     <None Include="vertex.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="최종총소리.wav" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

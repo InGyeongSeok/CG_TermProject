@@ -25,5 +25,7 @@ void Animals::keyIn(glm::vec3 Position, float Direction)
 {
 	this->Position = Position;
 	this->Direction = Direction;
+
 	update();
+
 }
