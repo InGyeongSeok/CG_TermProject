@@ -32,7 +32,14 @@
 # *.app
 
 # 비쥬얼에서 필요없는거
-**/.vs/
-**/Debug/
-**/Release/
-**/x64/
+*/.vs/
+*/Debug/*
+*/Release/*
+*/x64/*
+!*/x64/Debug/*.dll
+!*/x64/Release/*.dll
+!*/Debug/*.dll
+!*/Release/*.dll
+*/*/Debug/
+*/*/Release/
+*/*/x64/
