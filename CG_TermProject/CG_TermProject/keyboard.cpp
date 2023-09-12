@@ -26,12 +26,6 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		isJump = true;
 		jumpUp = true;
 		break;
-	case'z':
-		carAddZ -= 1;
-		break;
-	case'Z':
-		carAddZ += 1;
-		break;
 
 	case 'q':
 	case 'Q':

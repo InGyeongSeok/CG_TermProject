@@ -44,37 +44,51 @@ void camera() {
 		//bearlive = false;
 	}
 
-	else if (doglive && dogdead < 6) {
+	else if (doglive ) {
 		if (second) {
 			carAddX = 100;
 			carAddZ = 0;
 			second = false;
 		}
-		if (95 > carAddX)
-			carAddX += 1.0;
-		if (105 < carAddX)
-			carAddX -= 1.0;
-		if (-5 > carAddZ)
-			carAddZ += 1.0;
-		if (+5 < carAddZ)
-			carAddZ -= 1.0;
-		//doglive = false;
+
+		if (dogdead == 6 && carAddX < 101 && carAddX > 98 && carAddZ < -4.5 && isW) {
+			carAddZ -= 0.1;
+
+		}
+		else {
+			if (95 > carAddX)
+				carAddX += 1.0;
+			if (105 < carAddX)
+				carAddX -= 1.0;
+			if (-5 > carAddZ)
+				carAddZ += 1.0;
+			if (+5 < carAddZ)
+				carAddZ -= 1.0;
+		}
+	
 	}
-	else if (catlive && catdead < 6) {
+	else if (catlive) {
 		if (first) {
 			carAddX = -100;
 			carAddZ = 0;
 			first = false;
 		}
-		if (-105 > carAddX)
-			carAddX += 1.0;
-		if (-95 < carAddX)
-			carAddX -= 1.0;
-		if (-5 > carAddZ)
-			carAddZ += 1.0;
-		if (+5 < carAddZ)
-			carAddZ -= 1.0;
-		//catlive = false;
+
+		if (catdead == 6 && carAddX > -101 && carAddX < -98 && carAddZ < -4.5 && isW) {
+			carAddZ -= 0.1;
+			
+		}
+		else {
+			if (-105 > carAddX)
+				carAddX += 1.0;
+			if (-95 < carAddX)
+				carAddX -= 1.0;
+			if (-5 > carAddZ)
+				carAddZ += 1.0;
+			if (+5 < carAddZ)
+				carAddZ -= 1.0;
+		}
+	
 	}
 	
 	glm::mat4 VAngleY_Rot = glm::rotate(glm::mat4(1.0f), glm::radians(-VAngleY), glm::vec3(0.0, 1.0, 0.0)); 

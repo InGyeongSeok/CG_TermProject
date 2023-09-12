@@ -519,6 +519,7 @@ void HeroVSBear()
 {
 	if (HeroVSRoom(hero, bearRoom)) {
 
+		
 		if (hero.PosX < bearRoom.PositionX - 5)
 			hero.PosX += 1.0;
 		if (hero.PosX > bearRoom.PositionX + 5)
@@ -534,14 +535,20 @@ void HeroVSCat()
 {
 	if (HeroVSRoom(hero, catRoom)) {
 
-		if (hero.PosX < catRoom.PositionX - 5)
-			hero.PosX += 1.0;
-		if (hero.PosX > catRoom.PositionX + 5)
-			hero.PosX -= 1.0;
-		if (hero.PosZ < catRoom.PositionZ - 5)
-			hero.PosZ += 1.0;
-		if (hero.PosZ > catRoom.PositionZ + 5)
-			hero.PosZ -= 1.0;
+		if (catdead == 6 && hero.PosX > -101 && hero.PosX < -98 && hero.PosZ < -4.5 && isW) {
+			hero.PosZ -= 0.1;
+		}
+		else {
+			if (hero.PosX < catRoom.PositionX - 5)
+				hero.PosX += 1.0;
+			if (hero.PosX > catRoom.PositionX + 5)
+				hero.PosX -= 1.0;
+			if (hero.PosZ < catRoom.PositionZ - 5)
+				hero.PosZ += 1.0;
+			if (hero.PosZ > catRoom.PositionZ + 5)
+				hero.PosZ -= 1.0;
+		}
+		
 	}
 }
 
@@ -549,13 +556,19 @@ void HeroVSDog()
 {
 	if (HeroVSRoom(hero, dogRoom)) {
 
-		if (hero.PosX < dogRoom.PositionX - 5)
-			hero.PosX += 1.0;
-		if (hero.PosX > dogRoom.PositionX + 5)
-			hero.PosX -= 1.0;
-		if (hero.PosZ < dogRoom.PositionZ - 5)
-			hero.PosZ += 1.0;
-		if (hero.PosZ > dogRoom.PositionZ + 5)
-			hero.PosZ -= 1.0;
+		if (dogdead == 6 && hero.PosX < +101 && hero.PosX > 98 && hero.PosZ < -4.5 && isW) {
+			hero.PosZ -= 0.1;
+		}
+		else {
+			if (hero.PosX < dogRoom.PositionX - 5)
+				hero.PosX += 1.0;
+			if (hero.PosX > dogRoom.PositionX + 5)
+				hero.PosX -= 1.0;
+			if (hero.PosZ < dogRoom.PositionZ - 5)
+				hero.PosZ += 1.0;
+			if (hero.PosZ > dogRoom.PositionZ + 5)
+				hero.PosZ -= 1.0;
+		}
+		
 	}
 }
