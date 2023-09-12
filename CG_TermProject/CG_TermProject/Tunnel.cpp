@@ -32,7 +32,6 @@ void Tunnel::Update()
 void Tunnel::Draw()
 {
 	if (dogopen || catopen) {
-
 		glBindVertexArray(VAO);
 		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
 		glUniform4f(Color, 0.2, 0.2, 0.2, 1.0);

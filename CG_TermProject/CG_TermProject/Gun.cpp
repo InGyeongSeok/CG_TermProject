@@ -1,15 +1,16 @@
 #include "Gun.h"
+#include <algorithm>
 
-Gun::Gun(float posX, float posY, float posZ,float dirX,float dirY,float dirZ) : Unit(1.f),PosX(posX),PosY(posY),PosZ(posZ),
+Gun::Gun(float posX, float posY, float posZ, float dirX, float dirY, float dirZ) : Unit(1.f), PosX(posX), PosY(posY), PosZ(posZ),
 dirX(dirX), dirY(dirY), dirZ(dirZ)
 {
-	
+
 	startP = 0.8;
-	
-	color = glm::vec3(255/255.,221/255.,115/255.);
+
+	color = glm::vec3(255 / 255., 221 / 255., 115 / 255.);
 
 	Damage = 10;
-	
+
 }
 
 Gun::~Gun()
@@ -29,10 +30,26 @@ void Gun::Update()
 	GunDir = glm::vec3(dirX * startP, dirY * startP, dirZ * startP) + glm::vec3(PosX, PosY, PosZ);
 	glm::mat4 Scale = glm::scale(Unit, glm::vec3(0.01, 0.01, 0.01));
 	glm::mat4 Trans = glm::translate(Unit, glm::vec3(GunDir.x, GunDir.y, GunDir.z));
-	Change = Trans * Scale ;
+	Change = Trans * Scale;
 }
 
+//void Gun::BulletErase(vector<Gun*> gun)
+//{
+//	gun.erase(remove_if(gun.begin(), gun.end(), [](Gun* guns) {
+//		if ((guns->startP_Pos()) > 100) {
+//			return true;
+//		}
+//		}));
+//
+//}
 
+float Gun::GetPosZ() {
+	return GunDir.z;
+}
+
+float Gun::GetPosX() {
+	return GunDir.x;
+}
 void Gun::Draw()
 {
 
@@ -41,10 +58,10 @@ void Gun::Draw()
 	glUniform1i(SelectColor, 1);
 
 	GLuint aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform4f(aColor, color.r, color.g, color.b,1.0);
+	glUniform4f(aColor, color.r, color.g, color.b, 1.0);
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change));
-	
+
 	glDrawArrays(GL_TRIANGLES, 0, vertex2.size() * 3);
 }
 

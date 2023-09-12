@@ -41,12 +41,12 @@ float lightColorB = 1.0f;
 bool isParticle = false;
 bool isBullet = false;
 
-float ortho = 12.0;		
+float ortho = 12.0;
 vector<Gun*> gun;
 bool isCollideBear(Bear r1, Gun r2);
 
 
-vector<Particle*> particle{new Particle,new Particle, new Particle, new Particle, new Particle
+vector<Particle*> particle{ new Particle,new Particle, new Particle, new Particle, new Particle
 						,new Particle, new Particle,new Particle,new Particle,new Particle,
 						 new Particle,new Particle, new Particle, new Particle, new Particle
 						,new Particle, new Particle,new Particle,new Particle,new Particle,new Particle,new Particle, new Particle, new Particle, new Particle
@@ -86,31 +86,31 @@ default_random_engine dre(rd());
 uniform_real_distribution<float> urd{ 0, 255 };
 
 
-GLvoid drawScene() 
+GLvoid drawScene()
 {
 
 	GLuint SelectColor = glGetUniformLocation(shaderID, "SelectColor");
 	glUniform1i(SelectColor, 1);
 
-	if(lightColorR <0.35)
+	if (lightColorR < 0.35)
 		glClearColor(0.f, 0.f, 0.f, 1.0f);
 	else
 		glClearColor(1.f, 1.f, 1.f, 1.0f);
-	
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);  
-	glEnable(GL_DITHER);       
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DITHER);
 	//glEnable(GL_CULL_FACE);  
-	glEnable(GL_LINE_SMOOTH);   
+	glEnable(GL_LINE_SMOOTH);
 	glEnable(GL_POLYGON_SMOOTH);
-	glShadeModel(GL_SMOOTH);    
+	glShadeModel(GL_SMOOTH);
 	//glEnable(GL_CULL_FACE);
 	//glFrontFace(GL_CW);
 
-	glm::mat4 projection; 
+	glm::mat4 projection;
 
 	projection = glm::perspective(glm::radians(90.0f), (float)width / height, 0.1f, 200.0f);
-	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); 
+	unsigned int projectionLocation = glGetUniformLocation(shaderID, "projectionTransform");
 	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 	glViewport(0, 0, width, height);
 	camera();
@@ -134,7 +134,7 @@ GLvoid drawScene()
 		glDrawArrays(GL_POLYGON, 0, 4);
 	}
 
-	glViewport(width / 1.26, height / 1.35, 200,200);
+	glViewport(width / 1.26, height / 1.35, 200, 200);
 	projection = glm::mat4(1.0f);
 	projection = glm::ortho(-ortho, ortho, -ortho, ortho, -ortho, ortho);
 	projectionLocation = glGetUniformLocation(shaderID, "projectionTransform");
@@ -143,7 +143,7 @@ GLvoid drawScene()
 
 	draw();
 
-	glutSwapBuffers();	
+	glutSwapBuffers();
 };
 
 
@@ -161,18 +161,18 @@ void draw() {
 		lightColorR = 0.5f;
 		lightColorG = 0.5f;
 		lightColorB = 0.5f;
-		
-		
+
+
 	}
 	unsigned int lightPosLocation = glGetUniformLocation(shaderID, "lightPos");      //--- lightPos 
-	glm::vec4 tempv(lightPosX, lightPosY, lightPosZ, 1); 
+	glm::vec4 tempv(lightPosX, lightPosY, lightPosZ, 1);
 	glm::mat4 Lightrotate = glm::rotate(glm::mat4(1.f), glm::radians(lightRot), glm::vec3(0, 1, 0));
 	tempv = Lightrotate * tempv;
 	glUniform3f(lightPosLocation, tempv.x, tempv.y, tempv.z);
 	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor 
 	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color
-	glUniform4f(aColor, 1, 1., 1.,1.);
+	glUniform4f(aColor, 1, 1., 1., 1.);
 
 	world.Draw();
 
@@ -188,8 +188,8 @@ void draw() {
 		tree[i].Update();
 
 	}
-	
-	
+
+
 
 
 	for (int i = 0; i < 600; ++i) {
@@ -198,19 +198,19 @@ void draw() {
 	}
 
 	glDisable(GL_BLEND);
-	
+
 
 	if (catdead == 6) {
 		catopen = true;
 		dogopen = false;
 	}
-		
+
 
 	if (dogdead == 6) {
 		catopen = false;
 		dogopen = true;
 	}
-	
+
 
 	catRoom.Draw();
 	catRoom.Update();
@@ -218,7 +218,7 @@ void draw() {
 	dogRoom.Update();
 	bearRoom.Draw();
 	bearRoom.Update();
-	
+
 	castle.Draw();
 	castle.Update();
 
@@ -237,20 +237,20 @@ void draw() {
 
 
 
-	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");
 	glUniform1i(selectColorLocation, 0);
 
 	Dogopen.Draw();
 	Dogopen.Update();
 	Catopen.Draw();
 	Catopen.Update();
-	
+
 
 	crown.Draw();
 	crown.Update();
 
 	if (herodead) {
-		
+
 	}
 	for (int i = 0; i < cats.size(); ++i) {
 		cats[i]->draw();
@@ -266,12 +266,12 @@ void draw() {
 	hero.Update();
 	hero.Draw();
 
-	
+
 	for (Gun*& gunbullet : gun) {
 		gunbullet->Update();
 		gunbullet->Draw();
+
 	}
-	
 	if (CatEndPosX != 0 && CatEndPosZ != 0) {
 		if (isParticle) {
 			for (int i = 0; i < 40; ++i) {
@@ -284,13 +284,37 @@ void draw() {
 	if (isBullet && BulletLimit == 0) {
 		BulletLimit += 1;
 		gun.push_back(new Gun{ cameraPos.x,cameraPos.y,cameraPos.z, TermGunDir.x,TermGunDir.y,TermGunDir.z });
+		//cout << "(X) : " << cameraPos.x << "(Z) : " << cameraPos.z << endl;
+	}
+	for (Gun* guns : gun) {
+		cout << "guns X : " << guns->GetPosX() << endl;
+		cout << "guns Z : " << guns->GetPosZ() << endl;
+	}
+	auto p = find_if(gun.begin(), gun.end(), [](Gun* guns) {
+		if ((guns->GetPosX()) > 1000 || (guns->GetPosX()) < -1000 || (guns->GetPosZ()) > 1000 || (guns->GetPosZ()) < -1000) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		});
+	if (p != gun.end() && gun.begin()!=gun.end()) {
+		gun.erase(p);
+		cout << "지워짐!!!" << endl;
 	}
 
-	glBindVertexArray(HeroHPVAO);     //���ε�
-	aColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform4f(aColor, 1.0, 0.0, 0.,1);
+	/*int index{};
+	for (Gun* guns : gun) {
+		++index;
+		if ((guns->GetPosX()) > 1000 || (guns->GetPosX()) < -1000 || (guns->GetPosZ()) > 1000 || (guns->GetPosZ()) < -1000) {
+		}
+	}*/
 
-	
+	glBindVertexArray(HeroHPVAO);
+	aColor = glGetUniformLocation(shaderID, "objectColor");
+	glUniform4f(aColor, 1.0, 0.0, 0., 1);
+
+
 
 }
 
@@ -382,32 +406,32 @@ void BulletCollideDog() {
 				break;
 			}
 
-		} 
+		}
 
 	}
 }
 
 void BulletCollideBear() {
 
-		for (int i = 0; i < gun.size(); ++i) {
-			if (isCollideBear(bear, *gun[i])) {
-				bear.HP -= gun[i]->Damage;
-				delete gun[i];
-				if (0 == bear.HP) {
-					for (int i = 0; i < 40; ++i) {
-						particle[i]->dirY = -0.2;
-					}
-					CatEndPosX = bear.Position.x;
-					CatEndPosZ = bear.Position.z;
-					BearLife = false;
-					beardead = true;
-					isParticle = true;
+	for (int i = 0; i < gun.size(); ++i) {
+		if (isCollideBear(bear, *gun[i])) {
+			bear.HP -= gun[i]->Damage;
+			delete gun[i];
+			if (0 == bear.HP) {
+				for (int i = 0; i < 40; ++i) {
+					particle[i]->dirY = -0.2;
 				}
-				gun.erase(gun.begin() + i);
-				--i;
+				CatEndPosX = bear.Position.x;
+				CatEndPosZ = bear.Position.z;
+				BearLife = false;
+				beardead = true;
+				isParticle = true;
 			}
+			gun.erase(gun.begin() + i);
+			--i;
 		}
-} 
+	}
+}
 
 bool isCollide2D(Cat r1, Gun r2)
 {
@@ -465,14 +489,14 @@ void Catroomtest()
 	for (int i = 0; i < 6; ++i) {
 		if (isCollideCatroom(*cats[i], catRoom)) {
 
-			if(cats[i]->Position.x < catRoom.PositionX - 5)
-				cats[i]->Position.x +=1;
-			if(cats[i]->Position.x > catRoom.PositionX+5)
+			if (cats[i]->Position.x < catRoom.PositionX - 5)
+				cats[i]->Position.x += 1;
+			if (cats[i]->Position.x > catRoom.PositionX + 5)
 				cats[i]->Position.x -= 1;
-			if(cats[i]->Position.z < catRoom.PositionZ - 5)
+			if (cats[i]->Position.z < catRoom.PositionZ - 5)
 				cats[i]->Position.z += 1;
 			if (cats[i]->Position.z > catRoom.PositionZ + 5)
-				cats[i]->Position.z -=1;
+				cats[i]->Position.z -= 1;
 		}
 	}
 }
@@ -498,19 +522,19 @@ void Dogroomtest()
 
 void Bearroomtest()
 {
-	
-		if (isCollideBearroom(bear, bearRoom)) {
 
-			if (bear.Position.x < bearRoom.PositionX - 5)
-				bear.Position.x += 1;
-			if (bear.Position.x > bearRoom.PositionX + 5)
-				bear.Position.x -= 1;
-			if (bear.Position.z < bearRoom.PositionZ - 5)
-				bear.Position.z += 1;
-			if (bear.Position.z > bearRoom.PositionZ + 5)
-				bear.Position.z -= 1;
-		}
-	
+	if (isCollideBearroom(bear, bearRoom)) {
+
+		if (bear.Position.x < bearRoom.PositionX - 5)
+			bear.Position.x += 1;
+		if (bear.Position.x > bearRoom.PositionX + 5)
+			bear.Position.x -= 1;
+		if (bear.Position.z < bearRoom.PositionZ - 5)
+			bear.Position.z += 1;
+		if (bear.Position.z > bearRoom.PositionZ + 5)
+			bear.Position.z -= 1;
+	}
+
 }
 
 
