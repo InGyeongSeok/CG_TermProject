@@ -32,7 +32,7 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 		glutLeaveMainLoop();
 		break;
 	}
-	glutPostRedisplay(); //--- ������ �ٲ� ������ ��� �ݹ� �Լ��� ȣ���Ͽ� ȭ���� refresh �Ѵ�
+	glutPostRedisplay(); 
 }
 
 
@@ -51,8 +51,7 @@ GLvoid SpecialKeyboard(int key, int x, int y)
 	case GLUT_KEY_DOWN:
 		isS = true;
 		break;
-	case GLUT_KEY_F5: //전체화면 on/off
-
+	case GLUT_KEY_F5: 
 		glutFullScreenToggle();
 		break;
 	}

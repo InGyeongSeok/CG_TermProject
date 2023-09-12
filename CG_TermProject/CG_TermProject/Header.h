@@ -31,7 +31,7 @@ extern GLint width, height;
 
 extern GLuint aColor;
 
-extern GLuint shaderID; //--- ���̴� ���α׷� �̸�
+extern GLuint shaderID; 
 extern GLuint VAO;
 extern GLuint sphereVAO;
 extern GLuint pyramidVAO;
@@ -47,9 +47,9 @@ extern GLuint DoorTexture[2];
 extern GLuint ScoreTexture[9];
 extern GLuint HeroHPVAO;
 extern float Rot;
-extern vector<glm::vec3> vertex1; //����ü
-extern vector<glm::vec3> vertex2; //��
-extern vector<glm::vec3> vertex3; //�Ƕ�̵�
+extern vector<glm::vec3> vertex1; 
+extern vector<glm::vec3> vertex2; 
+extern vector<glm::vec3> vertex3; 
 extern vector<glm::vec3> vertex4;
 extern vector<glm::vec3> vertex5;
 extern vector<glm::vec3> vertex6;
@@ -82,7 +82,6 @@ extern float cameraJump;
 extern float VAngleX;
 extern float VAngleY;
 extern float HeroMovY;
-//156. / 255, 91. / 255, 54. / 255 �� ����!?
 extern bool catlive;
 extern bool doglive;
 extern bool bearlive;
