@@ -61,11 +61,11 @@ void Room::Draw()
 		
 		for (int i = 0; i < 6; ++i) {
 			if (i == 4) {
-				glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom]);
+				glBindTexture(GL_TEXTURE_2D, DeadTexture[AnimalRoom]);
 				glDrawArrays(GL_TRIANGLES, i * 6, 6);
 			}
-			else {
-				glBindTexture(GL_TEXTURE_2D, RoomTexture[AnimalRoom + 3]);
+			else{
+				glBindTexture(GL_TEXTURE_2D, DeadTexture[AnimalRoom]);
 				glDrawArrays(GL_TRIANGLES, i * 6, 6);
 			}
 		}
