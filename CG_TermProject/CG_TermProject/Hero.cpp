@@ -155,12 +155,10 @@ void Hero::Update()
 		
 	glm::mat4 AddTrans = glm::translate(Unit, glm::vec3(0., 1., 0.));
 	Change = Trans * Scale * AddTrans;
-	if (catlive  )
-	{
+	if(catlive && catdead <6)
 		HeroVSCat();
-	}
 		
-	if(doglive)
+	if(doglive && dogdead < 6)
 		HeroVSDog();
 		
 	if(bearlive)

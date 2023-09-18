@@ -44,5 +44,4 @@ public:
 	friend void HeroVSDog();
 	friend void HeroVSBear();
 	friend void HeroVSCat();
-	
 };
