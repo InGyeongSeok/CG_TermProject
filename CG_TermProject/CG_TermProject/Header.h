@@ -42,8 +42,7 @@ extern GLuint crownVAO;
 extern GLuint TreeTexture[3];
 extern GLuint GrassTexture[3];
 extern GLuint GameoverTexture;
-extern GLuint RoomTexture[3];
-extern GLuint DeadTexture[3];
+extern GLuint RoomTexture[6];
 extern GLuint DoorTexture[2];
 extern GLuint ScoreTexture[9];
 extern GLuint HeroHPVAO;
@@ -123,7 +122,6 @@ extern float openingCat;
 extern float openingDog;
 extern int catdead;
 extern int dogdead;
-extern int beardead;
 
 
 
@@ -134,3 +132,4 @@ extern float CarDX;
 extern float CarDY;
 extern float CarDZ;
 extern float ortho;
+extern int beardead;

@@ -63,9 +63,7 @@ GLuint GrassTexture[3];
 GLuint Texture[6];
 GLuint ScoreTexture[9];
 GLuint GameoverTexture;
-GLuint RoomTexture[3];
-GLuint DeadTexture[3];
-
+GLuint RoomTexture[6];
 GLuint DoorTexture[2];
 GLuint CastleTexture;
 GLuint CastleSideTexTure;
@@ -493,9 +491,10 @@ void InitTexture()
 
 		}
 		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		stbi_image_free(data);
 	}
+
 
 	glGenTextures(3, GrassTexture);
 	for (int i = 0; i < 3; ++i) {
@@ -519,14 +518,17 @@ void InitTexture()
 		case 2:
 			filename = "잔디3.png";
 			break;
+	
 		}
 		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		stbi_image_free(data);
 	}
 
-	glGenTextures(3, RoomTexture);
-	for (int i = 0; i < 3; ++i) {
+
+
+	glGenTextures(6, RoomTexture);
+	for (int i = 0; i < 6; ++i) {
 		glBindTexture(GL_TEXTURE_2D, RoomTexture[i]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -547,49 +549,21 @@ void InitTexture()
 		case 2:
 			filename = "Bearroom.png"; //핑크 
 			break;
-		//case 3:
-		//	filename = "Catroomdead.png"; //회색 
-		//	break;
-		//case 4:
-		//	filename = "Dogroomdead.png"; //갈색 
-		//	break;
-		//case 5:
-		//	filename = "Bearroomdead.png"; //핑크 
-		//	break;
+		case 3:
+			filename = "Catroomdead.png"; //회색 
+			break;
+		case 4:
+			filename = "Dogroomdead.png"; //갈색 
+			break;
+		case 5:
+			filename = "Bearroomdead.png"; //핑크 
+			break;
 		}
 		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 		glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		stbi_image_free(data);
 	}
 
-	glGenTextures(3, DeadTexture);
-	for (int i = 0; i < 3; ++i) {
-		glBindTexture(GL_TEXTURE_2D, DeadTexture[i]);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		int ImageWidth, ImageHeight, numberOfChannel;
-		//stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
-		string filename;
-
-		switch (i) {
-	
-			case 0:
-				filename = "Catroomdead.png"; //회색 
-				break;
-			case 1:
-				filename = "Dogroomdead.png"; //갈색 
-				break;
-			case 2:
-				filename = "Bearroomdead.png"; //핑크 
-				break;
-		}
-		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		stbi_image_free(data);
-	}
 
 	glGenTextures(1, &GameoverTexture);
 	glBindTexture(GL_TEXTURE_2D, GameoverTexture);

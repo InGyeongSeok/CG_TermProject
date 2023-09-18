@@ -180,6 +180,7 @@ void Hero::Jump()
 		else {
 			HeroMovY -= 0.1f;
 			cameraJump -= 0.1f;
+
 			if (HeroMovY <= 0.f) {
 				isJump = false;
 			}
