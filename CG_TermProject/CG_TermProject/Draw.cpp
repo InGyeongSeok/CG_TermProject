@@ -170,7 +170,7 @@ void draw() {
 	tempv = Lightrotate * tempv;
 	glUniform3f(lightPosLocation, tempv.x, tempv.y, tempv.z);
 	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor 
-	glUniform3f(lightColorLocation, 1, 1, 1);
+	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color
 	glUniform4f(aColor, 1, 1., 1., 1.);
 
@@ -222,18 +222,15 @@ void draw() {
 	castle.Draw();
 	castle.Update();
 
-
 	Catleft.Draw();
 	Catleft.Update();
 	Catright.Draw();
 	Catright.Update();
 
-
 	Dogleft.Draw();
 	Dogleft.Update();
 	Dogright.Draw();
 	Dogright.Update();
-
 
 
 
@@ -244,7 +241,6 @@ void draw() {
 	Dogopen.Update();
 	Catopen.Draw();
 	Catopen.Update();
-
 
 	crown.Draw();
 	crown.Update();
@@ -266,7 +262,6 @@ void draw() {
 	hero.Update();
 	hero.Draw();
 
-
 	for (Gun*& gunbullet : gun) {
 		gunbullet->Update();
 		gunbullet->Draw();
@@ -280,16 +275,11 @@ void draw() {
 			}
 		}
 	}
-
 	if (isBullet && BulletLimit == 0) {
 		BulletLimit += 1;
 		gun.push_back(new Gun{ cameraPos.x,cameraPos.y,cameraPos.z, TermGunDir.x,TermGunDir.y,TermGunDir.z });
-		//cout << "(X) : " << cameraPos.x << "(Z) : " << cameraPos.z << endl;
 	}
-	for (Gun* guns : gun) {
-		//cout << "guns X : " << guns->GetPosX() << endl;
-		//cout << "guns Z : " << guns->GetPosZ() << endl;
-	}
+
 	auto p = find_if(gun.begin(), gun.end(), [](Gun* guns) {
 		if ((guns->GetPosX()) > 1000 || (guns->GetPosX()) < -1000 || (guns->GetPosZ()) > 1000 || (guns->GetPosZ()) < -1000) {
 			return true;
@@ -300,21 +290,10 @@ void draw() {
 		});
 	if (p != gun.end() && gun.begin()!=gun.end()) {
 		gun.erase(p);
-		//cout << "지워짐!!!" << endl;
 	}
-
-	/*int index{};
-	for (Gun* guns : gun) {
-		++index;
-		if ((guns->GetPosX()) > 1000 || (guns->GetPosX()) < -1000 || (guns->GetPosZ()) > 1000 || (guns->GetPosZ()) < -1000) {
-		}
-	}*/
-
 	glBindVertexArray(HeroHPVAO);
 	aColor = glGetUniformLocation(shaderID, "objectColor");
 	glUniform4f(aColor, 1.0, 0.0, 0., 1);
-
-
 
 }
 
