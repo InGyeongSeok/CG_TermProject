@@ -170,7 +170,7 @@ void draw() {
 	tempv = Lightrotate * tempv;
 	glUniform3f(lightPosLocation, tempv.x, tempv.y, tempv.z);
 	unsigned int lightColorLocation = glGetUniformLocation(shaderID, "lightColor");   //--- lightColor 
-	glUniform3f(lightColorLocation, 1, 1, 1);
+	glUniform3f(lightColorLocation, lightColorR, lightColorG, lightColorB);
 	unsigned int aColor = glGetUniformLocation(shaderID, "objectColor");   //--- object Color
 	glUniform4f(aColor, 1, 1., 1., 1.);
 
@@ -287,8 +287,8 @@ void draw() {
 		//cout << "(X) : " << cameraPos.x << "(Z) : " << cameraPos.z << endl;
 	}
 	for (Gun* guns : gun) {
-		//cout << "guns X : " << guns->GetPosX() << endl;
-		//cout << "guns Z : " << guns->GetPosZ() << endl;
+		cout << "guns X : " << guns->GetPosX() << endl;
+		cout << "guns Z : " << guns->GetPosZ() << endl;
 	}
 	auto p = find_if(gun.begin(), gun.end(), [](Gun* guns) {
 		if ((guns->GetPosX()) > 1000 || (guns->GetPosX()) < -1000 || (guns->GetPosZ()) > 1000 || (guns->GetPosZ()) < -1000) {
@@ -300,7 +300,7 @@ void draw() {
 		});
 	if (p != gun.end() && gun.begin()!=gun.end()) {
 		gun.erase(p);
-		//cout << "지워짐!!!" << endl;
+		cout << "지워짐!!!" << endl;
 	}
 
 	/*int index{};
